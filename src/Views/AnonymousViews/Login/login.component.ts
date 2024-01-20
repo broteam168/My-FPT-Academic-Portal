@@ -1,16 +1,22 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewChecked, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  NgForm,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NgIf,ReactiveFormsModule],
+  imports: [NgIf, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterContentInit {
   loginForm!: FormGroup;
   submitted = false;
   loading = false;
@@ -21,7 +27,11 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+  ngAfterContentInit(): void {
+    this.submitted = false;
+  }
   ngOnInit(): void {
+    this.submitted = true;
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -31,13 +41,12 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
-  onSubmit(event:Event) {
+  onSubmit(event: Event) {
     event.preventDefault();
     //console.log(this.f['username'].value);
     this.submitted = true;
     setTimeout(() => {
-      this.router.navigate(['../student'], {queryParams:null});
-    
+     // this.router.navigate(['../student'], { queryParams: null });
     }, 3000);
     // stop here if form is invalid
 
