@@ -1,8 +1,48 @@
-<div #header class="flex  w-full h-20 bg-gray-100 pt-5 pl-5">
-    <div class="w-fit h-12 bg-white rounded flex items-center justify-center px-5">
-        <div class="text-orange-500 text-xl font-medium font-sans">Welcome back, Admin !</div>
-
+<div
+  #header
+  class="box-content flex justify-between items-center w-full h-12 bg-gray-100 py-5"
+>
+  <div
+    class="ml-5 w-fit h-full bg-white rounded flex items-center justify-center px-5"
+  >
+    <div class="text-orange-500 text-xl font-medium font-sans">
+      Welcome back, Admin !
     </div>
+  </div>
+  <div class="py-3 mr-5 pl-4 h-full flex items-center bg-white rounded">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="search"
+      class="text-gray-500"
+    ></mat-icon>
+    <input type="text" class="ml-2 focus-visible:outline-none w-96" />
+  </div>
+  <div class="h-full flex items-center bg-white rounded px-3">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="notifications"
+      class="text-black text-2xl"
+    ></mat-icon>
+  </div>
+  <div class=" h-full flex items-center bg-white rounded px-3">
+    <mat-icon
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="message"
+                  class="text-black text-2xl"
+                ></mat-icon>
+   
 
-
+</div> 
+  <div class="flex h-full items-center justify-center rounded">
+    <img class="mr-4 h-full rounded" src="/assets/images/google.png" />
+    <div class="mr-4 h-full">
+      <div class="w-40 h-5 text-black text-lg font-medium font-sans mb-1.5">
+        Nguyen Hoang Son
+      </div>
+      <div class="w-20 h-5 text-black text-lg font-light font-sans">Admin</div>
+    </div>
+  </div>
 </div>
