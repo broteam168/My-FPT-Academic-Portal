@@ -6,8 +6,7 @@ import { map } from 'rxjs/operators';
 export const adminGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
-  var current = authService.currentUserValue;
-  console.log( current);
+ 
   return authService
   .verifyRole('ADMIN')
   .pipe(

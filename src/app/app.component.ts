@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
   }
   ngOnInit(): void {
     this.appConfigService.loadAppConfig();
-    console.log(this.appConfigService.apiBaseUrl);
+   
   }
   title = 'FPT Academic Portal';
 
