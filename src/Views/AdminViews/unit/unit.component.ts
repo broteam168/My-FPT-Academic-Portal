@@ -5,6 +5,7 @@ import { getMenu } from '../MenuDrawer';
 import { School } from '../../../Models';
 import { SchoolService } from '../../../Services';
 import { NgClass, NgFor } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-unit',
@@ -17,15 +18,17 @@ export class UnitComponent {
   menu: any;
 
   schoolService: SchoolService;
-  constructor(schoolService: SchoolService) {
+  router : Router;
+  constructor(schoolService: SchoolService , router : Router) {
     this.menu = getMenu('Units');
     this.schoolService = schoolService;
     this.schoolService.getAllSchools();
+    this.router = router ; 
     
   }
   viewDetailSchool(id:string)
   {
-    console.log(id);
+      this.router.navigate([this.router.url+'/school/'+id]);
   }
   refreshSchool() {
     this.schoolService.getAllSchools();
