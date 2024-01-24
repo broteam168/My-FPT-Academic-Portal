@@ -5,8 +5,8 @@
       <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
         >Open drawer</label
       >
-      <div #maincontent class="px-5 mt-5">
-        <div #head class="flex justify-between">
+      <div #maincontent class="px-5 mt-10">
+        <div #head class="flex justify-between items-center ">
           <div #header class="flex items-center">
             <div #total class="font-bold text-lg font-sans">
               Showing total
@@ -26,11 +26,119 @@
               >Filter
             </div>
           </div>
-          <div #button_header_right>
-            <button class="btn btn-success text-white font-sans font-medium">Add School</button>
+          <div #button_header_right class="flex items-center">
+            <button class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600">
+                <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="library_add"
+                class="text-white text-lg "
+                appearance="outline "
+              ></mat-icon
+              >
+              Add School
+            </button>
+            <button class="shadow ml-5 btn bg-orange-500 text-white font-sans font-medium" (click)="refreshSchool()">
+                <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="refresh"
+                class="text-white text-lg "
+                appearance="outline "
+              ></mat-icon
+              >
+                Refresh
+              </button>
+          </div>
+        </div>
+        <!--DATA LIST-->
+        <div class="flex flex-row flex-wrap mt-5">
+          <div #container *ngFor="let item of getAllSchool()">
+            <div
+              #item
+              class="transform transition-transform   mt-5 bg-white rounded-lg shadow border border-zinc-100 w-96 h-80 p-5 mr-3 overflow-hidden flex flex-col justify-between"
+            >
+              <div>
+                <div #header class="flex h-fit items-center border-b border-zinc-200 w-full pb-5">
+                  <img
+                    src="assets/images/google.png"
+                    class="w-fit h-3/4 object-scale-down py-auto self-center"
+                  />
+                  <div
+                    class="flex flex-col ml-3 "
+                  >
+                    <div class="text-xl font-medium font-sans">
+                      {{ item.name }}
+                    </div>
+                    <div class="font-sans text-orange-400">
+                      No.{{ item.id }}
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-5 flex items-center">
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="local_phone"
+                    class="text-black text-base ml-1.5"
+                    appearance="outline "
+                  ></mat-icon>
+                  <div class="inline font-medium mr-1">Phone:</div>
+                  <div class="inline w-auto">{{ item.phone }}</div>
+                </div>
+                <div class="mt-2">
+                  <div class="inline-flex font-medium mr-1">
+                    <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="location_on"
+                    class="text-black text-base ml-1.5"
+                    appearance="outline "
+                  ></mat-icon>
+                    <div class="inline">Location:</div>
+                  </div>
+                  <div class="inline w-auto">{{ item.location }}</div>
+                </div>
+                <div class="mt-2 flex">
+                  <div class="inline font-medium mr-1">Status:</div>
+                  <div
+                    class="flex items-center px-1.5 py-1"
+                    [ngClass]="{
+                      'text-green-600 bg-emerald-50 ': item.isActive,
+                      'text-red-600 bg-rose-50': !item.isActive
+                    }"
+                  >
+                    <mat-icon
+                      aria-hidden="false"
+                      aria-label="Example home icon"
+                      fontIcon="fiber_manual_record"
+                      class="text-black text-base ml-1.5"
+                      [ngClass]="{
+                        'text-green-600 ': item.isActive,
+                        'text-red-600 ': !item.isActive
+                      }"
+                      appearance="outline "
+                    ></mat-icon>
+                    {{ item.isActive ? "Active" : "Deactived" }}
+                  </div>
+                </div>
+              </div>
+              <div #action class="flex justify-end">
+                <button
+                  class="btn p-2 btn-accent  text-white font-medium font-sans mr-2"
+                >
+                  Manage class
+                </button>
+                <button
+                  class="btn p-2 btn-info text-white font-medium font-sans" (click)="viewDetailSchool(item.id)"
+                >
+                  View details
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 </app-drawer>
