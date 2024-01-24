@@ -9,7 +9,7 @@ export function getMenu(highlight:string)
               below: false,
             },
             {
-              icon: 'widgets',
+              icon: 'account_balance',
               name: 'Academic',
               url: '/admin/academic',
               current: false,

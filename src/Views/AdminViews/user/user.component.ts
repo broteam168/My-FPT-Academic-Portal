@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { DrawerComponent } from '../../Common/drawer/drawer.component';
-import { HeaderComponent } from '../../Common/header/header.component';
+import { DrawerComponent, HeaderComponent } from '../../Common';
 import { NgFor } from '@angular/common';
 import { getMenu } from '../MenuDrawer';
 @Component({
