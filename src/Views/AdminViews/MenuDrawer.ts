@@ -11,7 +11,7 @@ export function getMenu(highlight:string)
             {
               icon: 'widgets',
               name: 'Academic',
-              url: '/admin/semester',
+              url: '/admin/academic',
               current: false,
               below: false,
             },
