@@ -10,7 +10,7 @@ import { appConfig } from '../app/app.config';
   providedIn: 'root',
 })
 export class AuthService {
-  public static currentUser : UserAuth;
+  public static currentUser : UserAuth | null;
   constructor(
     private http: HttpClient,
     private configService: AppConfigService
@@ -18,7 +18,7 @@ export class AuthService {
     AuthService.currentUser =JSON.parse(localStorage.getItem('currentUser') || '{}');
     
   }
-  public get currentUserValue(): UserAuth {
+  public get currentUserValue(): UserAuth | null {
     return AuthService.currentUser;
 }
 
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   logout() {
-    // remove user from local storage to log user out
+    AuthService.currentUser = null; 
     localStorage.removeItem('currentUser');
   }
 

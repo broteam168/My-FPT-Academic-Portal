@@ -38,11 +38,12 @@ export class LoginComponent implements OnInit, AfterContentInit {
     private router: Router,
     private authenticationService: AuthService
   ) {
-    let currentUser = this.authenticationService.currentUserValue;
+    // let currentUser = this.authenticationService.currentUserValue;
 
-    if (currentUser && currentUser.token) {
-      this.router.navigate([currentUser.role[0].name.toLowerCase()]);
-    }
+    // if (currentUser && currentUser.token) {
+    //   this.router.navigate([currentUser.role[0].name.toLowerCase()]);
+    // }
+    authenticationService.logout();
   }
   ngAfterContentInit(): void {
     this.submitted = false;
@@ -71,7 +72,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
           if (data.responseCode == 200) {
             var current = this.authenticationService.currentUserValue;
             console.log(current)
-            this.router.navigate([current.role[0].name.toLowerCase()]);
+            this.router.navigate([current!.role[0].name.toLowerCase()]);
           } else {
             this.submitted = false;
             this.fail = true;

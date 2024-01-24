@@ -1,9 +1,10 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateChildFn, Router } from '@angular/router';
 import { AuthService } from '../Services/auth.service';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
-export const adminGuard: CanActivateFn = (route, state) => {
+export const adminGuard: CanActivateChildFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
  
@@ -12,8 +13,13 @@ export const adminGuard: CanActivateFn = (route, state) => {
   .pipe(
     map((result) => {
      if(result.responseCode == 200 )return true ;
+      authService.logout();
       router.navigateByUrl('/login');
       return false;
+    }),
+    catchError(() => {
+       router.navigateByUrl('/login');
+       return EMPTY;
     })
   );
 };
