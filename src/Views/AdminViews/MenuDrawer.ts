@@ -24,9 +24,9 @@ export function getMenu(highlight:string)
             },
             
             {
-              icon: 'home',
-              name: 'Semester',
-              url: '/',
+              icon: 'business',
+              name: 'Units',
+              url: '/admin/unit',
               current: false,
               below: false,
             },

@@ -1,0 +1,36 @@
+<app-drawer [items]="menu">
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent class="px-5 mt-5">
+        <div #head class="flex justify-between">
+          <div #header class="flex items-center">
+            <div #total class="font-bold text-lg font-sans">
+              Showing total
+              <div class="text-red-600 inline">{{ getCountSchools() }}</div>
+              Schools
+            </div>
+            <div
+              class="transform active:scale-95 transition-transform shadow hover:cursor-pointer hover:border-orange-500 pr-4 py-1 ml-4 bg-white rounded-lg flex justify-center items-center"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="filter_list"
+                class="text-black text-lg ml-1.5 mb-1"
+                appearance="outline "
+              ></mat-icon
+              >Filter
+            </div>
+          </div>
+          <div #button_header_right>
+            <button class="btn btn-success text-white font-sans font-medium">Add School</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</app-drawer>
