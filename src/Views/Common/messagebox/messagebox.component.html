@@ -6,12 +6,13 @@
     class="transform transition-transform flex bg-neutral-100/50 overflow-y-auto overflow-x-hidden fixed  z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
   >
    <div class="modal-box">
-    <h3 class="font-bold text-xl text-blue-500">{{title}}</h3>
+    <h3 class="font-bold text-xl"
+    [ngClass]="{'text-red-500': type}" >{{title}}</h3>
     <p class="py-4">{{description}}</p>
     <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
-        <button class="btn btn-primary" (click)="closeModal()">Close</button>
+        <button class="btn btn-primary" (click)="closeModal.emit()">Close</button>
       </form>
     </div>
   </div>

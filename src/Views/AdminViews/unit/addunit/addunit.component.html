@@ -153,7 +153,7 @@
               </div>
             </div>
           </form>
-          <app-messagebox [open]="true"></app-messagebox>
+          <app-messagebox (closeModal)="close()" [open]="openMessage" [title]="messageTitle" [description]="messageDescription" [type]="fail" ></app-messagebox>
       
         </div>
        </div>
