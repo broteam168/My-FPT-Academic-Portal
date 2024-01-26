@@ -1,0 +1,160 @@
+<app-drawer [items]="menu">
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent class="pt-10 px-5 pb-10">
+        <div #header class="flex flex-row justify-between items-center">
+          <div #back_button class="flex items-center hover:cursor-pointer">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="keyboard_backspace"
+              class="text-black text-lg font-medium mb-1 mr-3"
+              appearance="outline "
+            ></mat-icon>
+
+            <div class="font-medium text-lg" (click)="goBack()">
+              Back to Unit management
+            </div>
+          </div>
+          <div #right_button class="mt-3"></div>
+        </div>
+        <div
+          #formcontrol
+          class="mt-5 bg-white pt-10 flex justify-center rounded-xl flex-col"
+        >
+          <div class="text-center mb-10">
+            <h1 class="font-bold text-3xl text-gray-900">Create school</h1>
+            <p>Enter your information to create</p>
+          </div>
+          <form
+            [formGroup]="schoolForm"
+            class="flex flex-col items-center w-full"
+          >
+            <div class="w-2/3">
+              <div class="flex -mx-3">
+                <div class="w-1/2 px-3 mb-5">
+                  <label for="" class="text-xs font-semibold px-1"
+                    >School name</label
+                  >
+                  <div class="flex">
+                    <div
+                      class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                    >
+                      <i
+                        class="mdi mdi-account-outline text-gray-400 text-lg"
+                      ></i>
+                    </div>
+                    <input
+                      required
+                      id="Name"
+                      formControlName="Name"
+                      type="text"
+                      class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      placeholder="FPT University Hòa Lạc"
+                    />
+                  </div>
+                </div>
+                <div class="w-1/2 px-3 mb-5">
+                  <label for="" class="text-xs font-semibold px-1">Phone</label>
+                  <div class="flex">
+                    <div
+                      class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                    >
+                      <i
+                        class="mdi mdi-account-outline text-gray-400 text-lg"
+                      ></i>
+                    </div>
+                    <input
+                      required
+                      id="Phone"
+                      formControlName="Phone"
+                      type="text"
+                      class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      placeholder="09xxxxxxxx"
+                      id="Phone"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="w-full flex -mx-3 pl-3">
+                <div class="w-full mb-5">
+                  <label for="" class="text-xs font-semibold px-1"
+                    >Location</label
+                  >
+                  <div class="flex">
+                    <div
+                      class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                    >
+                      <i
+                        class="mdi mdi-email-outline text-gray-400 text-lg"
+                      ></i>
+                    </div>
+                    <input
+                      required
+                      id="Location"
+                      formControlName="Location"
+                      type="text"
+                      class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      placeholder="Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="flex -mx-3 w-full">
+                <div class="w-full pl-3">
+                  <label for="" class="text-xs font-semibold px-1"
+                    >Description</label
+                  >
+                  <div class="flex">
+                    <div
+                      class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                    >
+                      <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
+                    </div>
+                    <textarea
+                      required
+                      id="Description"
+                      formControlName="Description"
+                      id="Description"
+                      type="text"
+                      class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      placeholder="Add description here"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="flex -mx-3 w-full">
+                <div class="w-full pl-3 mb-12 mt-10">
+                  <div class="flex">
+                    <input
+                      id="IsActive"
+                      formControlName="IsActive"
+                      type="checkbox"
+                      checked="checked"
+                      class="checkbox"
+                    />
+                    <div class="ml-5 font-medium">Is Active ?</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex -mx-3">
+                <div class="w-full px-3 mb-5">
+                  <button
+                    (click)="createSchool()"
+                    class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                  >
+                    ADD NOW
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-drawer>

@@ -27,7 +27,7 @@
             </div>
           </div>
           <div #button_header_right class="flex items-center">
-            <button class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600">
+            <button class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600" (click)="addSchool()">
                 <mat-icon
                 aria-hidden="false"
                 aria-label="Example home icon"
@@ -102,7 +102,7 @@
                 <div class="mt-2 flex">
                   <div class="inline font-medium mr-1">Status:</div>
                   <div
-                    class="flex items-center px-1.5 py-1"
+                    class="flex items-center px-1.5 py-1 "
                     [ngClass]="{
                       'text-green-600 bg-emerald-50 ': item.isActive,
                       'text-red-600 bg-rose-50': !item.isActive

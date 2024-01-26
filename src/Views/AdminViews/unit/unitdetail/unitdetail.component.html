@@ -1,115 +1,35 @@
 <app-drawer [items]="menu">
-    <div class="h-screen bg-gray-100">
-       <div class="bg-gray-100">
-        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
-          >Open drawer</label
-        >
-        <div #maincontent class="pt-10 px-5 pb-10">
-            <div #header class="flex flex-row justify-between items-center">
-                <div #back_button class="flex items-center hover:cursor-pointer">
-                    <mat-icon
-                    aria-hidden="false"
-                    aria-label="Example home icon"
-                    fontIcon="keyboard_backspace"
-                    class="text-black text-lg font-medium mb-1 mr-3 "
-                    appearance="outline "
-                  ></mat-icon><div class="font-medium text-lg">Back to Unit management</div></div>
-                  <div #right_button class="mt-3">
-                    <button class="btn border-red-500 font-medium text-red-600 hover:bg-red-500 hover:text-white mr-5">Remove unit</button>
-                    <button class="btn border-gray-500 font-medium text-gray-600 hover:bg-gray-500 hover:text-white ">Refresh information</button>
-                </div>
-                 
-            </div>
-            <div #header_info>
-                <div #duplicate>
-                    <div
-                    #item
-                    class="transform transition-transform   mt-5 bg-white rounded-lg shadow border border-zinc-100 w-96 h-80 p-5 mr-3 overflow-hidden flex flex-col justify-between"
-                  >
-                    <div>
-                      <div #header class="flex h-fit items-center border-b border-zinc-200 w-full pb-5">
-                        <img
-                          src="assets/images/google.png"
-                          class="w-fit h-3/4 object-scale-down py-auto self-center"
-                        />
-                        <div
-                          class="flex flex-col ml-3 "
-                        >
-                          <div class="text-xl font-medium font-sans">
-                            {{ item.name }}
-                          </div>
-                          <div class="font-sans text-orange-400">
-                            No.{{ item.id }}
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mt-5 flex items-center">
-                        <mat-icon
-                          aria-hidden="false"
-                          aria-label="Example home icon"
-                          fontIcon="local_phone"
-                          class="text-black text-base ml-1.5"
-                          appearance="outline "
-                        ></mat-icon>
-                        <div class="inline font-medium mr-1">Phone:</div>
-                        <div class="inline w-auto">{{ item.phone }}</div>
-                      </div>
-                      <div class="mt-2">
-                        <div class="inline-flex font-medium mr-1">
-                          <mat-icon
-                          aria-hidden="false"
-                          aria-label="Example home icon"
-                          fontIcon="location_on"
-                          class="text-black text-base ml-1.5"
-                          appearance="outline "
-                        ></mat-icon>
-                          <div class="inline">Location:</div>
-                        </div>
-                        <div class="inline w-auto">{{ item.location }}</div>
-                      </div>
-                      <div class="mt-2 flex">
-                        <div class="inline font-medium mr-1">Status:</div>
-                        <div
-                          class="flex items-center px-1.5 py-1"
-                          [ngClass]="{
-                            'text-green-600 bg-emerald-50 ': item.isActive,
-                            'text-red-600 bg-rose-50': !item.isActive
-                          }"
-                        >
-                          <mat-icon
-                            aria-hidden="false"
-                            aria-label="Example home icon"
-                            fontIcon="fiber_manual_record"
-                            class="text-black text-base ml-1.5"
-                            [ngClass]="{
-                              'text-green-600 ': item.isActive,
-                              'text-red-600 ': !item.isActive
-                            }"
-                            appearance="outline "
-                          ></mat-icon>
-                          {{ item.isActive ? "Active" : "Deactived" }}
-                        </div>
-                      </div>
-                    </div>
-                    <div #action class="flex justify-end">
-                      <button
-                        class="btn p-2 btn-accent  text-white font-medium font-sans mr-2"
-                      >
-                        Manage class
-                      </button>
-                      <button
-                        class="btn p-2 btn-info text-white font-medium font-sans" (click)="viewDetailSchool(item.id)"
-                      >
-                        View details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                </div>
-            </div>
+  <div class="h-screen bg-gray-100">
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent class="pt-10 px-5 pb-10">
+        <div #header class="flex flex-row justify-between items-center">
+          <div #back_button class="flex items-center hover:cursor-pointer">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="keyboard_backspace"
+              class="text-black text-lg font-medium mb-1 mr-3"
+              appearance="outline "
+            ></mat-icon>
+            <div class="font-medium text-lg">Back to Unit management</div>
+          </div>
+          <div #right_button class="mt-3">
+            <button
+              class="btn border-red-500 font-medium text-red-600 hover:bg-red-500 hover:text-white mr-5"
+            >
+              Remove unit
+            </button>
+            <button
+              class="btn border-gray-500 font-medium text-gray-600 hover:bg-gray-500 hover:text-white"
+            >
+              Refresh information
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </app-drawer>
-  
+  </div>
+</app-drawer>

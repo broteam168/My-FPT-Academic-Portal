@@ -26,6 +26,10 @@ export class UnitComponent {
     this.router = router ; 
     
   }
+  addSchool()
+  {
+    this.router.navigate([this.router.url+'/school/add']);
+  }
   viewDetailSchool(id:string)
   {
       this.router.navigate([this.router.url+'/school/'+id]);

@@ -5,6 +5,7 @@ import { adminGuard } from '../Helpers/admin.guard';
 import { AcademicComponent } from '../Views/AdminViews/academic/academic.component';
 import { UnitComponent } from '../Views/AdminViews/unit/unit.component';
 import { UnitdetailComponent } from '../Views/AdminViews/unit/unitdetail/unitdetail.component';
+import { AddunitComponent } from '../Views/AdminViews/unit/addunit/addunit.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,11 +26,17 @@ export const routes: Routes = [
         path: 'unit',
         component: UnitComponent,
       },
-
+      {
+        path: 'unit/school/add',
+        component: AddunitComponent,
+        pathMatch:'full'
+      },
       {
         path: 'unit/school/:id',
         component: UnitdetailComponent,
+        pathMatch:"full"
       },
+     
     ],
   },
 ];

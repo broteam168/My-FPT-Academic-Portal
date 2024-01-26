@@ -21,4 +21,5 @@ export class SchoolService {
         this.schools = response.data;
       });
   }
+  
 }
