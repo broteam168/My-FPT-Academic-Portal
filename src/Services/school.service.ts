@@ -21,5 +21,14 @@ export class SchoolService {
         this.schools = response.data;
       });
   }
-  
+  createNewSchool(newSchool: School) {
+    const newObj = Object.fromEntries(
+      Object.entries(newSchool).map(([k, v]) => [
+        k.charAt(0).toLowerCase() + k.slice(1),
+        v,
+      ])
+    );
+    
+    return this.http.post<any>(this.configService.apiBaseUrl + '/unit/school',newObj);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DrawerComponent, HeaderComponent } from '../../Common';
 import { MatIcon } from '@angular/material/icon';
 import { getMenu } from '../MenuDrawer';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: './unit.component.html',
   styleUrl: './unit.component.scss',
 })
-export class UnitComponent {
+export class UnitComponent implements OnInit{
   menu: any;
 
   schoolService: SchoolService;
@@ -25,6 +25,9 @@ export class UnitComponent {
     this.schoolService.getAllSchools();
     this.router = router ; 
     
+  }
+  ngOnInit(): void {
+    this.schoolService.getAllSchools();
   }
   addSchool()
   {
@@ -38,7 +41,8 @@ export class UnitComponent {
     this.schoolService.getAllSchools();
   }
   getAllSchool() {
-    return this.schoolService.schools;
+    console.log(this.schoolService.schools);
+     return this.schoolService.schools;
   }
   getCountSchools() {
     return this.schoolService.schools ? this.schoolService.schools.length : 0;

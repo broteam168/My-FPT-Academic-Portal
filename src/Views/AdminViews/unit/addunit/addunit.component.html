@@ -5,18 +5,18 @@
       <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
         >Open drawer</label
       >
-      <div #maincontent class="pt-10 px-5 pb-10">
+      <div #maincontent class=" pt-10 px-5 pb-10 ">
         <div #header class="flex flex-row justify-between items-center">
-          <div #back_button class="flex items-center hover:cursor-pointer">
+          <div #back_button class="flex items-center hover:cursor-pointer" (click)="goBack()">
             <mat-icon
               aria-hidden="false"
               aria-label="Example home icon"
               fontIcon="keyboard_backspace"
-              class="text-black text-lg font-medium mb-1 mr-3"
+              class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
               appearance="outline "
             ></mat-icon>
 
-            <div class="font-medium text-lg" (click)="goBack()">
+            <div class="font-medium text-lg" >
               Back to Unit management
             </div>
           </div>
@@ -24,7 +24,7 @@
         </div>
         <div
           #formcontrol
-          class="mt-5 bg-white pt-10 flex justify-center rounded-xl flex-col"
+          class="mt-5 bg-white pt-10 flex justify-center rounded-xl flex-col xl:max-w-screen-lg xl:mx-auto "
         >
           <div class="text-center mb-10">
             <h1 class="font-bold text-3xl text-gray-900">Create school</h1>
@@ -135,7 +135,7 @@
                       formControlName="IsActive"
                       type="checkbox"
                       checked="checked"
-                      class="checkbox"
+                      class="checkbox checkbox-primary"
                     />
                     <div class="ml-5 font-medium">Is Active ?</div>
                   </div>
@@ -153,6 +153,7 @@
               </div>
             </div>
           </form>
+          <app-loadingmodal *ngIf="loading"></app-loadingmodal>
           <app-messagebox (closeModal)="close()" [open]="openMessage" [title]="messageTitle" [description]="messageDescription" [type]="fail" ></app-messagebox>
       
         </div>
