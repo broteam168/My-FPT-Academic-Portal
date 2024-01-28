@@ -8,11 +8,18 @@ import { School } from '../Models';
 })
 export class SchoolService {
   schools: School[];
+  currentSchool:School;
   constructor(
     private http: HttpClient,
     private configService: AppConfigService
   ) {
     this.getAllSchools();
+  }
+ 
+  getCurrentSchool(id:string|undefined)
+  {
+    return this.http
+    .get<any>(this.configService.apiBaseUrl + '/unit/school/'+id)
   }
   getAllSchools() {
     this.http

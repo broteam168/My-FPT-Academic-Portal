@@ -6,12 +6,12 @@ import { AcademicComponent } from '../Views/AdminViews/academic/academic.compone
 import { UnitComponent } from '../Views/AdminViews/unit/unit.component';
 import { UnitdetailComponent } from '../Views/AdminViews/unit/unitdetail/unitdetail.component';
 import { AddunitComponent } from '../Views/AdminViews/unit/addunit/addunit.component';
+import { EditunitComponent } from '../Views/AdminViews/unit/editunit/editunit.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'admin',
-
     canActivateChild: [adminGuard],
     children: [
       {
@@ -32,11 +32,16 @@ export const routes: Routes = [
         pathMatch:'full'
       },
       {
+        path: 'unit/school/:id/edit',
+        component: EditunitComponent,
+        pathMatch:"full"
+      },
+      {
         path: 'unit/school/:id',
         component: UnitdetailComponent,
         pathMatch:"full"
       },
-     
+      
     ],
   },
 ];

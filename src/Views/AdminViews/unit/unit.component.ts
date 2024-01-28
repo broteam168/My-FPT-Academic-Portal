@@ -14,35 +14,33 @@ import { Router } from '@angular/router';
   templateUrl: './unit.component.html',
   styleUrl: './unit.component.scss',
 })
-export class UnitComponent implements OnInit{
+export class UnitComponent implements OnInit {
   menu: any;
 
   schoolService: SchoolService;
-  router : Router;
-  constructor(schoolService: SchoolService , router : Router) {
+  router: Router;
+  constructor(schoolService: SchoolService, router: Router) {
     this.menu = getMenu('Units');
     this.schoolService = schoolService;
     this.schoolService.getAllSchools();
-    this.router = router ; 
-    
+    this.router = router;
   }
   ngOnInit(): void {
     this.schoolService.getAllSchools();
   }
-  addSchool()
-  {
-    this.router.navigate([this.router.url+'/school/add']);
+  addSchool() {
+    this.router.navigate([this.router.url + '/school/add']);
   }
-  viewDetailSchool(id:string)
-  {
-      this.router.navigate([this.router.url+'/school/'+id]);
+  viewDetailSchool(id: string) {
+   // this.schoolService.setCurrentSchool(id);
+
+    this.router.navigate([this.router.url + '/school/' + id]);
   }
   refreshSchool() {
     this.schoolService.getAllSchools();
   }
   getAllSchool() {
-    console.log(this.schoolService.schools);
-     return this.schoolService.schools;
+    return this.schoolService.schools;
   }
   getCountSchools() {
     return this.schoolService.schools ? this.schoolService.schools.length : 0;

@@ -4,16 +4,23 @@
       <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
         >Open drawer</label
       >
-      <div #maincontent class="pt-10 px-5 pb-10">
+      <app-header></app-header>
+
+      <div #maincontent class="pt-10 px-5 pb-10 w-full">
         <div #header class="flex flex-row justify-between items-center">
-          <div #back_button class="flex items-center hover:cursor-pointer">
+          <div
+            #back_button
+            class="flex items-center hover:cursor-pointer"
+            (click)="goBack()"
+          >
             <mat-icon
               aria-hidden="false"
               aria-label="Example home icon"
               fontIcon="keyboard_backspace"
-              class="text-black text-lg font-medium mb-1 mr-3"
+              class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
               appearance="outline "
             ></mat-icon>
+
             <div class="font-medium text-lg">Back to Unit management</div>
           </div>
           <div #right_button class="mt-3">
@@ -22,11 +29,421 @@
             >
               Remove unit
             </button>
-            <button
+            <button (click)="editschool()"
               class="btn border-gray-500 font-medium text-gray-600 hover:bg-gray-500 hover:text-white"
             >
-              Refresh information
+              Edit information
             </button>
+          </div>
+        </div>
+        <div #headcontent>
+          <div
+            #shortcontent
+            class="mt-5 flex justify-between bg-white rounded-xl px-5 border border-gray-400"
+          >
+            <div #header class="flex h-fit items-cente w-fit py-5 mt-1">
+              <img
+                src="assets/images/google.png"
+                class="w-fit h-3/4 object-scale-down py-auto self-center"
+              />
+              <div class="flex flex-col ml-3">
+                <div class="text-xl font-medium font-sans">
+                  {{ currentItem.name }}
+                </div>
+                <div class="text-md font-normal mt-1 font-sans">
+                  No.{{ currentItem.id }}
+                </div>
+                <div class="mt-2 flex">
+                  <div class="inline font-normal mr-1">Status:</div>
+                  <div
+                    class="flex items-center px-1.5 py-1"
+                    [ngClass]="{
+                      'text-green-600 bg-emerald-50 ': currentItem.isActive,
+                      'text-red-600 bg-rose-50': !currentItem.isActive
+                    }"
+                  >
+                    <mat-icon
+                      aria-hidden="false"
+                      aria-label="Example home icon"
+                      fontIcon="fiber_manual_record"
+                      class="text-black text-base ml-1.5"
+                      [ngClass]="{
+                        'text-green-600 ': currentItem.isActive,
+                        'text-red-600 ': !currentItem.isActive
+                      }"
+                      appearance="outline "
+                    ></mat-icon>
+                    {{ currentItem.isActive ? "Active" : "Deactived" }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div #supportheader class="pt-10">
+              <div class="font-sans text-sm text-gray-400 flex items-center">
+                <mat-icon
+                  aria-hidden="false"
+                  fontIcon="av_timer"
+                  class="text-black text-lg ml-1.5"
+                ></mat-icon>
+                Created at 28-01-2024
+              </div>
+              <div #classnum class="flex mt-5">
+                <div
+                  #classnumdeative
+                  class="text-sm text-gray-400 flex items-center"
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    fontIcon="work_off"
+                    class="mr-2 text-red-600 bg-red-200 rounded-full text-lg text-center center align-middle mb-1"
+                  ></mat-icon
+                  >Deactived
+                  <div class="ml-1 text-red-600">
+                    {{ countDeactivedClasses() }}
+                  </div>
+                </div>
+                <div
+                  #classnumdeative
+                  class="ml-5 text-sm text-gray-400 flex items-center"
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    fontIcon="work"
+                    class="mr-2 text-green-600 bg-red-200 rounded-full text-lg text-center center align-middle mb-1"
+                  ></mat-icon
+                  >Actived
+                  <div class="ml-1 text-green-600">
+                    {{ countActivedClasses() }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div #totalclass class="mt-5 bg-sky-200 h-fit rounded-lg px-5 py-5">
+              <div class="font-medium font-sans text-lg">Total Classes</div>
+              <div class="flex">
+                <div
+                  #percentage
+                  class="text-3xl font-semibold font-sans text-green-600"
+                >
+                  {{ getPercentage() }}%
+                </div>
+                <div class="ml-10 self-end">
+                  <div class="text-green-600 inline item">
+                    {{ countActivedClasses() }}
+                  </div>
+                  /{{ countClasses() }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            #maincontent2
+            class="mt-10 w-full bg-white rounded-lg p-5 border border-gray-400"
+          >
+            <div role="tablist" class="tabs tabs-bordered w-full">
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab w-96"
+                aria-label="Details"
+                checked
+              />
+              <div role="tabpanel" class="tab-content p-10">
+                <div class="text-xl font-sans font-semibold">
+                  School Basic Information
+                </div>
+                <diV class="mt-8">
+                  <div class="mt-2">
+                    Id:
+                    <div class="inline text-gray-500">{{ currentItem.id }}</div>
+                  </div>
+                  <div class="mt-2">
+                    Name:
+                    <div class="inline text-gray-500">
+                      {{ currentItem.name }}
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    Location:
+                    <div class="inline text-gray-500">
+                      {{ currentItem.location }}
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    Contact:
+                    <div class="inline text-gray-500">
+                      {{ currentItem.location }}
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    Number of Classes:
+                    <div class="inline text-gray-500">{{ countClasses() }}</div>
+                  </div>
+                </diV>
+                <div class="mt-8 text-xl font-sans font-semibold">
+                  School Description
+                </div>
+                <div class="whitespace-pre-wrap pt-10">
+                  <div class="inline text-gray-500">
+                    {{ currentItem.description }}
+                  </div>
+                </div>
+                <div class="mt-8 text-xl font-sans font-semibold">
+                  School Rules
+                </div>
+                <div class="whitespace-break-spaces pt-10">
+                  <div class="inline text-gray-500">Updating...</div>
+                </div>
+              </div>
+
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab"
+                aria-label="Classes"
+              />
+              <div role="tabpanel" class="tab-content">
+                <div class="container mx-auto px-4 sm:px-8">
+                  <div class="py-8">
+                    <div>
+                      <h2 class="text-2xl font-semibold leading-tight">
+                        Classes
+                      </h2>
+                    </div>
+                    <div class="my-2 flex sm:flex-row flex-col">
+                      <div class="flex flex-row mb-1 sm:mb-0">
+                        <div class="relative">
+                          <select
+                            #count
+                            (change)="onChange(count.value)"
+                            class="h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          >
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                          </select>
+                          <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                          >
+                            <svg
+                              class="fill-current h-4 w-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="relative">
+                          <select
+                            class="h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500"
+                          >
+                            <option>All</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                          </select>
+                          <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                          >
+                            <svg
+                              class="fill-current h-4 w-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="block relative">
+                        <span
+                          class="h-full absolute inset-y-0 left-0 flex items-center pl-2"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            class="h-4 w-4 fill-current text-gray-500"
+                          >
+                            <path
+                              d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z"
+                            ></path>
+                          </svg>
+                        </span>
+                        <input
+                          placeholder="Search"
+                          class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                    <!--Action block-->
+                    <div
+                      class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto"
+                    >
+                      <div
+                        class="inline-block min-w-full shadow rounded-lg overflow-hidden"
+                      >
+                        <table class="min-w-full leading-normal">
+                          <thead>
+                            <tr>
+                              <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                              >
+                                No.
+                              </th>
+                              <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                              >
+                                Class Name
+                              </th>
+                              <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                              >
+                                Major
+                              </th>
+                              <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                              >
+                                Description
+                              </th>
+
+                              <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                              >
+                                Status
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody *ngFor="let item of DataClasses">
+                            <tr>
+                              <td
+                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                              >
+                                <div class="flex items-center">
+                                  <div class="flex-shrink-0 w-10 h-10">
+                                    <img
+                                      class="w-full h-full rounded-full"
+                                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="ml-3">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                      {{ item.id }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td
+                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                              >
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                  {{ item.name }}
+                                </p>
+                              </td>
+
+                              <td
+                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                              >
+                                <p
+                                  class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                                >
+                                  {{ item.major.name }}
+                                </p>
+                              </td>
+                              <td
+                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                              >
+                                <p
+                                  class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                                >
+                                  {{ item.description }}
+                                </p>
+                              </td>
+                              <td
+                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                              >
+                                <span
+                                  class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                                >
+                                  <span
+                                    aria-hidden
+                                    class="absolute inset-0 opacity-50 rounded-full"
+                                    [ngClass]="{
+                                      ' bg-green-200 ': item.isActive,
+                                      ' bg-red-200': !item.isActive
+                                    }"
+                                  ></span>
+                                  <span
+                                    [ngClass]="{
+                                      'text-green-900 ': item.isActive,
+                                      'text-red-900 ': !item.isActive
+                                    }"
+                                    class="relative"
+                                    >{{
+                                      item.isActive ? "Active" : "Deactived"
+                                    }}</span
+                                  >
+                                </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div
+                          class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between"
+                        >
+                          <span class="text-xs xs:text-sm text-gray-900">
+                            Showing {{ start }} to
+                            {{ start + DataClasses.length - 1 }} of
+                            {{ countClasses() }} Entries
+                          </span>
+                          <div class="inline-flex mt-2 xs:mt-0">
+                            <button
+                              (click)="BackListClass()"
+                              class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
+                            >
+                              Prev
+                            </button>
+                            <button
+                              (click)="nextListClass()"
+                              class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
+                            >
+                              Next
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab"
+                aria-label="Users "
+              />
+              <div role="tabpanel" class="tab-content p-10">
+                This function is updating...
+              </div>
+
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab"
+                aria-label="Recent "
+              />
+              <div role="tabpanel" class="tab-content p-10">
+                This function is updating...
+              </div>
+            </div>
           </div>
         </div>
       </div>
