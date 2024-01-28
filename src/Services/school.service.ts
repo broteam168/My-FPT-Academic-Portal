@@ -38,4 +38,18 @@ export class SchoolService {
     
     return this.http.post<any>(this.configService.apiBaseUrl + '/unit/school',newObj);
   }
+  updateSchool(id:any, newSchool: School) {
+    const newObj = Object.fromEntries(
+      Object.entries(newSchool).map(([k, v]) => [
+        k.charAt(0).toLowerCase() + k.slice(1),
+        v,
+      ])
+    );
+    
+    return this.http.put<any>(this.configService.apiBaseUrl + '/unit/school/'+id,newObj);
+  }
+  deleteSchool(id:any) {
+    
+    return this.http.delete<any>(this.configService.apiBaseUrl + '/unit/school/'+id);
+  }
 }

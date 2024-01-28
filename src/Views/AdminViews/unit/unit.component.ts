@@ -45,4 +45,8 @@ export class UnitComponent implements OnInit {
   getCountSchools() {
     return this.schoolService.schools ? this.schoolService.schools.length : 0;
   }
+  manageClass(id: string)
+  {
+    this.router.navigate([this.router.url + '/school/' + id+'/class']);
+  }
 }

@@ -19,7 +19,8 @@ import { School } from '../../../../Models';
     MatIcon,
     ReactiveFormsModule,
     MessageboxComponent,
-    LoadingmodalComponent
+    LoadingmodalComponent,
+    
   ],
   templateUrl: './editunit.component.html',
   styleUrl: './editunit.component.scss'
@@ -72,12 +73,44 @@ export class EditunitComponent implements OnInit{
   }
   close() {
     this.openMessage = false;
-    if(this.naviage == true) this.goBack();
+    if(this.naviage == true)  this.goBack();
   }
-  createSchool() {
-   
+  updateSchool() {
+    if (this.schoolForm.valid) {
+      this.loading = true;
+      var newSchool =this.schoolForm.getRawValue();
+      var temp = this.router.url.split('/');
+    temp.pop();
+      this.schoolService.updateSchool(temp.pop(),newSchool).subscribe(data=>{
+        if(data['responseCode'] == 200)
+        {
+          this.messageTitle = 'Notification' ;
+          this.fail = false;
+          this.messageDescription = data['message'];
+          this.openMessage = true;
+          this.naviage = true;
+        }
+        else
+        {
+          this.messageTitle = 'Error' ;
+          this.fail = true;
+          this.messageDescription = data['message'];
+          this.openMessage = true;
+        }
+        return data;
+      })
+    } else {
+      this.messageTitle = 'Error Occurs' ;
+      this.fail = true;
+      this.messageDescription = 'Please enter full information to continue';
+      this.openMessage = true;
+     
+    }
+    this.loading = false;
   }
   goBack() {
-    this.router.navigateByUrl('/admin/unit');
+    var temp = this.router.url.split('/');
+    temp.pop();
+    this.router.navigateByUrl(temp.join('/'));
   }
 }
