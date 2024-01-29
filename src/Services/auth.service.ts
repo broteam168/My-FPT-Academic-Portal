@@ -43,9 +43,17 @@ export class AuthService {
     AuthService.currentUser = null; 
     localStorage.removeItem('currentUser');
   }
-
+refreshToken()
+{
+  AuthService.currentUser =JSON.parse(localStorage.getItem('currentUser') || '{}');
+}
   verifyRole(role:string) {
-   return this.http
+    if(this.currentUserValue == undefined)
+    {
+      console.log(AuthService.currentUser)
+    AuthService.currentUser =JSON.parse(localStorage.getItem('currentUser') || '{}');
+    }
+    return this.http
       .get<any>(this.configService.apiBaseUrl + '/auth/verify-role?role='+role);
       
   }
