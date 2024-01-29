@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,7 +14,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
 import { MajorService } from '../../../../../Services';
-import { Major } from '../../../../../Models';
+import { Class, Major } from '../../../../../Models';
 
 @Component({
   selector: 'app-addclass',
@@ -29,10 +29,10 @@ import { Major } from '../../../../../Models';
     MessageboxComponent,
     LoadingmodalComponent,
   ],
-  templateUrl: './addclass.component.html',
-  styleUrl: './addclass.component.scss',
+  templateUrl: './editclass.component.html',
+  styleUrl: './editclass.component.scss',
 })
-export class AddclassComponent {
+export class EditclassComponent implements OnInit {
   classForm: FormGroup;
   menu: any;
   messageTitle: string;
@@ -43,6 +43,7 @@ export class AddclassComponent {
   naviage: boolean;
   majors: Major[];
   major: Major;
+  currentClass: Class;
   constructor(
     private classService: ClassService,
     private router: Router,
@@ -61,6 +62,21 @@ export class AddclassComponent {
       this.majors = x.data;
     });
   }
+  ngOnInit(): void {
+    var temp = this.router.url.split('/');
+    temp.pop();
+    this.classService.getCurrentClass(temp.pop()).subscribe((x) => {
+      this.currentClass = x.data;
+      console.log(this.currentClass);
+      this.classForm.controls['name'].setValue(this.currentClass.name);
+      this.classForm.controls['majorId'].setValue(this.currentClass.major.id);
+      this.classForm.controls['description'].setValue(
+        this.currentClass.description
+      );
+
+      this.classForm.controls['isActive'].setValue(this.currentClass.isActive);
+    });
+  }
   close() {
     this.openMessage = false;
     if (this.naviage == true) this.goBack();
@@ -72,10 +88,13 @@ export class AddclassComponent {
       var newClass = this.classForm.getRawValue();
       var temp = this.router.url.split('/');
       temp.pop();
+
+      var id = temp.pop();
       temp.pop();
+
       newClass['school'] = Number(temp.pop());
       console.log(newClass);
-      this.classService.createNewClass(newClass).subscribe((data) => {
+      this.classService.updateClasS(Number(id),newClass).subscribe((data) => {
         if (data['responseCode'] == 200) {
           this.messageTitle = 'Notification';
           this.fail = false;
@@ -101,7 +120,8 @@ export class AddclassComponent {
   goBack() {
     var temp = this.router.url.split('/');
     temp.pop();
-  
+    temp.pop();
+
     this.router.navigateByUrl(temp.join('/'));
   }
 }

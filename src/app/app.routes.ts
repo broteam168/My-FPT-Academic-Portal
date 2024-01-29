@@ -9,6 +9,7 @@ import { AddunitComponent } from '../Views/AdminViews/unit/addunit/addunit.compo
 import { EditunitComponent } from '../Views/AdminViews/unit/editunit/editunit.component';
 import { ClassComponent } from '../Views/AdminViews/unit/class/class.component';
 import { AddclassComponent } from '../Views/AdminViews/unit/class/addclass/addclass.component';
+import { EditclassComponent } from '../Views/AdminViews/unit/class/editclass/editclass.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +34,11 @@ export const routes: Routes = [
         path: 'unit/school/add',
         component: AddunitComponent,
         pathMatch:'full'
+      },
+      {
+        path: 'unit/school/:id/class/:id2/edit',
+        component: EditclassComponent,
+        pathMatch:"full"
       },
       {
         path: 'unit/school/:id/class/add',

@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="ml-5 rounded-lg px-5 flex items-center">
-            <button
+            <button (click)="exportData()"
               class="btn border-blue-500 font-medium text-blue-600 hover:bg-blue-500 hover:text-white"
             >
               Export data
@@ -284,7 +284,7 @@
                         <td
                           class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex"
                         >
-                          <div>
+                          <div (click)="editClass(item.id)">
                             <mat-icon
                               title="Edit class"
                               aria-label="Example home icon"

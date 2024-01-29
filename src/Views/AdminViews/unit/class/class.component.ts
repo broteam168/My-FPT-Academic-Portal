@@ -95,8 +95,16 @@ export class ClassComponent {
       (x, i) => this.start - 1 <= i && i < Number(this.start + this.count - 1)
     ).filter(x=>x.name.toLowerCase().includes(text.toLowerCase()))
   }
+  exportData()
+  {
+    alert("This function is developing...");
+  }
   addClass()
   {
     this.router.navigateByUrl(this.router.url+'/add');
+  }
+  editClass(id:number)
+  {
+    this.router.navigateByUrl(this.router.url+'/'+id+'/edit');
   }
 }

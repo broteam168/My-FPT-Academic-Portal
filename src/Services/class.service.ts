@@ -17,4 +17,16 @@ export class ClassService {
    return this.http
       .get<any>(this.configService.apiBaseUrl + '/unit/class/search?schoolid='+id);
   }
+  getCurrentClass(id:string|undefined)
+  {
+    return this.http
+    .get<any>(this.configService.apiBaseUrl + '/unit/class/'+id)
+  }
+  createNewClass(newClass: any) {
+    return this.http.post<any>(this.configService.apiBaseUrl + '/unit/class',newClass);
+  }
+  updateClasS(id:number,data:any)
+  {
+    return this.http.put<any>(this.configService.apiBaseUrl + '/unit/class/'+id,data);
+  }
 }
