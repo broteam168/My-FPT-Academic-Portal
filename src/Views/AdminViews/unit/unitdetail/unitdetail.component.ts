@@ -69,7 +69,14 @@ export class UnitdetailComponent {
           });
       });
   }
+  search(text:string)
+  {
+    this.DataClasses =   this.DataClasses = this.classes.filter(
+      (x, i) => this.start - 1 <= i && i < Number(this.start + this.count - 1)
+    ).filter(x=>x.name.toLowerCase().includes(text.toLowerCase()))
+  }
   onChange(event: any) {
+    
     this.count = Number(event);
     this.DataClasses = [];
     console.log(Number(this.start + this.count - 1));
@@ -147,4 +154,5 @@ export class UnitdetailComponent {
     this.openMessage2 = false;
     if(this.naviage==true) this.goBack();
   }
+  
 }

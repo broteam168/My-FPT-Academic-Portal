@@ -89,4 +89,14 @@ export class ClassComponent {
     this.router.navigateByUrl('/admin/unit');
     
   }
+  search(text:string)
+  {
+    this.DataClasses =   this.DataClasses = this.classes.filter(
+      (x, i) => this.start - 1 <= i && i < Number(this.start + this.count - 1)
+    ).filter(x=>x.name.toLowerCase().includes(text.toLowerCase()))
+  }
+  addClass()
+  {
+    this.router.navigateByUrl(this.router.url+'/add');
+  }
 }

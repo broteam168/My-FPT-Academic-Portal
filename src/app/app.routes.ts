@@ -8,6 +8,7 @@ import { UnitdetailComponent } from '../Views/AdminViews/unit/unitdetail/unitdet
 import { AddunitComponent } from '../Views/AdminViews/unit/addunit/addunit.component';
 import { EditunitComponent } from '../Views/AdminViews/unit/editunit/editunit.component';
 import { ClassComponent } from '../Views/AdminViews/unit/class/class.component';
+import { AddclassComponent } from '../Views/AdminViews/unit/class/addclass/addclass.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,11 @@ export const routes: Routes = [
         path: 'unit/school/add',
         component: AddunitComponent,
         pathMatch:'full'
+      },
+      {
+        path: 'unit/school/:id/class/add',
+        component: AddclassComponent,
+        pathMatch:"full"
       },
       {
         path: 'unit/school/:id/class',
