@@ -294,7 +294,7 @@
                               appearance="outline "
                             ></mat-icon>
                           </div>
-                          <div>
+                          <div (click)="deletee(item.id)">
                             <mat-icon
                               title="Delete class"
                               aria-label="Example home icon"
@@ -337,6 +337,40 @@
           </div>
         </div>
       </div>
+      <app-messagebox
+      (closeModal)="close2()"
+      [open]="openMessage2"
+      [title]="messageTitle"
+      [description]="messageDescription"
+      [type]="fail"
+    ></app-messagebox>
+      <div 
+      id="wrong-modal"
+      *ngIf="openMessage"
+      tabindex="-1"
+      aria-hidden="true"
+      class="transform transition-transform flex bg-neutral-100/50 overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+    >
+      <div class="modal-box">
+        <h3
+          class="font-bold text-xl text-red-500"
+        >
+         Confirmation
+        </h3>
+        <p class="py-4"> Please consider before doing this action. This can cause losing data forever!!!</p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button  class="btn btn-error text-white" (click)="deletea()">
+              Delete
+            </button>
+            <button class="ml-5 btn btn-primary" (click)="close()">
+              Close
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </app-drawer>

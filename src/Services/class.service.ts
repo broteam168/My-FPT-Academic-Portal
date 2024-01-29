@@ -29,4 +29,8 @@ export class ClassService {
   {
     return this.http.put<any>(this.configService.apiBaseUrl + '/unit/class/'+id,data);
   }
+  deleteClass(id:any) {
+    
+    return this.http.delete<any>(this.configService.apiBaseUrl + '/unit/class/'+id);
+  }
 }

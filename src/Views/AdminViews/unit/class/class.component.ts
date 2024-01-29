@@ -6,14 +6,15 @@ import { getMenu } from '../../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
 import { Class, School } from '../../../../Models';
 import { ClassService } from '../../../../Services/class.service';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
 
 @Component({
   selector: 'app-class',
   standalone: true,
-  imports: [DrawerComponent,HeaderComponent,MatIcon,NgFor,NgClass],
+  imports: [DrawerComponent, HeaderComponent, MatIcon, NgFor, NgClass, NgIf,MessageboxComponent],
   templateUrl: './class.component.html',
-  styleUrl: './class.component.scss'
+  styleUrl: './class.component.scss',
 })
 export class ClassComponent {
   menu: any;
@@ -31,23 +32,24 @@ export class ClassComponent {
   openMessage2: boolean;
   fail: boolean;
   loading: boolean;
-  naviage:boolean;
-  constructor(schoolService: SchoolService,private router: Router, private classService : ClassService) {
+  naviage: boolean;
+
+  constructor(
+    schoolService: SchoolService,
+    private router: Router,
+    private classService: ClassService
+  ) {
     this.menu = getMenu('Units');
     var temp = router.url.split('/');
     temp.pop();
-    this.classService
-          .getClassesById(temp.pop() || "1")
-          .subscribe((data) => {
-            this.classes = data.data;
-            this.start = 1;
-            this.count = 5;
-            console.log(this.classes);
-            this.DataClasses = this.classes.filter(
-              (x, i) => this.start - 1 <= i && i < this.start + this.count - 1
-            );
-          });
-     
+    this.classService.getClassesById(temp.pop() || '1').subscribe((data) => {
+      this.classes = data.data;
+      this.start = 1;
+      this.count = 5;
+      this.DataClasses = this.classes.filter(
+        (x, i) => this.start - 1 <= i && i < this.start + this.count - 1
+      );
+    });
   }
   onChange(event: any) {
     this.count = Number(event);
@@ -87,24 +89,63 @@ export class ClassComponent {
   }
   goBack() {
     this.router.navigateByUrl('/admin/unit');
-    
   }
-  search(text:string)
-  {
-    this.DataClasses =   this.DataClasses = this.classes.filter(
-      (x, i) => this.start - 1 <= i && i < Number(this.start + this.count - 1)
-    ).filter(x=>x.name.toLowerCase().includes(text.toLowerCase()))
+  search(text: string) {
+    this.DataClasses = this.DataClasses = this.classes
+      .filter(
+        (x, i) => this.start - 1 <= i && i < Number(this.start + this.count - 1)
+      )
+      .filter((x) => x.name.toLowerCase().includes(text.toLowerCase()));
   }
-  exportData()
-  {
-    alert("This function is developing...");
+  exportData() {
+    alert('This function is developing...');
   }
-  addClass()
-  {
-    this.router.navigateByUrl(this.router.url+'/add');
+  addClass() {
+    this.router.navigateByUrl(this.router.url + '/add');
   }
-  editClass(id:number)
-  {
-    this.router.navigateByUrl(this.router.url+'/'+id+'/edit');
+  editClass(id: number) {
+    this.router.navigateByUrl(this.router.url + '/' + id + '/edit');
+  }
+  currentId:any;
+  deletee(id:any) {
+    this.currentId = id;
+    this.openMessage = true;
+  }
+  close() {
+    this.openMessage = false;
+  }
+  deletea() {
+   
+    this.classService.deleteClass(this.currentId).subscribe((data) => {
+      if (data['responseCode'] == 200) {
+        this.messageTitle = 'Notification';
+        this.fail = false;
+        this.messageDescription = data['message'];
+        this.openMessage2 = true;
+        this.naviage = true;
+      } else {
+        this.messageTitle = 'Error';
+        this.fail = true;
+        this.messageDescription = data['message'];
+        this.openMessage2 = true;
+      }
+      return data;
+    });
+    this.close();
+  }
+  close2() {
+    this.openMessage2 = false;
+    var temp = this.router.url.split('/');
+    temp.pop();
+   
+     if(this.naviage==true)  this.classService.getClassesById(temp.pop() || '1').subscribe((data) => {
+      this.classes = data.data;
+      this.start = 1;
+      this.count = 5;
+      console.log(this.classes);
+      this.DataClasses = this.classes.filter(
+        (x, i) => this.start - 1 <= i && i < this.start + this.count - 1
+      );
+    });
   }
 }
