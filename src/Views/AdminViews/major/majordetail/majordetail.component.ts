@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DrawerComponent, HeaderComponent } from '../../../Common';
 import { MatIcon } from '@angular/material/icon';
 import { getMenu } from '../../MenuDrawer';
-import { SchoolService } from '../../../../Services';
-import { Class, School } from '../../../../Models';
+import { MajorService, SchoolService } from '../../../../Services';
+import { Class, Major, School } from '../../../../Models';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassService } from '../../../../Services/class.service';
@@ -11,7 +11,7 @@ import { NgModel } from '@angular/forms';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
 
 @Component({
-  selector: 'app-unitdetail',
+  selector: 'app-majordetail',
   standalone: true,
   imports: [
     DrawerComponent,
@@ -22,16 +22,15 @@ import { MessageboxComponent } from '../../../Common/messagebox/messagebox.compo
     MessageboxComponent,
     NgIf,
   ],
-  templateUrl: './unitdetail.component.html',
-  styleUrl: './unitdetail.component.scss',
+  templateUrl: './majordetail.component.html',
+  styleUrl: './majordetail.component.scss',
 })
-export class UnitdetailComponent {
+export class MajordetailComponent implements OnInit {
   menu: any;
   DataClasses: Class[];
 
-  currentItem: School;
-  schoolService: SchoolService;
-  router: Router;
+  currentItem: Major;
+  
   classes: Class[];
   start: number;
   count: number;
@@ -44,31 +43,32 @@ export class UnitdetailComponent {
   loading: boolean;
   naviage:boolean;
   constructor(
-    schoolService: SchoolService,
-    private classService: ClassService,
-    router: Router,
+    majorService: MajorService,
+    private router: Router,
     private activeroute: ActivatedRoute
   ) {
-    this.menu = getMenu('Units');
-    this.schoolService = schoolService;
-    this.schoolService.getAllSchools();
-    this.router = router;
-    this.schoolService
-      .getCurrentSchool(router.url.split('/').pop())
+    console.log(this.menu)
+  
+  
+    majorService.getSpecificMajor(router.url.split('/').pop())
       .subscribe((response) => {
         this.currentItem = response.data;
-        this.classService
-          .getClassesById(this.currentItem.id)
-          .subscribe((data) => {
-            this.classes = data.data;
-            this.start = 1;
-            this.count = 5;
-            this.DataClasses = this.classes.filter(
-              (x, i) => this.start - 1 <= i && i < this.start + this.count - 1
-            );
-          });
+        // this.classService
+        //   .getClassesById(this.currentItem.id)
+        //   .subscribe((data) => {
+        //     this.classes = data.data;
+        //     this.start = 1;
+        //     this.count = 5;
+        //     this.DataClasses = this.classes.filter(
+        //       (x, i) => this.start - 1 <= i && i < this.start + this.count - 1
+        //     );
+        //   });
       });
   }
+  ngOnInit(): void {
+    this.menu = getMenu('Majors');
+  }
+ 
   search(text:string)
   {
     this.DataClasses =   this.DataClasses = this.classes.filter(
@@ -100,52 +100,39 @@ export class UnitdetailComponent {
       );
     }
   }
-  countClasses() {
-    return this.classes.length;
-  }
-  countDeactivedClasses() {
-    return this.classes.filter((x) => x.isActive == false).length;
-  }
-  countActivedClasses() {
-    return this.classes.filter((x) => x.isActive == true).length;
-  }
-  getPercentage() {
-    return Math.round((this.countActivedClasses() / this.classes.length) * 100);
-  }
-  editschool() {
-    this.router.navigateByUrl(this.router.url + '/edit');
-  }
+ 
+  
   goBack() {
-    this.router.navigateByUrl('/admin/unit');
+    this.router.navigateByUrl('/admin/major');
     
   }
   deleteSchool()
   {
-    
+    this.menu = getMenu('Majors');
     this.openMessage = true;
   }
   deletea()
   {
-    this.close();
-    var temp = this.router.url;
-     this.schoolService.deleteSchool(temp.split('/').pop()).subscribe(data=>{
-        if(data['responseCode'] == 200)
-        {
-          this.messageTitle = 'Notification' ;
-          this.fail = false;
-          this.messageDescription = data['message'];
-          this.openMessage2 = true;
-          this.naviage=true;
-        }
-        else
-        {
-          this.messageTitle = 'Error' ;
-          this.fail = true;
-          this.messageDescription = data['message'];
-          this.openMessage2 = true;
-        }
-        return data;
-      })
+    // this.close();
+    // var temp = this.router.url;
+    //  this.schoolService.deleteSchool(temp.split('/').pop()).subscribe(data=>{
+    //     if(data['responseCode'] == 200)
+    //     {
+    //       this.messageTitle = 'Notification' ;
+    //       this.fail = false;
+    //       this.messageDescription = data['message'];
+    //       this.openMessage2 = true;
+    //       this.naviage=true;
+    //     }
+    //     else
+    //     {
+    //       this.messageTitle = 'Error' ;
+    //       this.fail = true;
+    //       this.messageDescription = data['message'];
+    //       this.openMessage2 = true;
+    //     }
+    //     return data;
+    //   })
   }
   close() {
     

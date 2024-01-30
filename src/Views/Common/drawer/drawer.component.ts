@@ -10,8 +10,11 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './drawer.component.scss',
 })
 export class DrawerComponent {
-  @Input() items :any;
+  @Input() items: any;
   filterBelowItems() {
-    return this.items.filter((x: { below: any; }) => x.below);
+    return this.items.filter((x: { below: any }) => x.below == true);
+  }
+  filterNonBelowItems() {
+    return this.items.filter((x: { below: any }) => x.below == false);
   }
 }

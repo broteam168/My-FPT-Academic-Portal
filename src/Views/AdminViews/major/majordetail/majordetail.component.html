@@ -1,0 +1,289 @@
+<app-drawer [items]="menu">
+  <div class="h-screen bg-gray-100">
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <app-header></app-header>
+
+      <div #maincontent class="pt-10 px-5 pb-10 w-full">
+        <div #header class="flex flex-row justify-between items-center">
+          <div
+            #back_button
+            class="flex items-center hover:cursor-pointer"
+            (click)="goBack()"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="keyboard_backspace"
+              class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
+              appearance="outline "
+            ></mat-icon>
+
+            <div class="font-medium text-lg">Back to Major management</div>
+          </div>
+          <div #right_button class="mt-3">
+            <button
+              (click)="deleteSchool()"
+              class="btn border-red-500 font-medium text-red-600 hover:bg-red-500 hover:text-white mr-5"
+            >
+              Remove major
+            </button>
+            <button
+              class="btn border-gray-500 font-medium text-gray-600 hover:bg-gray-500 hover:text-white"
+            >
+              Edit information
+            </button>
+          </div>
+        </div>
+        <div #headcontent>
+          <div
+            #shortcontent
+            class="mt-5 flex justify-between bg-white rounded-xl px-5 border border-gray-400"
+          >
+            <div #header class="flex h-fit items-cente w-fit py-5 mt-1">
+              <img
+                src="assets/images/google.png"
+                class="w-fit h-3/4 object-scale-down py-auto self-center"
+              />
+              <div class="flex flex-col ml-3">
+                <div class="text-xl font-medium font-sans">
+                  {{ currentItem.fullName }}
+                </div>
+                <div class="text-md font-normal mt-1 font-sans">
+                  No.{{ currentItem.id }}
+                </div>
+                <div class="mt-2 flex">
+                  <div class="inline font-normal mr-1">Status:</div>
+                  <div
+                    class="flex items-center px-1.5 py-1"
+                    [ngClass]="{
+                      'text-green-600 bg-emerald-50 ': currentItem.isActive,
+                      'text-red-600 bg-rose-50': !currentItem.isActive
+                    }"
+                  >
+                    <mat-icon
+                      aria-hidden="false"
+                      aria-label="Example home icon"
+                      fontIcon="fiber_manual_record"
+                      class="text-black text-base ml-1.5"
+                      [ngClass]="{
+                        'text-green-600 ': currentItem.isActive,
+                        'text-red-600 ': !currentItem.isActive
+                      }"
+                      appearance="outline "
+                    ></mat-icon>
+                    {{ currentItem.isActive ? "Active" : "Deactived" }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div #supportheader class="pt-10">
+              <div class="font-sans text-sm text-gray-400 flex items-center">
+                <mat-icon
+                  aria-hidden="false"
+                  fontIcon="av_timer"
+                  class="text-black text-lg ml-1.5"
+                ></mat-icon>
+                Created at 28-01-2024
+              </div>
+              <div #classnum class="flex mt-5">
+                <div
+                  #classnumdeative
+                  class="text-sm text-gray-400 flex items-center"
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    fontIcon="work_off"
+                    class="mr-2 text-red-600 bg-red-200 rounded-full text-lg text-center center align-middle mb-1"
+                  ></mat-icon
+                  >Deactived
+                  <div class="ml-1 text-red-600">
+                    {{ 1 }}
+                  </div>
+                </div>
+                <div
+                  #classnumdeative
+                  class="ml-5 text-sm text-gray-400 flex items-center"
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    fontIcon="work"
+                    class="mr-2 text-green-600 bg-green-200 rounded-full text-lg text-center center align-middle mb-1"
+                  ></mat-icon
+                  >Actived
+                  <div class="ml-1 text-green-600">
+                    {{ 1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              #totalclass
+              class="mt-5 bg-sky-200 h-fit rounded-lg px-5 py-5 mb-5"
+            >
+              <div class="font-medium font-sans text-lg">Total Classes</div>
+              <div class="flex">
+                <div
+                  #percentage
+                  class="text-3xl font-semibold font-sans text-green-600"
+                >
+                  {{ 1}}%
+                </div>
+                <div class="ml-10 self-end">
+                  <div class="text-green-600 inline item">
+                    {{1}}
+                  </div>
+                  /{{ 1 }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            #maincontent2
+            class="mt-10 w-full bg-white rounded-lg p-5 border border-gray-400"
+          >
+            <div role="tablist" class="tabs tabs-bordered w-full">
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab w-96"
+                aria-label="Details"
+                checked
+              />
+              <div role="tabpanel" class="tab-content p-10">
+                <div
+                class="text-xl font-sans font-semibold flex justify-between"
+              >
+                Major Basic Information<button
+                
+                  class="btn border-orange-500 font-medium text-orange-600 hover:bg-orange-500 hover:text-white"
+                >
+                  Export data
+                </button>
+              </div>
+              <diV class="mt-8">
+                <div class="mt-2">
+                  Id:
+                  <div class="inline text-gray-500">{{ currentItem.id }}</div>
+                </div>
+                <div class="mt-2">
+                  Code:
+                  <div class="inline text-gray-500">
+                    {{ currentItem.name }}
+                  </div>
+                </div>
+                <div class="mt-2">
+                  Category:
+                  <div class="inline text-gray-500">
+                    {{ currentItem.category }}
+                  </div>
+                </div>
+                <div class="mt-2">
+                  Degree Level:
+                  <div class="inline text-gray-500">
+                    {{ currentItem.degreeLevel }}
+                  </div>
+                </div>
+                <div class="mt-2">
+                   Full Name:
+                    <div class="inline text-gray-500">
+                      {{ currentItem.fullName }}
+                    </div>
+                  </div>
+                <div class="mt-2">
+                  Number of Classes:
+                  <div class="inline text-gray-500">{{ 1 }}</div>
+                </div>
+              </diV>
+              <div class="mt-8 text-xl font-sans font-semibold">
+                Major Description
+              </div>
+              <div class="whitespace-pre-wrap pt-10">
+                <div class="inline text-gray-500">
+                  {{ currentItem.description }}
+                </div>
+              </div>
+              <div class="mt-8 text-xl font-sans font-semibold">
+                Major Notes
+              </div>
+              <div class="whitespace-break-spaces pt-10">
+                <div class="inline text-gray-500">Updating...</div>
+              </div>
+              </div>
+
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab"
+                aria-label="Submajors"
+              />
+              <div role="tabpanel" class="tab-content">
+             
+              </div>
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab"
+                aria-label="Students "
+              />
+              <div role="tabpanel" class="tab-content p-10">
+                This function is updating...
+              </div>
+
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab"
+                aria-label="Recent "
+              />
+              <div role="tabpanel" class="tab-content p-10">
+                This function is updating...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-messagebox
+      (closeModal)="close2()"
+      [open]="openMessage2"
+      [title]="messageTitle"
+      [description]="messageDescription"
+      [type]="fail"
+    ></app-messagebox>
+
+    <div
+      id="wrong-modal"
+      *ngIf="openMessage"
+      tabindex="-1"
+      aria-hidden="true"
+      class="transform transition-transform flex bg-neutral-100/50 overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+    >
+      <div class="modal-box">
+        <h3 class="font-bold text-xl text-red-500">Confirmation</h3>
+        <p class="py-4">
+          Please consider before doing this action. This can cause losing data
+          forever!!!
+        </p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-error text-white" (click)="deletea()">
+              Delete
+            </button>
+            <button class="ml-5 btn btn-primary" (click)="close()">
+              Close
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-drawer>

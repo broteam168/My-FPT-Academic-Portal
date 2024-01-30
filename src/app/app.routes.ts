@@ -10,6 +10,9 @@ import { EditunitComponent } from '../Views/AdminViews/unit/editunit/editunit.co
 import { ClassComponent } from '../Views/AdminViews/unit/class/class.component';
 import { AddclassComponent } from '../Views/AdminViews/unit/class/addclass/addclass.component';
 import { EditclassComponent } from '../Views/AdminViews/unit/class/editclass/editclass.component';
+import { MajorComponent } from '../Views/AdminViews/major/major.component';
+import { AddmajorComponent } from '../Views/AdminViews/major/addmajor/addmajor.component';
+import { MajordetailComponent } from '../Views/AdminViews/major/majordetail/majordetail.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -60,7 +63,21 @@ export const routes: Routes = [
         component: UnitdetailComponent,
         pathMatch:"full"
       },
-      
+      {
+        path: 'major/add',
+        component: AddmajorComponent,
+        pathMatch:"full"
+      },
+      {
+        path: 'major/:id',
+        component: MajordetailComponent,
+        pathMatch:"full"
+      },
+      {
+        path: 'major',
+        component: MajorComponent,
+        pathMatch:"full"
+      },
     ],
   },
 ];

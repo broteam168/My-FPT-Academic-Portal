@@ -20,7 +20,7 @@
                 alt="logo"
                 class="w-42 pr-4 mx-auto pb-8 border-red-50 border-solid border-b-2"
             /></a>
-            <div *ngFor="let item of items">
+            <div *ngFor="let item of filterNonBelowItems()">
               <a [href]="item.url">
                 <div
                   *ngIf="item.current; else elseBlock"

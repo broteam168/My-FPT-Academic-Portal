@@ -14,4 +14,13 @@ export class MajorService {
     return this.http
        .get<any>(this.configService.apiBaseUrl + '/major');
    }
+   createNewMajor(newObj: any) {
+    
+    return this.http.post<any>(this.configService.apiBaseUrl + '/major',newObj);
+  }
+  getSpecificMajor(id:any)
+  {
+    return this.http
+       .get<any>(this.configService.apiBaseUrl + '/major/'+id);
+  }
 }

@@ -22,7 +22,13 @@ export function getMenu(highlight:string)
               current: false,
               below: false,
             },
-            
+            {
+              icon: 'school',
+              name: 'Majors',
+              url: '/admin/major',
+              current: false,
+              below: false,
+            },
             {
               icon: 'business',
               name: 'Units',
@@ -32,7 +38,7 @@ export function getMenu(highlight:string)
             },
             {
               icon: 'home',
-              name: 'News',
+              name: 'News2',
               url: '/',
               current: false,
               below: true,

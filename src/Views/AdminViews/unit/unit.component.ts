@@ -37,6 +37,7 @@ export class UnitComponent implements OnInit {
     this.router.navigate([this.router.url + '/school/' + id]);
   }
   refreshSchool() {
+    
     this.schoolService.getAllSchools();
   }
   getAllSchool() {
