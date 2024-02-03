@@ -3,3 +3,4 @@ export * from "./auth.service";
 export * from "./school.service";
 export * from "./class.service";
 export * from "./major.service";
+export * from "./submajor.service";
