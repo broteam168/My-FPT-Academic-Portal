@@ -19,5 +19,7 @@ export class SubmajorService {
   createNewSubMajor(newClass: any) {
     return this.http.post<any>(this.configService.apiBaseUrl + '/submajor',newClass);
   }
-  
+  updateSubMajor(id:any,newClass: any) {
+    return this.http.post<any>(this.configService.apiBaseUrl + '/submajor/'+id,newClass);
+  }
 }
