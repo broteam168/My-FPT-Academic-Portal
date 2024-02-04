@@ -23,4 +23,11 @@ export class MajorService {
     return this.http
        .get<any>(this.configService.apiBaseUrl + '/major/'+id);
   }
+  updateMajor(id:any, newMajor: any) {
+    return this.http.put<any>(this.configService.apiBaseUrl + '/major/'+id,newMajor);
+  }
+  deleteMajor(id:any) {
+    
+    return this.http.delete<any>(this.configService.apiBaseUrl + '/major/'+id);
+  }
 }

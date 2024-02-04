@@ -48,6 +48,6 @@ export class MajorComponent {
     return this.majors ? this.majors.length : 0;
   }
   manageSbmajor(id: any) {
-    this.router.navigate([this.router.url + '/school/' + id + '/class']);
+    this.router.navigate([this.router.url + '/'+id+'/submajor']);
   }
 }

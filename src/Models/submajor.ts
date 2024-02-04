@@ -1,4 +1,4 @@
-export class Major {
+export class SubMajor {
     id: number;
     description: string;
     name: string;

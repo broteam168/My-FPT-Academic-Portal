@@ -13,6 +13,9 @@ import { EditclassComponent } from '../Views/AdminViews/unit/class/editclass/edi
 import { MajorComponent } from '../Views/AdminViews/major/major.component';
 import { AddmajorComponent } from '../Views/AdminViews/major/addmajor/addmajor.component';
 import { MajordetailComponent } from '../Views/AdminViews/major/majordetail/majordetail.component';
+import { EditmajorComponent } from '../Views/AdminViews/major/editmajor/editmajor.component';
+import { SubmajorComponent } from '../Views/AdminViews/major/submajor/submajor.component';
+import { AddsubmajorComponent } from '../Views/AdminViews/major/submajor/addsubmajor/addsubmajor.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -66,6 +69,21 @@ export const routes: Routes = [
       {
         path: 'major/add',
         component: AddmajorComponent,
+        pathMatch:"full"
+      },
+      {
+        path: 'major/:id/submajor/add',
+        component: AddsubmajorComponent,
+        pathMatch:"full"
+      },
+      {
+        path: 'major/:id/edit',
+        component: EditmajorComponent,
+        pathMatch:"full"
+      },
+      {
+        path: 'major/:id/submajor',
+        component: SubmajorComponent,
         pathMatch:"full"
       },
       {
