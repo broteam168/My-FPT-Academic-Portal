@@ -124,22 +124,22 @@ export class SubmajorComponent {
   }
   deletea() {
    
-    // this.subMajorService.deleteClass(this.currentId).subscribe((data) => {
-    //   if (data['responseCode'] == 200) {
-    //     this.messageTitle = 'Notification';
-    //     this.fail = false;
-    //     this.messageDescription = data['message'];
-    //     this.openMessage2 = true;
-    //     this.naviage = true;
-    //   } else {
-    //     this.messageTitle = 'Error';
-    //     this.fail = true;
-    //     this.messageDescription = data['message'];
-    //     this.openMessage2 = true;
-    //   }
-    //   return data;
-    // });
-    // this.close();
+    this.subMajorService.deleteClass(this.currentId).subscribe((data) => {
+      if (data['responseCode'] == 200) {
+        this.messageTitle = 'Notification';
+        this.fail = false;
+        this.messageDescription = data['message'];
+        this.openMessage2 = true;
+        this.naviage = true;
+      } else {
+        this.messageTitle = 'Error';
+        this.fail = true;
+        this.messageDescription = data['message'];
+        this.openMessage2 = true;
+      }
+      return data;
+    });
+    this.close();
   }
   addSubMajor()
   {
