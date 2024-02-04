@@ -15,6 +15,7 @@ import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.co
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
 import { MajorService, SubmajorService } from '../../../../../Services';
 import { Major } from '../../../../../Models';
+import { SubMajor } from '../../../../../Models/submajor';
 
 @Component({
   selector: 'app-add-submajor',
@@ -42,7 +43,7 @@ export class EditsubmajorComponent {
   loading: boolean;
   naviage: boolean;
   majors: Major[];
-  major: Major;
+  submajor: SubMajor;
   constructor(
     private subMajorService: SubmajorService,
     private router: Router,
@@ -57,24 +58,35 @@ export class EditsubmajorComponent {
       description: ['', Validators.required],
       isActive: [true],
     });
-    this.subMajorService.get
+    var tempUrl = this.router.url.split('/');
+    tempUrl.pop();
+    this.subMajorService.getSpecificSubMajor(tempUrl.pop()).subscribe((x) => {
+      this.submajor = x.data;
+      this.classForm.controls['name'].setValue(this.submajor.name);
+      this.classForm.controls['fullName'].setValue(this.submajor.fullName);
+      this.classForm.controls['description'].setValue(
+        this.submajor.description
+      );
+      this.classForm.controls['isActive'].setValue(this.submajor.isActive);
+    });
   }
   close() {
     this.openMessage = false;
     if (this.naviage == true) this.goBack();
   }
   createSchool() {
-     if (this.classForm.valid) {
+    if (this.classForm.valid) {
       this.loading = true;
       var newClass = this.classForm.getRawValue();
       var temp = this.router.url.split('/');
       temp.pop();
-      temp.pop();
+      var id  = temp.pop();
+      temp.pop()
       newClass['majorId'] = Number(temp.pop());
       newClass['isCommon'] = false;
       newClass['type'] = null;
       console.log(newClass);
-      this.subMajorService.createNewSubMajor(newClass).subscribe((data) => {
+      this.subMajorService.updateSubMajor(id,newClass).subscribe((data) => {
         if (data['responseCode'] == 200) {
           this.messageTitle = 'Notification';
           this.fail = false;
@@ -100,7 +112,7 @@ export class EditsubmajorComponent {
   goBack() {
     var temp = this.router.url.split('/');
     temp.pop();
-  
+    temp.pop();
     this.router.navigateByUrl(temp.join('/'));
   }
 }
