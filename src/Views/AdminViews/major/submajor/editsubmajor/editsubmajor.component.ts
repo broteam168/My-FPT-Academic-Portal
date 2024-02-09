@@ -15,7 +15,7 @@ import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.co
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
 import { MajorService, SubmajorService } from '../../../../../Services';
 import { Major } from '../../../../../Models';
-import { SubMajor } from '../../../../../Models/submajor';
+import { SubMajor } from '../../../../../Models/Major/submajor';
 
 @Component({
   selector: 'app-add-submajor',

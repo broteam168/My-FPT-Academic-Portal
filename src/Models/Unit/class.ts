@@ -1,4 +1,4 @@
-import { Major } from './major';
+import { Major } from '../Major/major';
 
 export class Class {
   id: number;

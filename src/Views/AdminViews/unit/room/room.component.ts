@@ -8,6 +8,7 @@ import { Class, School } from '../../../../Models';
 import { ClassService } from '../../../../Services/class.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
+import { RoomService } from '../../../../Services/room.service';
 
 @Component({
   selector: 'app-room',
@@ -22,7 +23,7 @@ export class RoomComponent {
 
   currentItem: School;
   schoolService: SchoolService;
-  classes: Class[];
+  classes: Room[];
   start: number;
   count: number;
   counti: number;
@@ -37,12 +38,12 @@ export class RoomComponent {
   constructor(
     schoolService: SchoolService,
     private router: Router,
-    private classService: ClassService
+    private roomService: RoomService
   ) {
     this.menu = getMenu('Units');
     var temp = router.url.split('/');
     temp.pop();
-    this.classService.getClassesById(temp.pop() || '1').subscribe((data) => {
+    this.roomService.getRoomsById(temp.pop() || '1').subscribe((data) => {
       this.classes = data.data;
       this.start = 1;
       this.count = 5;

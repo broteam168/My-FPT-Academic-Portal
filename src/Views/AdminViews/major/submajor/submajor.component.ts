@@ -8,7 +8,7 @@ import { Class, Major, School } from '../../../../Models';
 import { ClassService } from '../../../../Services/class.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
-import { SubMajor } from '../../../../Models/submajor';
+import { SubMajor } from '../../../../Models/Major/submajor';
 
 @Component({
   selector: 'app-submajor',
