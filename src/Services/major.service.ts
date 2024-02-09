@@ -9,7 +9,8 @@ export class MajorService {
   constructor(
     private http: HttpClient,
     private configService: AppConfigService
-  ) {}
+  ) {
+  }
   getAllMajors() {
     return this.http
        .get<any>(this.configService.apiBaseUrl + '/major');

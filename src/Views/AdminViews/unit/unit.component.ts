@@ -50,4 +50,8 @@ export class UnitComponent implements OnInit {
   {
     this.router.navigate([this.router.url + '/school/' + id+'/class']);
   }
+  manageRoom(id: string)
+  {
+    this.router.navigate([this.router.url + '/school/' + id+'/room']);
+  }
 }

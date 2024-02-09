@@ -27,7 +27,7 @@
             </div>
           </div>
           <div #button_header_right class="flex items-center">
-            <button class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600" (click)="addSchool()">
+            <button class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600"  (click)="addSchool()">
                 <mat-icon
                 aria-hidden="false"
                 aria-label="Example home icon"
@@ -123,8 +123,17 @@
                   </div>
                 </div>
               </div>
-              <div #action class="flex justify-end">
-                <button
+           
+              <div #action class="flex justify-between">
+                <div>
+                  <button
+                  class="btn p-2 btn-warning  text-white font-medium font-sans mr-2" (click)="manageRoom(item.id)"
+                >
+                  Manage room 
+                </button>
+                </div>
+                <div>
+                  <button
                   class="btn p-2 btn-accent  text-white font-medium font-sans mr-2" (click)="manageClass(item.id)"
                 >
                   Manage class
@@ -134,6 +143,8 @@
                 >
                   View details
                 </button>
+                </div>
+              
               </div>
             </div>
           </div>
