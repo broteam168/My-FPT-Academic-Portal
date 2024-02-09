@@ -17,7 +17,11 @@ import { EditmajorComponent } from '../Views/AdminViews/major/editmajor/editmajo
 import { SubmajorComponent } from '../Views/AdminViews/major/submajor/submajor.component';
 import { AddsubmajorComponent } from '../Views/AdminViews/major/submajor/addsubmajor/addsubmajor.component';
 import { EditsubmajorComponent } from '../Views/AdminViews/major/submajor/editsubmajor/editsubmajor.component';
+
 import { SubjectComponent } from '../Views/AdminViews/academic/subject/subject.component';
+import { TimeComponent } from '../Views/AdminViews/time/time.component';
+import { RoomComponent } from '../Views/AdminViews/unit/room/room.component';
+
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,74 +42,83 @@ export const routes: Routes = [
         component: AcademicComponent,
       },
       {
+        path: 'timetable',
+        component: TimeComponent,
+      },
+      {
         path: 'unit',
         component: UnitComponent,
       },
-      
+
       {
         path: 'unit/school/add',
         component: AddunitComponent,
-        pathMatch:'full'
+        pathMatch: 'full',
       },
       {
         path: 'unit/school/:id/class/:id2/edit',
         component: EditclassComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'unit/school/:id/class/add',
         component: AddclassComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
+      },
+      {
+        path: 'unit/school/:id/room',
+        component: RoomComponent,
+        pathMatch: 'full',
       },
       {
         path: 'unit/school/:id/class',
         component: ClassComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'unit/school/:id/edit',
         component: EditunitComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'unit/school/:id',
         component: UnitdetailComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'major/add',
         component: AddmajorComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'major/:id/submajor/:id/edit',
         component: EditsubmajorComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'major/:id/submajor/add',
         component: AddsubmajorComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'major/:id/edit',
         component: EditmajorComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'major/:id/submajor',
         component: SubmajorComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'major/:id',
         component: MajordetailComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
       {
         path: 'major',
         component: MajorComponent,
-        pathMatch:"full"
+        pathMatch: 'full',
       },
     ],
   },

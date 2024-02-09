@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DrawerComponent, HeaderComponent } from '../../Common';
 import { MatIcon } from '@angular/material/icon';
 import { NgClass, NgFor } from '@angular/common';
@@ -14,7 +14,7 @@ import { Major } from '../../../Models';
   templateUrl: './major.component.html',
   styleUrl: './major.component.scss',
 })
-export class MajorComponent {
+export class MajorComponent implements OnInit{
   menu: any;
   majors:Major[];
   constructor(private majorService: MajorService, private router: Router) {
