@@ -17,6 +17,7 @@ import { EditmajorComponent } from '../Views/AdminViews/major/editmajor/editmajo
 import { SubmajorComponent } from '../Views/AdminViews/major/submajor/submajor.component';
 import { AddsubmajorComponent } from '../Views/AdminViews/major/submajor/addsubmajor/addsubmajor.component';
 import { EditsubmajorComponent } from '../Views/AdminViews/major/submajor/editsubmajor/editsubmajor.component';
+import { SubjectComponent } from '../Views/AdminViews/academic/subject/subject.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,6 +28,10 @@ export const routes: Routes = [
       {
         path: 'user',
         component: UserComponent,
+      },
+      {
+        path: 'academic/subject',
+        component: SubjectComponent,
       },
       {
         path: 'academic',
