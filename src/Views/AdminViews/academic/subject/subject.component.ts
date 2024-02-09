@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { getMenu } from "../../MenuDrawer";
 import { DrawerComponent, HeaderComponent } from "../../../Common";
 import { MatIcon } from "@angular/material/icon";
@@ -10,8 +10,9 @@ import { MatIcon } from "@angular/material/icon";
   templateUrl: './subject.component.html',
   styleUrl: './subject.component.scss',
 })
-export class SubjectComponent {
+export class SubjectComponent implements OnInit{
   menu: any;
+  
   constructor() {
     this.menu = getMenu('Academic');
     console.log(this.menu);
