@@ -11,4 +11,8 @@ export class SubjectService {
     private http: HttpClient,
     private configService: AppConfigService
   ) { }
+
+  getAllSubject() {
+    return this.http.get<any>(this.configService.apiBaseUrl + '/subject');
+  }
 }

@@ -6,5 +6,5 @@ export class Subject {
     status: boolean;
     description: string;
     credits: number;
-    prerequisite: number;
+    prerequisite: number | null;
 }

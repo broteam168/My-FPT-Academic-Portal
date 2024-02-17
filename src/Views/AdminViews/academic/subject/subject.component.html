@@ -57,7 +57,28 @@
 
         <!-- data list -->
         <div>
-          <div *ngFor="let item of list"></div>
+          <table class="mt-6 mx-5 w-full">
+            <tr class="text-white bg-orange-500">
+              <td class="py-4 w-1/5 text-center">Subject Id</td>
+              <td class="w-1/6">Subject Code</td>
+              <td class="w-1/4">Subject Name</td>
+              <td class="w-1/12">Credit</td>
+              <td class="w-1/12">Status</td>
+              <td></td>
+            </tr>
+
+            <div *ngFor="let item of getAllSubject()">
+              <tr>
+                <td class="py-4 w-1/5 text-center">{{item.id}}</td>
+                <td class="w-1/6">{{item.subjectCode}}</td>
+                <td class="w-1/4">{{item.name}}</td>
+                <td class="w-1/12">{{item.credits}}</td>
+                <td class="w-1/12">{{item.status}}</td>
+                <td>View Detail</td>
+              </tr>
+            </div>
+          </table>
+          
         </div>
       </div>
     </div>

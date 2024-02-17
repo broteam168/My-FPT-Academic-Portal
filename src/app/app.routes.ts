@@ -34,12 +34,12 @@ export const routes: Routes = [
         component: UserComponent,
       },
       {
-        path: 'academic/subject',
-        component: SubjectComponent,
-      },
-      {
         path: 'academic',
         component: AcademicComponent,
+      },
+      {
+        path: 'academic/subject',
+        component: SubjectComponent,
       },
       {
         path: 'timetable',
