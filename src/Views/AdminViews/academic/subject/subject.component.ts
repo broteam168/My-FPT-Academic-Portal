@@ -31,4 +31,7 @@ export class SubjectComponent implements OnInit{
   getAllSubject() {
     return this.subjects;
   }
+  addSubject() {
+    this.router.navigate([this.router.url + '/add']);
+  }
 }

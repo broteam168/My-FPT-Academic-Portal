@@ -21,6 +21,7 @@ import { EditsubmajorComponent } from '../Views/AdminViews/major/submajor/editsu
 import { SubjectComponent } from '../Views/AdminViews/academic/subject/subject.component';
 import { TimeComponent } from '../Views/AdminViews/time/time.component';
 import { RoomComponent } from '../Views/AdminViews/unit/room/room.component';
+import { AddsubjectComponent } from '../Views/AdminViews/academic/subject/addsubject/addsubject.component';
 
 
 export const routes: Routes = [
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
         path: 'academic/subject',
         component: SubjectComponent,
+      },
+      {
+        path: 'academic/subject/add',
+        component: AddsubjectComponent,
       },
       {
         path: 'timetable',

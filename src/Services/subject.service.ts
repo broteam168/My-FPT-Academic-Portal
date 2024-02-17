@@ -15,4 +15,8 @@ export class SubjectService {
   getAllSubject() {
     return this.http.get<any>(this.configService.apiBaseUrl + '/subject');
   }
+
+  createNewSubject(newObj: any) {
+    return this.http.post<any>(this.configService.apiBaseUrl + '/subject', newObj);
+  }
 }
