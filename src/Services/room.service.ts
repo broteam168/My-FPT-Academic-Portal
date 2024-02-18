@@ -20,4 +20,13 @@ export class RoomService {
    createNewRoom(newRoom: any) {
     return this.http.post<any>(this.configService.apiBaseUrl + '/unit/room',newRoom);
   }
+  getCurrentRoom(id:string|undefined)
+  {
+    return this.http
+    .get<any>(this.configService.apiBaseUrl + '/unit/room/'+id)
+  }
+  updateRoom(id:number,data:any)
+  {
+    return this.http.put<any>(this.configService.apiBaseUrl + '/unit/room/'+id,data);
+  }
 }
