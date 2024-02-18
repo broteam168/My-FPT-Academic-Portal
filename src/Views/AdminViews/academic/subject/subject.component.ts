@@ -5,13 +5,17 @@ import { MatIcon } from "@angular/material/icon";
 import { Subject } from "../../../../Models";
 import { SubjectService } from "../../../../Services/subject.service";
 import { Router } from "@angular/router";
-import { CommonModule } from "@angular/common";
+import { NgFor } from "@angular/common";
 
 
 @Component({
   selector: 'app-academic',
   standalone: true,
-  imports: [DrawerComponent, HeaderComponent,MatIcon, CommonModule],
+  imports: [
+    DrawerComponent, 
+    HeaderComponent,
+    MatIcon, 
+    NgFor],
   templateUrl: './subject.component.html',
   styleUrl: './subject.component.scss',
 })
@@ -33,5 +37,8 @@ export class SubjectComponent implements OnInit{
   }
   addSubject() {
     this.router.navigate([this.router.url + '/add']);
+  }
+  deleteSubject() {
+    this.router.navigate([this.router.url + '/delete']);
   }
 }

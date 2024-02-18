@@ -1,0 +1,68 @@
+<app-drawer [items]="menu">
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent>
+        <!-- Back -->
+        <div class="flex hover:cursor-pointer" (click)="goBack()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="keyboard_backspace"
+            class="text-black text-lg font-medium mb-5 mx-5 hover:bg-white hover:rounded-full hover:pl-1"
+            appearance="outline"
+          ></mat-icon>
+          <div class="font-medium text-lg">Back to subject management</div>
+        </div>
+        <!-- title -->
+        <div class="ml-6 text-center">
+          <p class="text-4xl font-medium">Subject Management</p>
+        </div>
+
+        <!-- các nút -->
+        <div #button_header_right class="items-center my-5 float-end">
+          <button
+            class="shadow ml-5 btn bg-red-500 text-white font-sans font-medium"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="edit"
+              class="text-white text-lg"
+              appearance="outline "
+            ></mat-icon>
+            Delete subject
+          </button>
+        </div>
+
+        <!-- data list -->
+        <div>
+          <table class="mt-6 mx-5 w-full">
+            <tr class="text-white bg-orange-500">
+              <td class="py-4 w-1/5 text-center">Subject Id</td>
+              <td class="w-1/6">Subject Code</td>
+              <td class="w-1/4">Subject Name</td>
+              <td class="w-1/12">Credit</td>
+              <td class="w-1/12">Status</td>
+              <td></td>
+            </tr>
+
+            <div *ngFor="let item of getAllSubject()">
+              <tr>
+                <td class="py-4 w-1/5 text-center">{{ item.id }}</td>
+                <td class="w-1/6">{{ item.subjectCode }}</td>
+                <td class="w-1/4">{{ item.name }}</td>
+                <td class="w-1/12">{{ item.credits }}</td>
+                <td class="w-1/12">{{ item.status }}</td>
+                <td>View Detail</td>
+              </tr>
+            </div>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-drawer>
