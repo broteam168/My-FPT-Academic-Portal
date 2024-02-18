@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { DrawerComponent, HeaderComponent } from '../../../Common';
-import { MajorService, SchoolService } from '../../../../Services';
+
 import { Route, Router } from '@angular/router';
-import { getMenu } from '../../MenuDrawer';
+
 import { MatIcon } from '@angular/material/icon';
 import {
   FormGroup,
@@ -11,10 +10,12 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
-import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
-import { LoadingmodalComponent } from '../../../Common/loadingmodal/loadingmodal.component';
 import { NgIf } from '@angular/common';
-import { School } from '../../../../Models';
+import { DrawerComponent, HeaderComponent } from '../../../../Common';
+import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
+import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
+import { getMenu } from '../../../MenuDrawer';
+import { RoomService } from '../../../../../Services/room.service';
 @Component({
   selector: 'app-addunit',
   standalone: true,
@@ -26,11 +27,11 @@ import { School } from '../../../../Models';
     MessageboxComponent,
     LoadingmodalComponent
   ],
-  templateUrl: './addmajor.component.html',
-  styleUrl: './addmajor.component.scss',
+  templateUrl: './addroom.component.html',
+  styleUrl: './addroom.component.scss',
 })
-export class AddmajorComponent {
-  majorForm: FormGroup;
+export class AddroomComponent {
+  roomForm: FormGroup;
   menu: any;
   router: Router;
   messageTitle: string;
@@ -41,17 +42,16 @@ export class AddmajorComponent {
   naviage:boolean;
   
   constructor(
-    private majorService: MajorService,
+    private roomService : RoomService,
     router: Router,
     private formBuilder: FormBuilder
   ) {
     this.menu = getMenu('Majors');
     this.router = router;
-    this.majorForm = this.formBuilder.group({
+    this.roomForm = this.formBuilder.group({
       name: ['', Validators.required],
-      category: ['', Validators.required],
-      degreeLevel: ['', Validators.required],
-      fullName: ['', Validators.required],
+      type: ['', Validators.required],
+      building: ['', Validators.required],
       description:['',Validators.required],
       isActive: [true],
     });
@@ -63,10 +63,14 @@ export class AddmajorComponent {
   }
   createMajor() {
      
-    if (this.majorForm.valid) {
+    if (this.roomForm.valid) {
       this.loading = true;
-      var newMajor =this.majorForm.getRawValue();
-      this.majorService.createNewMajor(newMajor).subscribe(data=>{
+      var newRoom =this.roomForm.getRawValue();
+      var temp = this.router.url.split('/');
+      temp.pop();
+      temp.pop();
+      newRoom['schoolId'] = temp.pop();
+      this.roomService.createNewRoom(newRoom).subscribe(data=>{
         if(data['responseCode'] == 200)
         {
           this.messageTitle = 'Notification' ;
@@ -93,6 +97,8 @@ export class AddmajorComponent {
     this.loading = false;
   }
   goBack() {
-    this.router.navigateByUrl('/admin/major');
+    var returnUrl = this.router.url.split('/');
+    returnUrl.pop();
+    this.router.navigateByUrl(returnUrl.join('/'));
   }
 }

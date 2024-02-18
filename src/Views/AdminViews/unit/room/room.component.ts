@@ -4,10 +4,11 @@ import { SchoolService } from '../../../../Services';
 import { Router } from '@angular/router';
 import { getMenu } from '../../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
-import { Class, School } from '../../../../Models';
+import { Class, Room, School } from '../../../../Models';
 import { ClassService } from '../../../../Services/class.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
+import { RoomService } from '../../../../Services/room.service';
 
 @Component({
   selector: 'app-room',
@@ -18,11 +19,10 @@ import { MessageboxComponent } from '../../../Common/messagebox/messagebox.compo
 })
 export class RoomComponent {
   menu: any;
-  DataClasses: Class[];
+  DataClasses: Room[];
 
-  currentItem: School;
-  schoolService: SchoolService;
-  classes: Class[];
+  
+  classes: Room[];
   start: number;
   count: number;
   counti: number;
@@ -37,12 +37,12 @@ export class RoomComponent {
   constructor(
     schoolService: SchoolService,
     private router: Router,
-    private classService: ClassService
+    private roomService: RoomService
   ) {
     this.menu = getMenu('Units');
     var temp = router.url.split('/');
     temp.pop();
-    this.classService.getClassesById(temp.pop() || '1').subscribe((data) => {
+    this.roomService.getRoomsById(temp.pop() || '1').subscribe((data) => {
       this.classes = data.data;
       this.start = 1;
       this.count = 5;
@@ -116,7 +116,7 @@ export class RoomComponent {
   }
   deletea() {
    
-    this.classService.deleteClass(this.currentId).subscribe((data) => {
+    this.roomService.deleteRoom(this.currentId).subscribe((data) => {
       if (data['responseCode'] == 200) {
         this.messageTitle = 'Notification';
         this.fail = false;
@@ -138,7 +138,7 @@ export class RoomComponent {
     var temp = this.router.url.split('/');
     temp.pop();
    
-     if(this.naviage==true)  this.classService.getClassesById(temp.pop() || '1').subscribe((data) => {
+     if(this.naviage==true)  this.roomService.getRoomsById(temp.pop() || '1').subscribe((data) => {
       this.classes = data.data;
       this.start = 1;
       this.count = 5;

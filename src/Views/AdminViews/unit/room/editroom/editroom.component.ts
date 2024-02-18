@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,12 +13,12 @@ import { MatIcon } from '@angular/material/icon';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
-import { MajorService, SubmajorService } from '../../../../../Services';
-import { Major } from '../../../../../Models';
-import { SubMajor } from '../../../../../Models/Major/submajor';
+import { MajorService } from '../../../../../Services';
+import { Class, Major, Room } from '../../../../../Models';
+import { RoomService } from '../../../../../Services/room.service';
 
 @Component({
-  selector: 'app-add-submajor',
+  selector: 'app-addclass',
   standalone: true,
   imports: [
     NgIf,
@@ -30,11 +30,11 @@ import { SubMajor } from '../../../../../Models/Major/submajor';
     MessageboxComponent,
     LoadingmodalComponent,
   ],
-  templateUrl: './editsubmajor.component.html',
-  styleUrl: './editsubmajor.component.scss',
+  templateUrl: './editroom.component.html',
+  styleUrl: './editroom.component.scss',
 })
-export class EditsubmajorComponent {
-  classForm: FormGroup;
+export class EditroomComponent implements OnInit {
+  roomForm: FormGroup;
   menu: any;
   messageTitle: string;
   messageDescription: string;
@@ -42,52 +42,60 @@ export class EditsubmajorComponent {
   fail: boolean;
   loading: boolean;
   naviage: boolean;
-  majors: Major[];
-  submajor: SubMajor;
+  major: Major;
+  currentClass: Room;
   constructor(
-    private subMajorService: SubmajorService,
+    private roomService: RoomService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private majorService: MajorService
+    
   ) {
-    this.menu = getMenu('Majors');
+    this.menu = getMenu('Units');
     this.router = router;
-    this.classForm = this.formBuilder.group({
+    this.roomForm = this.formBuilder.group({
       name: ['', Validators.required],
-      fullName: ['', Validators.required],
-      description: ['', Validators.required],
+      type: ['', Validators.required],
+      building: ['', Validators.required],
+      description:['',Validators.required],
       isActive: [true],
     });
-    var tempUrl = this.router.url.split('/');
-    tempUrl.pop();
-    this.subMajorService.getSpecificSubMajor(tempUrl.pop()).subscribe((x) => {
-      this.submajor = x.data;
-      this.classForm.controls['name'].setValue(this.submajor.name);
-      this.classForm.controls['fullName'].setValue(this.submajor.fullName);
-      this.classForm.controls['description'].setValue(
-        this.submajor.description
+    
+  }
+  ngOnInit(): void {
+    var temp = this.router.url.split('/');
+    temp.pop();
+    this.roomService.getCurrentRoom(temp.pop()).subscribe((x) => {
+      this.currentClass = x.data;
+      console.log(this.currentClass);
+      this.roomForm.controls['name'].setValue(this.currentClass.name);
+      this.roomForm.controls['type'].setValue(this.currentClass.type);
+      this.roomForm.controls['building'].setValue(this.currentClass.building);
+      this.roomForm.controls['description'].setValue(
+        this.currentClass.description
       );
-      this.classForm.controls['isActive'].setValue(this.submajor.isActive);
+
+      this.roomForm.controls['isActive'].setValue(this.currentClass.isActive);
     });
   }
   close() {
     this.openMessage = false;
     if (this.naviage == true) this.goBack();
   }
-  createSchool() {
-    if (this.classForm.valid) {
+  editRoom() {
+    console.log(this.roomForm.getRawValue());
+    if (this.roomForm.valid) {
       this.loading = true;
-      var newClass = this.classForm.getRawValue();
+      var newClass = this.roomForm.getRawValue();
       var temp = this.router.url.split('/');
       temp.pop();
-      var id  = temp.pop();
-      temp.pop()
-      newClass['majorId'] = Number(temp.pop());
-      newClass['isCommon'] = false;
-      newClass['type'] = null;
+
+      var id = temp.pop();
+      temp.pop();
+
+      newClass['schoolId'] = Number(temp.pop());
       console.log(newClass);
-      this.subMajorService.updateSubMajor(id,newClass).subscribe((data) => {
-        if (data['responseCode'] == 200) {
+       this.roomService.updateRoom(Number(id),newClass).subscribe((data) => {
+         if (data['responseCode'] == 200) {
           this.messageTitle = 'Notification';
           this.fail = false;
           this.messageDescription = data['message'];
@@ -113,6 +121,7 @@ export class EditsubmajorComponent {
     var temp = this.router.url.split('/');
     temp.pop();
     temp.pop();
+
     this.router.navigateByUrl(temp.join('/'));
   }
 }

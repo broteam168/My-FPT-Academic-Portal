@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClassService } from '../../../../Services/class.service';
 import { NgModel } from '@angular/forms';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
-import { SubMajor } from '../../../../Models/submajor';
+import { SubMajor } from '../../../../Models/Major/submajor';
 
 @Component({
   selector: 'app-majordetail',
