@@ -19,6 +19,7 @@ import { AddsubmajorComponent } from '../Views/AdminViews/major/submajor/addsubm
 import { EditsubmajorComponent } from '../Views/AdminViews/major/submajor/editsubmajor/editsubmajor.component';
 import { TimeComponent } from '../Views/AdminViews/time/time.component';
 import { RoomComponent } from '../Views/AdminViews/unit/room/room.component';
+import { AddroomComponent } from '../Views/AdminViews/unit/room/addroom/addroom.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -56,6 +57,11 @@ export const routes: Routes = [
       {
         path: 'unit/school/:id/class/add',
         component: AddclassComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'unit/school/:id/room/add',
+        component: AddroomComponent,
         pathMatch: 'full',
       },
       {

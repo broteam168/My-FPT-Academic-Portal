@@ -17,4 +17,7 @@ export class RoomService {
     return this.http
        .get<any>(this.configService.apiBaseUrl + '/unit/room/search?schoolid='+id);
    }
+   createNewRoom(newRoom: any) {
+    return this.http.post<any>(this.configService.apiBaseUrl + '/unit/room',newRoom);
+  }
 }
