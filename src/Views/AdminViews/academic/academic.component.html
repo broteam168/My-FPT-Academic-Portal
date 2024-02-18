@@ -95,6 +95,7 @@
         <div id="item1">
           <div
             #item
+            (click)="goToSubject()"
             class="transform active:scale-95 transition-transform shadow rounded-md hover:cursor-pointer hover:border-orange-500 bg-white w-fit ml-5 mt-5 px-5 py-5 border border-solid border-slate-600"
           >
             <div
@@ -112,7 +113,7 @@
                   appearance="outline "
                 ></mat-icon>
               </div>
-              <div class="text-black text-2xl font-medium font-sans" (click)="goToSubject()">
+              <div class="text-black text-2xl font-medium font-sans">
                 Subjects
               </div>
               <div

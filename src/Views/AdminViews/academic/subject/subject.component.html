@@ -6,8 +6,20 @@
         >Open drawer</label
       >
       <div #maincontent>
+        <!-- back -->
+        <div class="flex items-center hover:cursor-pointer" (click)="goBack()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="keyboard_backspace"
+            class="text-lg font-medium m-5 hover:bg-white hover:rounded-full hover:pl-1"
+            appearance="outline"
+          ></mat-icon>
+          <div class="font-medium text-lg">Back to Academic management</div>
+        </div>
+
         <!-- title -->
-        <div class="ml-6">
+        <div class="ml-6 text-center">
           <p class="text-4xl font-medium">Subject Management</p>
         </div>
 

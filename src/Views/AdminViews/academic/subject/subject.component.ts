@@ -41,4 +41,7 @@ export class SubjectComponent implements OnInit{
   deleteSubject() {
     this.router.navigate([this.router.url + '/delete']);
   }
+  goBack() {
+    this.router.navigateByUrl('/admin/academic');
+  }
 }
