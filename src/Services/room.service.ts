@@ -29,4 +29,8 @@ export class RoomService {
   {
     return this.http.put<any>(this.configService.apiBaseUrl + '/unit/room/'+id,data);
   }
+  deleteRoom(id:any) {
+    
+    return this.http.delete<any>(this.configService.apiBaseUrl + '/unit/room/'+id);
+  }
 }
