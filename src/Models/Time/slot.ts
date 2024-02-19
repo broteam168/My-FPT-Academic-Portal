@@ -2,9 +2,10 @@ export class Slot {
     id: number;
     description: string;
     name: string;
-    starttime: string;
-    category: string;
-    degreeLevel: string;
+    startTime: string;
+    endTime: string;
+    order: number;
     isActive: boolean;
+    groupId:number;
   }
   

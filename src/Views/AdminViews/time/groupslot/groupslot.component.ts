@@ -65,7 +65,7 @@ export class GroupslotComponent implements OnInit {
   }
   manageRoom(id: string)
   {
-    this.router.navigate([this.router.url + '/school/' + id+'/room']);
+    this.router.navigate([this.router.url + '/' + id+'/slot']);
   }
   deleteSchool(id:any)
   {

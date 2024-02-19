@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ClassService } from '../../../../../Services/class.service';
+import { ClassService } from '../../../../../Services/Unit/class.service';
 import { getMenu } from '../../../MenuDrawer';
 import { DrawerComponent, HeaderComponent } from '../../../../Common';
 import { MatIcon } from '@angular/material/icon';

@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import { getMenu } from '../../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
 import { Class, Room, School } from '../../../../Models';
-import { ClassService } from '../../../../Services/class.service';
+import { ClassService } from '../../../../Services/Unit/class.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
-import { RoomService } from '../../../../Services/room.service';
+import { RoomService } from '../../../../Services/Unit/room.service';
 
 @Component({
   selector: 'app-room',

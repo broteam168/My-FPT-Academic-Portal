@@ -6,7 +6,7 @@ import { SchoolService } from '../../../../Services';
 import { Class, School } from '../../../../Models';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClassService } from '../../../../Services/class.service';
+import { ClassService } from '../../../../Services/Unit/class.service';
 import { NgModel } from '@angular/forms';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
 
