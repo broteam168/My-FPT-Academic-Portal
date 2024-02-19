@@ -1,17 +1,141 @@
 <app-drawer [items]="menu">
-    <div class="h-screen bg-gray-100">
-      <app-header></app-header>
-      <div class="bg-gray-100">
-        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
-          >Open drawer</label
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent>
+        <div
+          #header
+          class="flex flex-row items-center justify-between ml-5 mt-5"
         >
-        <div #maincontent>
-          <!-- header -->
-          <div #header class="flex ">
+          <!-- Back -->
+          <div class="flex cursor-pointer" (click)="goBack()">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="keyboard_backspace"
+              class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
+              appearance="outline "
+            ></mat-icon>
+            <div class="font-medium text-lg">Back to subject management</div>
+          </div>
 
+          <!-- action -->
+          <div>
+            <button
+              class="shadow btn bg-orange-500 text-white font-sans font-medium"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="edit"
+                class="text-white text-lg"
+                appearance="outline "
+              ></mat-icon>
+              Edit Subject
+            </button>
+            <button
+              class="shadow ml-5 btn bg-red-500 text-white font-sans font-medium"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="delete"
+                class="text-white text-lg"
+                appearance="outline "
+              ></mat-icon>
+              Delete subject
+            </button>
+          </div>
+        </div>
+
+        <!-- header content-->
+        <div
+          #headcontent
+          class="mt-5 ml-5 bg-white rounded-xl h-32 border border-gray-400 flex items-center"
+        >
+          <img
+            src="assets/images/google.png"
+            class="w-fit h-3/4 object-scale-down py-auto self-center"
+          />
+          <div class="flex flex-col ml-5">
+            <div class="text-xl font-medium font-sans">
+              {{ currentSubject.name }}
+            </div>
+            <div class="text-xl font-normal font-sans">
+              No.{{ currentSubject.id }}
+            </div>
+            <div class="flex">
+              <div class="text-xl font-normal font-sans">Status:</div>
+              <div
+                class="flex items-center px-1.5 py-1"
+                [ngClass]="{
+                  'text-green-600 bg-emerald-50 ': currentSubject.status,
+                  'text-red-600 bg-rose-50': !currentSubject.status
+                }"
+              >
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="fiber_manual_record"
+                  class="text-black text-base ml-1.5"
+                  [ngClass]="{
+                    'text-green-600 ': currentSubject.status,
+                    'text-red-600 ': !currentSubject.status
+                  }"
+                  appearance="outline "
+                ></mat-icon>
+                {{ currentSubject.status ? "Active" : "Deactived" }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- data -->
+        <div
+          #detailcontent
+          class="mt-5 ml-5 bg-white rounded-xl border border-gray-400 flex items-center"
+        >
+          <div role="tablist" class="tabs tabs-bordered w-full m-5">
+            <input
+              type="radio"
+              name="my_tabs_1"
+              role="tab"
+              class="tab w-96"
+              aria-label="Details"
+              checked
+            />
+            <div role="tabpanel" class="tab-content p-10">
+              <div class="mt-2">
+                Id:
+                <div class="inline text-gray-500">{{ currentSubject.id }}</div>
+              </div>
+              <div class="mt-2">
+                Name:
+                <div class="inline text-gray-500">
+                  {{ currentSubject.subjectCode }}
+                </div>
+              </div>
+              <div class="mt-2">
+                Location:
+                <div class="inline text-gray-500">
+                  {{ currentSubject.name }}
+                </div>
+              </div>
+              <div class="mt-8 text-xl font-sans font-semibold">
+                School Description
+              </div>
+              <div class="whitespace-pre-wrap pt-10">
+                <div class="inline text-gray-500">
+                  {{ currentSubject.credits }}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </app-drawer>
-  
+  </div>
+</app-drawer>

@@ -24,6 +24,7 @@ import { RoomComponent } from '../Views/AdminViews/unit/room/room.component';
 import { AddsubjectComponent } from '../Views/AdminViews/academic/subject/addsubject/addsubject.component';
 import { DeletesubjectComponent } from '../Views/AdminViews/academic/subject/deletesubject/deletesubject.component';
 import { CuriculumComponent } from '../Views/AdminViews/academic/curiculum/curiculum.component';
+import { DetailSubjectComponent } from '../Views/AdminViews/academic/subject/detail-subject/detail-subject.component';
 
 
 export const routes: Routes = [
@@ -45,6 +46,10 @@ export const routes: Routes = [
         component: SubjectComponent,
       },
       {
+        path: 'academic/subject/detail/:id',
+        component: DetailSubjectComponent,
+      },
+      {
         path: 'academic/subject/add',
         component: AddsubjectComponent,
       },
@@ -64,7 +69,6 @@ export const routes: Routes = [
         path: 'unit',
         component: UnitComponent,
       },
-
       {
         path: 'unit/school/add',
         component: AddunitComponent,
