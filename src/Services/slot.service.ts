@@ -25,4 +25,7 @@ export class SlotService {
   updateSlot(id:any, newSlot: any) {
     return this.http.put<any>(this.configService.apiBaseUrl +  '/time/slot/'+id,newSlot);
   }
+  deleteSlot(id:any) {
+    return this.http.delete<any>(this.configService.apiBaseUrl + '/time/slot/'+id);
+  }
 }
