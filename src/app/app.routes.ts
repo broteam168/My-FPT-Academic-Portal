@@ -26,6 +26,7 @@ import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/a
 import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
 import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.component';
 import { AddslotComponent } from '../Views/AdminViews/time/groupslot/slot/addslot/addslot.component';
+import { EditslotComponent } from '../Views/AdminViews/time/groupslot/slot/editslot/editslot.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
         path: 'academic',
         component: AcademicComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/slot/:id2/edit',
+        component: EditslotComponent,
       },
       {
         path: 'timetable/groupslot/:id/slot/add',

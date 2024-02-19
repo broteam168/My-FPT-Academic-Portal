@@ -17,4 +17,12 @@ export class SlotService {
     return this.http
        .post<any>(this.configService.apiBaseUrl + '/time/slot',newSlot);
    }
+   getSpecificSlot(id:any)
+  {
+    return this.http
+       .get<any>(this.configService.apiBaseUrl + '/time/slot/'+id);
+  }
+  updateSlot(id:any, newSlot: any) {
+    return this.http.put<any>(this.configService.apiBaseUrl +  '/time/slot/'+id,newSlot);
+  }
 }
