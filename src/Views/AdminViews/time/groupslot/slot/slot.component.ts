@@ -1,29 +1,28 @@
-import { Component } from '@angular/core';
-import { DrawerComponent, HeaderComponent } from '../../../Common';
-import { MajorService, SchoolService, SubmajorService } from '../../../../Services';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { getMenu } from '../../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
-import { Class, Major, School } from '../../../../Models';
-import { ClassService } from '../../../../Services/Unit/class.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
-import { SubMajor } from '../../../../Models/Major/submajor';
+import { DrawerComponent, HeaderComponent } from '../../../../Common';
+import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
+import { Slot } from '../../../../../Models/Time/slot';
+import { GroupSlot } from '../../../../../Models';
+import { SlotService } from '../../../../../Services/slot.service';
+import { getMenu } from '../../../MenuDrawer';
+
 
 @Component({
-  selector: 'app-submajor',
+  selector: 'app-class',
   standalone: true,
   imports: [DrawerComponent, HeaderComponent, MatIcon, NgFor, NgClass, NgIf,MessageboxComponent],
-  templateUrl: './submajor.component.html',
-  styleUrl: './submajor.component.scss',
+  templateUrl: './slot.component.html',
+  styleUrl: './slot.component.scss',
 })
-export class SubmajorComponent {
+export class SlotComponent implements OnInit{
   menu: any;
-  DataClasses: SubMajor[];
+  DataClasses: Slot[];
 
-  currentItem: Major;
-  schoolService: SchoolService;
-  classes: SubMajor[];
+  currentItem: GroupSlot;
+  classes: Slot[];
   start: number;
   count: number;
   counti: number;
@@ -36,22 +35,18 @@ export class SubmajorComponent {
   naviage: boolean;
 
   constructor(
-    schoolService: SchoolService,
+    private slotService:SlotService,
     private router: Router,
-    private majorService : MajorService,  
-    private subMajorService: SubmajorService
   ) {
-    this.menu = getMenu('Majors');
-    var temp = router.url.split('/');
+    this.menu = getMenu('Timetable');
+   
+  }
+  ngOnInit(): void {
+    var temp = this.router.url.split('/');
     temp.pop();
-    var id = temp.pop();
-    majorService.getSpecificMajor(id)
-    .subscribe((response) => {
-      this.currentItem = response.data;
-      
-    });
-    this.subMajorService.getSubMajorInMajor(id || '1').subscribe((data) => {
+    this.slotService.getSlotsById(temp.pop() || '1').subscribe((data) => {
       this.classes = data.data;
+      console.log(this.classes);
       this.start = 1;
       this.count = 5;
       this.DataClasses = this.classes.filter(
@@ -96,7 +91,7 @@ export class SubmajorComponent {
     return Math.round((this.countActivedClasses() / this.classes.length) * 100);
   }
   goBack() {
-    this.router.navigateByUrl('/admin/major');
+    this.router.navigateByUrl('/admin/timetable');
   }
   search(text: string) {
     this.DataClasses = this.DataClasses = this.classes
@@ -124,7 +119,7 @@ export class SubmajorComponent {
   }
   deletea() {
    
-    this.subMajorService.deleteClass(this.currentId).subscribe((data) => {
+    this.slotService.deleteSlot(this.currentId).subscribe((data) => {
       if (data['responseCode'] == 200) {
         this.messageTitle = 'Notification';
         this.fail = false;
@@ -141,16 +136,12 @@ export class SubmajorComponent {
     });
     this.close();
   }
-  addSubMajor()
-  {
-   
-  }
   close2() {
     this.openMessage2 = false;
     var temp = this.router.url.split('/');
     temp.pop();
    
-     if(this.naviage==true)  this.subMajorService.getSubMajorInMajor(temp.pop() || '1').subscribe((data) => {
+     if(this.naviage==true)  this.slotService.getSlotsById(temp.pop() || '1').subscribe((data) => {
       this.classes = data.data;
       this.start = 1;
       this.count = 5;

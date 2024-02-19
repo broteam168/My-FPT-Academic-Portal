@@ -1,0 +1,190 @@
+<app-drawer [items]="menu">
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent class="px-5 mt-10 pb-10">
+        <div #head class="flex justify-between items-center ">
+          <div #header class="flex items-center">
+            <div #total class="font-bold text-lg font-sans">
+              Showing total
+              <div class="text-red-600 inline">{{ getCountSchools() }}</div>
+              Set of Slots
+            </div>
+            <div
+              class="transform active:scale-95 transition-transform shadow hover:cursor-pointer hover:border-orange-500 pr-4 py-1 ml-4 bg-white rounded-lg flex justify-center items-center"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="filter_list"
+                class="text-black text-lg ml-1.5 mb-1"
+                appearance="outline "
+              ></mat-icon
+              >Filter
+            </div>
+          </div>
+          <div #button_header_right class="flex items-center">
+            <button class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600"  (click)="addSchool()">
+                <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="library_add"
+                class="text-white text-lg "
+                appearance="outline "
+              ></mat-icon
+              >
+              Add set
+            </button>
+            <button class="shadow ml-5 btn bg-orange-500 text-white font-sans font-medium" (click)="refreshSchool()">
+                <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="refresh"
+                class="text-white text-lg "
+                appearance="outline "
+              ></mat-icon
+              >
+                Refresh
+              </button>
+          </div>
+        </div>
+        <!--DATA LIST-->
+        <div class="flex flex-row flex-wrap mt-5">
+          <div #container *ngFor="let item of getAllSchool()">
+            <div
+              #item
+              class=" max-xl:ml-10 max-xl:mt-10 xmax-xl:w transform transition-transform   mt-5 bg-white rounded-lg shadow border border-zinc-100 w-96 h-80 p-5 mr-3 overflow-hidden flex flex-col justify-between"
+            >
+              <div>
+                <div #header class="flex h-fit items-center border-b border-zinc-200 w-full pb-5">
+                  <img
+                    src="assets/images/google.png"
+                    class="w-fit h-3/4 object-scale-down py-auto self-center"
+                  />
+                  <div
+                    class="flex flex-col ml-3 "
+                  >
+                    <div class="text-xl font-medium font-sans">
+                      {{ item.name }}
+                    </div>
+                    <div class="font-sans text-orange-400">
+                      No.<div class="inline" #id>{{ item.id }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-5 flex items-center">
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="class"
+                    class="text-black text-base ml-1.5"
+                    appearance="outline "
+                  ></mat-icon>
+                  <div class="inline font-medium mr-1">Type:</div>
+                  <div class="inline w-auto">{{ item.type }}</div>
+                </div>
+                <div class="mt-2">
+                  <div class="inline-flex font-medium mr-1">
+                    <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="chrome_reader_mode"
+                    class="text-black text-base ml-1.5"
+                    appearance="outline "
+                  ></mat-icon>
+                    <div class="inline">Description:</div>
+                  </div>
+                  <div class="inline w-auto">{{ item.description }}</div>
+                </div>
+                <div class="mt-2 flex">
+                  <div class="inline font-medium mr-1">Status:</div>
+                  <div
+                    class="flex items-center px-1.5 py-1 "
+                    [ngClass]="{
+                      'text-green-600 bg-emerald-50 ': item.isActive,
+                      'text-red-600 bg-rose-50': !item.isActive
+                    }"
+                  >
+                    <mat-icon
+                      aria-hidden="false"
+                      aria-label="Example home icon"
+                      fontIcon="fiber_manual_record"
+                      class="text-black text-base ml-1.5"
+                      [ngClass]="{
+                        'text-green-600 ': item.isActive,
+                        'text-red-600 ': !item.isActive
+                      }"
+                      appearance="outline "
+                    ></mat-icon>
+                    {{ item.isActive ? "Active" : "Deactived" }}
+                  </div>
+                </div>
+              </div>
+           
+              <div #action class="flex justify-between">
+                <div>
+                  <button
+                  class="btn p-2 btn-warning  text-white font-medium font-sans mr-2" (click)="manageRoom(item.id)"
+                >
+                  Manage Slots
+                </button>
+                </div>
+                <div>
+                  <button
+                  class="btn p-2 btn-accent  text-white font-medium font-sans mr-2" (click)="manageClass(item.id)"
+                >
+                  Edit set
+                </button>
+                <button
+                  class="btn p-2 btn-error text-white font-medium font-sans" (click)="deleteSchool(item.id)"
+                >
+                  Delete set
+                </button>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-messagebox
+      (closeModal)="close2()"
+      [open]="openMessage2"
+      [title]="messageTitle"
+      [description]="messageDescription"
+      [type]="fail"
+    ></app-messagebox>
+
+    <div
+      id="wrong-modal"
+      *ngIf="openMessage"
+      tabindex="-1"
+      aria-hidden="true"
+      class="transform transition-transform flex bg-neutral-100/50 overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+    >
+      <div class="modal-box">
+        <h3 class="font-bold text-xl text-red-500">Confirmation</h3>
+        <p class="py-4">
+          Please consider before doing this action. This can cause losing data
+          forever!!!
+        </p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-error text-white" (click)="deletea()">
+              Delete
+            </button>
+            <button class="ml-5 btn btn-primary" (click)="close()">
+              Close
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+  </div>
+</app-drawer>
