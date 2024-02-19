@@ -13,4 +13,8 @@ export class SlotService {
     return this.http
        .get<any>(this.configService.apiBaseUrl + '/time/slot/search?groupId='+id);
    }
+   createSlot(newSlot:any) {
+    return this.http
+       .post<any>(this.configService.apiBaseUrl + '/time/slot',newSlot);
+   }
 }
