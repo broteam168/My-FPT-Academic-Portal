@@ -1,0 +1,92 @@
+<app-drawer [items]="menu">
+    <div class="h-screen bg-gray-100">
+      <app-header></app-header>
+      <div class="bg-gray-100">
+        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+          >Open drawer</label
+        >
+        <div #maincontent>
+          <!-- back -->
+          <div class="flex items-center hover:cursor-pointer" (click)="goBack()">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="keyboard_backspace"
+              class="text-lg font-medium m-5 hover:bg-white hover:rounded-full hover:pl-1"
+              appearance="outline"
+            ></mat-icon>
+            <div class="font-medium text-lg">Back to subject management</div>
+          </div>
+  
+          <!-- title -->
+          <div class="ml-6 text-center">
+            <p class="text-4xl font-medium">Curiculum</p>
+          </div>
+  
+          <!-- các nút -->
+          <div #button_header_right class="flex items-center justify-between mt-5">
+            <div class="flex flex-row ml-5 h-12 w-1/2">
+              <div class="relative mr-5 w-1/2">
+                <select class="h-full rounded-lg w-full">
+                  <option>Chọn chuyên ngành</option>
+                  <option>Chọn chuyên ngành</option>
+                  <option>Chọn chuyên ngành</option>
+                  <option>Chọn chuyên ngành</option>
+                </select>
+              </div>
+              <div class="relative w-1/2">
+                <select class="h-full rounded-lg w-full">
+                  <option>Chọn ngành hẹp</option>
+                  <option>Chọn chuyên ngành</option>
+                  <option>Chọn chuyên ngành</option>
+                  <option>Chọn chuyên ngành</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <button
+                class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600" 
+              >
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="library_add"
+                  class="text-white text-lg"
+                  appearance="outline "
+                ></mat-icon>
+                Add Subject
+              </button>
+              <button
+                class="shadow ml-5 btn bg-red-500 text-white font-sans font-medium"
+              >
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="edit"
+                  class="text-white text-lg"
+                  appearance="outline "
+                ></mat-icon>
+                Edit subject
+              </button>
+            </div>
+          </div>
+  
+          <!-- data list -->
+          <div>
+            <table class="mt-6 mx-5 w-full">
+              <tr class="text-white bg-orange-500">
+                <td class="py-4 w-1/5 text-center">Subject Id</td>
+                <td class="w-1/6">Subject Code</td>
+                <td class="w-2/4">Subject Name</td>
+                <td class="w-1/12">Termino</td>
+                <td></td>
+              </tr>
+              
+            </table>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-drawer>
+  

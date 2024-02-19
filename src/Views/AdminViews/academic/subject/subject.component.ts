@@ -44,4 +44,7 @@ export class SubjectComponent implements OnInit{
   goBack() {
     this.router.navigateByUrl('/admin/academic');
   }
+  goToCuriculum() {
+    this.router.navigate([this.router.url + '/curiculum']);
+  }
 }
