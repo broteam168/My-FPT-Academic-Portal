@@ -5,7 +5,7 @@ import { MatIcon } from "@angular/material/icon";
 import { Subject } from "../../../../Models";
 import { SubjectService } from "../../../../Services/subject.service";
 import { Router } from "@angular/router";
-import { NgFor } from "@angular/common";
+import { NgClass, NgFor } from "@angular/common";
 
 
 @Component({
@@ -15,7 +15,9 @@ import { NgFor } from "@angular/common";
     DrawerComponent, 
     HeaderComponent,
     MatIcon, 
-    NgFor],
+    NgFor,
+    NgClass
+  ],
   templateUrl: './subject.component.html',
   styleUrl: './subject.component.scss',
 })
@@ -46,5 +48,8 @@ export class SubjectComponent implements OnInit{
   }
   goToCuriculum() {
     this.router.navigate([this.router.url + '/curiculum']);
+  }
+  viewDetailSubject(id: any) {
+    this.router.navigate([this.router.url + '/detail/' + id]);
   }
 }

@@ -22,47 +22,83 @@
           <p class="text-4xl font-medium">Subject Management</p>
         </div>
 
-        <!-- các nút -->
-        <div #button_header_right class="items-center my-5 float-end">
-          <button
-            class="shadow ml-5 btn bg-red-500 text-white font-sans font-medium"
-          >
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example home icon"
-              fontIcon="edit"
-              class="text-white text-lg"
-              appearance="outline "
-            ></mat-icon>
-            Delete subject
-          </button>
-        </div>
-
         <!-- data list -->
         <div>
           <table class="mt-6 mx-5 w-full">
             <tr class="text-white bg-orange-500">
-              <td class="py-4 w-1/5 text-center">Subject Id</td>
-              <td class="w-1/6">Subject Code</td>
-              <td class="w-1/4">Subject Name</td>
-              <td class="w-1/12">Credit</td>
-              <td class="w-1/12">Status</td>
-              <td></td>
+              <td class="px-5 py-6"></td>
+              <td class="px-5 py-6">Subject Id</td>
+              <td class="px-5 py-6">Subject Code</td>
+              <td class="px-5 py-6">Subject Name</td>
+              <td class="px-5 py-6">Credit</td>
+              <td class="px-5 py-6">Status</td>
             </tr>
 
-            <div *ngFor="let item of getAllSubject()">
-              <tr>
-                <td class="py-4 w-1/5 text-center">{{ item.id }}</td>
-                <td class="w-1/6">{{ item.subjectCode }}</td>
-                <td class="w-1/4">{{ item.name }}</td>
-                <td class="w-1/12">{{ item.credits }}</td>
-                <td class="w-1/12">{{ item.status }}</td>
-                <td>View Detail</td>
-              </tr>
-            </div>
+            
+            <tr *ngFor="let item of getAllSubject()" class="bg-white mb-5 border-b border-gray-300">
+              <td class="px-5 py-6">
+                <div (click)="deleteSubjectRaw(item.id)">
+                  <mat-icon
+                    title="Delete class"
+                    aria-label="Example home icon"
+                    fontIcon="delete"
+                    class="text-red-700 text-lg hover:cursor-pointer ml-3"
+                    akt
+                    appearance="outline "
+                  ></mat-icon>
+                </div>
+              </td>
+              <td class="px-5 py-6">{{item.id}}</td>
+              <td class="px-5 py-6">{{item.subjectCode}}</td>
+              <td class="px-5 py-6">{{item.name}}</td>
+              <td class="px-5 py-6">{{item.credits}}</td>
+              <td class="px-5 py-6">
+                <div
+                  [ngClass]="{
+                    'text-green-600': item.status,
+                    'text-red-600': !item.status
+                  }"
+                >
+                  {{item.status ? "Active" : "Deactive"}}
+                </div>
+              </td>
+            </tr>
           </table>
         </div>
       </div>
     </div>
   </div>
+  <app-loadingmodal *ngIf="loading"></app-loadingmodal>
+  <app-messagebox
+    (closeModal)="close2()"
+    [open]="openMessage2"
+    [title]="messageTitle"
+    [description]="messageDescription"
+    [type]="fail"
+  ></app-messagebox>
+  <div
+    id="wrong-modal"
+    *ngIf="openMessage"
+    tabindex="-1"
+    aria-hidden="true"
+    class="transform transition-transform flex bg-neutral-100/50 overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+  <div class="modal-box">
+    <h3 class="font-bold text-xl text-red-500">
+      Confirmation
+    </h3>
+    <p class="py-4">Do you want to delete</p>
+    <div class="modal-action">
+      <form action="dialog">
+        <button class="mr-5 btn btn-success text-white" (click)="deleteSubject()">
+          Yes
+        </button>
+        <button class="btn btn-error text-white" (click)="close()">
+          No
+        </button>
+      </form>
+    </div>
+  </div>
+  </div>
+  
 </app-drawer>

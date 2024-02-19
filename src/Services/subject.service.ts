@@ -12,11 +12,19 @@ export class SubjectService {
     private configService: AppConfigService
   ) { }
 
+  getSubjectById(id: any) {
+    return this.http.get<any>(this.configService.apiBaseUrl + '/academic/subject/' + id);
+  }
+
   getAllSubject() {
-    return this.http.get<any>(this.configService.apiBaseUrl + '/subject');
+    return this.http.get<any>(this.configService.apiBaseUrl + '/academic/subject');
   }
 
   createNewSubject(newObj: any) {
-    return this.http.post<any>(this.configService.apiBaseUrl + '/subject', newObj);
+    return this.http.post<any>(this.configService.apiBaseUrl + '/academic/subject', newObj);
+  }
+
+  deleteSubject(id: any) {
+    return this.http.delete<any>(this.configService.apiBaseUrl + '/academic/subject/' + id);
   }
 }

@@ -25,7 +25,7 @@
 
         <!-- các nút -->
         <div #button_header_right class="flex items-center justify-between mt-5">
-          <div class="ml-6">
+          <div class="ml-5">
             <button
               (click)="goToCuriculum()"
               class="shadow btn bg-orange-500 text-white font-sans font-medium hover:bg-orange-300"
@@ -63,33 +63,79 @@
                 class="text-white text-lg"
                 appearance="outline "
               ></mat-icon>
-              Edit subject
+              Delete subject
             </button>
           </div>
         </div>
 
         <!-- data list -->
-        <div>
-          <table class="mt-6 mx-5 w-full">
+        <div class="overflow-x-hidden">
+          <table class="mt-6 mx-5 min-w-full">
             <tr class="text-white bg-orange-500">
-              <td class="py-4 w-1/5 text-center">Subject Id</td>
+              <td class="px-5 py-6"></td>
+              <td class="px-5 py-6">Subject Id</td>
+              <td class="px-5 py-6">Subject Code</td>
+              <td class="px-5 py-6">Subject Name</td>
+              <td class="px-5 py-6">Credit</td>
+              <td class="px-5 py-6">Status</td>
+              <td class="px-5 py-6"></td>
+            </tr>
+
+            
+            <tr *ngFor="let item of getAllSubject()" class="bg-white mb-5 border-b border-gray-300">
+              <td class="px-5 py-6"></td>
+              <td class="px-5 py-6">{{item.id}}</td>
+              <td class="px-5 py-6">{{item.subjectCode}}</td>
+              <td class="px-5 py-6">{{item.name}}</td>
+              <td class="px-5 py-6">{{item.credits}}</td>
+              <td class="px-5 py-6">
+                <div
+                  [ngClass]="{
+                    'text-green-600': item.status,
+                    'text-red-600': !item.status
+                  }"
+                >
+                  {{item.status ? "Active" : "Deactive"}}
+                </div>
+              </td>
+              <td class="px-5 py-6">
+                <div 
+                  (click)="viewDetailSubject(item.id)" 
+                  class="flex bg-purple-300 w-fit text-purple-500 cursor-pointer rounded-md"
+                >
+                  <mat-icon
+                      aria-hidden="false"
+                      aria-label="Example home icon"
+                      fontIcon="remove_red_eye"
+                      class="text-purple-500 text-base ml-1.5"
+                      appearance="outline "
+                    ></mat-icon>
+                  <p class="pr-3">View Detail</p>
+                </div>
+              </td>
+            </tr>
+
+            <!-- <tr class="text-white bg-orange-500">
+              <td class="w-1/12"></td>
+              <td class="py-4 w-1/6">Subject Id</td>
               <td class="w-1/6">Subject Code</td>
               <td class="w-1/4">Subject Name</td>
               <td class="w-1/12">Credit</td>
               <td class="w-1/12">Status</td>
-              <td></td>
+              <td class=""></td>
             </tr>
 
-            <div *ngFor="let item of getAllSubject()">
-              <tr>
-                <td class="py-4 w-1/5 text-center">{{item.id}}</td>
-                <td class="w-1/6">{{item.subjectCode}}</td>
-                <td class="w-1/4">{{item.name}}</td>
-                <td class="w-1/12">{{item.credits}}</td>
-                <td class="w-1/12">{{item.status}}</td>
-                <td>View Detail</td>
-              </tr>
-            </div>
+            
+            <tr *ngFor="let item of getAllSubject()" class="bg-white mb-5 border-b border-gray-300">
+              <td class="w-1/12"></td>
+              <td class="py-4 w-1/6">{{item.id}}</td>
+              <td class="w-1/6">{{item.subjectCode}}</td>
+              <td class="w-1/4">{{item.name}}</td>
+              <td class="w-1/12">{{item.credits}}</td>
+              <td class="w-1/12">{{item.status}}</td>
+              <td class="">View Detail</td>
+            </tr> -->
+            
           </table>
           
         </div>

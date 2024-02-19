@@ -50,7 +50,7 @@ export class AddsubjectComponent{
             status: [true],
             description: ['', Validators.required],
             credits: ['', Validators.required],
-            prerequisite: ['', Validators.required],
+            prerequisite: [''],
         });
     }
 
@@ -91,7 +91,6 @@ export class AddsubjectComponent{
             this.fail = true;
             this.messageDescription = 'Please enter full information to continue';
             this.openMessage = true;
-            console.log('av')
         }
         this.loading = false;
     }
