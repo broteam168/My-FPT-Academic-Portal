@@ -5,3 +5,4 @@ export * from './Unit/room';
 
 export * from './Major/major';
 export * from './Auth/role';
+export * from './Time/groupslot'

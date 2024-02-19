@@ -21,6 +21,9 @@ import { TimeComponent } from '../Views/AdminViews/time/time.component';
 import { RoomComponent } from '../Views/AdminViews/unit/room/room.component';
 import { AddroomComponent } from '../Views/AdminViews/unit/room/addroom/addroom.component';
 import { EditroomComponent } from '../Views/AdminViews/unit/room/editroom/editroom.component';
+import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
+import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
+import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +38,18 @@ export const routes: Routes = [
       {
         path: 'academic',
         component: AcademicComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/edit',
+        component: EditgroupComponent,
+      },
+      {
+        path: 'timetable/groupslot/add',
+        component: AddgroupComponent,
+      },
+      {
+        path: 'timetable/groupslot',
+        component: GroupslotComponent,
       },
       {
         path: 'timetable',

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DrawerComponent, HeaderComponent } from '../../Common';
 import { MatIcon } from '@angular/material/icon';
 import { getMenu } from '../MenuDrawer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-time',
@@ -12,8 +13,11 @@ import { getMenu } from '../MenuDrawer';
 })
 export class TimeComponent {
   menu: any;
-  constructor() {
+  constructor(private router:Router) {
     this.menu = getMenu('Timetable');
-    console.log(this.menu);
+  }
+  manageSlot()
+  {
+    this.router.navigateByUrl(this.router.url+'/groupslot')
   }
 }
