@@ -1,0 +1,218 @@
+<app-drawer [items]="menu">
+    <div class="h-screen bg-gray-100">
+      <app-header></app-header>
+      <div class="bg-gray-100">
+        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+          >Open drawer</label
+        >
+        <div #maincontent class="pt-10 px-5 pb-10">
+          <div #header class="flex flex-row justify-between items-center">
+            <div
+              #back_button
+              class="flex items-center hover:cursor-pointer"
+              (click)="goBack()"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="keyboard_backspace"
+                class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
+                appearance="outline "
+              ></mat-icon>
+  
+              <div class="font-medium text-lg">Back to Semester management</div>
+            </div>
+            <div #right_button class="mt-3"></div>
+          </div>
+          <div
+            #formcontrol
+            class="mt-5 bg-white pt-10 flex justify-center rounded-xl flex-col xl:max-w-screen-lg xl:mx-auto"
+          >
+            <div class="text-center mb-10">
+              <h1 class="font-bold text-3xl text-gray-900">Create semester</h1>
+              <p>Enter your information to create</p>
+            </div>
+            <form
+              [formGroup]="classForm"
+              class="flex flex-col items-center w-full"
+            >
+              <div class="w-2/3">
+                <div class="flex -mx-3">
+                  <div class="w-1/2 px-3 mb-5">
+                    <label for="" class="text-xs font-semibold px-1"
+                      >Name</label
+                    >
+                    <div class="flex">
+                      <div
+                        class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                      >
+                        <i
+                          class="mdi mdi-account-outline text-gray-400 text-lg"
+                        ></i>
+                      </div>
+                      <input
+                        required
+                        id="Name"
+                        formControlName="name"
+                        type="text"
+                        class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        placeholder="Fall 2024"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-1/2 px-3 mb-5">
+                    <label for="" class="text-xs font-semibold px-1"
+                      >Year</label
+                    >
+                    <div class="flex">
+                      <div
+                        class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                      >
+                        <i
+                          class="mdi mdi-account-outline text-gray-400 text-lg"
+                        ></i>
+                      </div>
+                      <input
+                        required
+                        id="Name"
+                        formControlName="year"
+                        type="text"
+                        class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        placeholder="2024"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="flex -mx-3">
+                    <div class="w-1/2 px-3 mb-5">
+                      <label for="" class="text-xs font-semibold px-1"
+                        >Start date</label
+                      >
+                      <div class="flex">
+                        <div
+                          class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                        >
+                          <i
+                            class="mdi mdi-account-outline text-gray-400 text-lg"
+                          ></i>
+                        </div>
+                        <input
+                          required
+                          id="Name"
+                          formControlName="startDate"
+                          type="date"
+                          class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                          placeholder="SE1819"
+                        />
+                      </div>
+                    </div>
+                    <div class="w-1/2 px-3 mb-5">
+                      <label for="" class="text-xs font-semibold px-1"
+                        >End date</label
+                      >
+                      <div class="flex">
+                        <div
+                          class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                        >
+                          <i
+                            class="mdi mdi-account-outline text-gray-400 text-lg"
+                          ></i>
+                        </div>
+                        <input
+                          required
+                          id="Name"
+                          formControlName="endDate"
+                          type="date"
+                          class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                          placeholder="SE1819"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                <div class="flex -mx-3 w-full">
+                    <div class="w-full pl-3">
+                      <label for="" class="text-xs font-semibold px-1"
+                        >Order</label
+                      >
+                      <div class="flex">
+                        <div
+                          class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                        >
+                          <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
+                        </div>
+                        <input
+                          required
+                          id="Description"
+                          formControlName="order"
+                          id="Description"
+                          type="text"
+                          class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                          placeholder="Add description here"
+                        >
+                      </div>
+                    </div>
+                  </div>
+               
+                <div class="flex -mx-3 w-full">
+                  <div class="w-full pl-3">
+                    <label for="" class="text-xs font-semibold px-1"
+                      >Description</label
+                    >
+                    <div class="flex">
+                      <div
+                        class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                      >
+                        <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
+                      </div>
+                      <textarea
+                        required
+                        id="Description"
+                        formControlName="description"
+                        id="Description"
+                        type="text"
+                        class=" w-full -ml-10 pl-10 pr-3 py-5 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        placeholder="Add description here"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex -mx-3 w-full">
+                  <div class="w-full pl-3 mb-12 mt-10">
+                    <div class="flex">
+                      <input
+                        id="isActive"
+                        formControlName="isActive"
+                        type="checkbox"
+                        checked="checked"
+                        class="checkbox checkbox-primary"
+                      />
+                      <div class="ml-5 font-medium">Is Active ?</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex -mx-3">
+                  <div class="w-full px-3 mb-5">
+                    <button
+                      (click)="createSchool()"
+                      class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                    >
+                      ADD NOW
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <app-loadingmodal *ngIf="loading"></app-loadingmodal>
+            <app-messagebox
+              (closeModal)="close()"
+              [open]="openMessage"
+              [title]="messageTitle"
+              [description]="messageDescription"
+              [type]="fail"
+            ></app-messagebox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-drawer>
+  

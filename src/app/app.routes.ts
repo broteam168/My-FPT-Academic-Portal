@@ -27,6 +27,9 @@ import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup
 import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.component';
 import { AddslotComponent } from '../Views/AdminViews/time/groupslot/slot/addslot/addslot.component';
 import { EditslotComponent } from '../Views/AdminViews/time/groupslot/slot/editslot/editslot.component';
+import { SemesterComponent } from '../Views/AdminViews/academic/semester/semester.component';
+import { AddsemesterComponent } from '../Views/AdminViews/academic/semester/addsemester/addsemester.component';
+import { EditSemesterComponent } from '../Views/AdminViews/academic/semester/editsemester/editsemester.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -37,6 +40,18 @@ export const routes: Routes = [
       {
         path: 'user',
         component: UserComponent,
+      },
+      {
+        path: 'academic/semester/:id/edit',
+        component: EditSemesterComponent,
+      },
+      {
+        path: 'academic/semester/add',
+        component: AddsemesterComponent,
+      },
+      {
+        path: 'academic/semester',
+        component: SemesterComponent,
       },
       {
         path: 'academic',
