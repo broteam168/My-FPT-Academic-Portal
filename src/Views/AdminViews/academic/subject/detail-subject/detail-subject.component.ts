@@ -6,7 +6,9 @@ import { getMenu } from '../../../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
 import { Subject } from '../../../../../Models';
 import { SubjectService } from '../../../../../Services/subject.service';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
+import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
+import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
 
 @Component({
     selector: 'app-detail-subject',
@@ -14,10 +16,13 @@ import { NgClass } from '@angular/common';
     templateUrl: './detail-subject.component.html',
     styleUrl: './detail-subject.component.scss',
     imports: [
-        DrawerComponent, 
+        DrawerComponent,
         HeaderComponent,
         MatIcon,
-        NgClass
+        NgClass,
+        NgIf,
+        LoadingmodalComponent,
+        MessageboxComponent
     ]
 })
 export class DetailSubjectComponent {
@@ -30,7 +35,7 @@ export class DetailSubjectComponent {
     openMessage2: boolean;
     fail: boolean;
     loading: boolean;
-    naviage:boolean;
+    navigate: boolean;
     constructor(
         subjectService: SubjectService,
         private router: Router
@@ -45,5 +50,46 @@ export class DetailSubjectComponent {
 
     goBack() {
         this.router.navigateByUrl('/admin/academic/subject');
+    }
+
+    editDetailSubject() {
+        this.router.navigateByUrl(this.router.url + '/edit');
+    }
+
+    currentId: any;
+    deleteSubjectRaw(id: any) {
+        this.currentId = id;
+        this.openMessage = true;
+    }
+
+    close() {
+        this.openMessage = false;
+    }
+
+    deleteSubject() {
+        this.loading = true;
+        this.subjectService.deleteSubject(this.currentId).subscribe((data) => {
+            if (data['responseCode'] == 200) {
+                this.messageTitle = 'Notification';
+                this.fail = false;
+                this.messageDescription = data['message'];
+                this.openMessage2 = true;
+                this.navigate = true;
+            } else {
+                this.messageTitle = 'Error';
+                this.fail = true;
+                this.messageDescription = data['message'];
+                this.openMessage2 = true;
+            }
+            return data;
+        });
+        this.close();
+    }
+
+    close2() {
+        this.openMessage2 = false;
+        if (this.navigate == true) {
+            this.goBack();
+        }
     }
 }

@@ -5,11 +5,8 @@
       <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
         >Open drawer</label
       >
-      <div #maincontent>
-        <div
-          #header
-          class="flex flex-row items-center justify-between ml-5 mt-5"
-        >
+      <div #maincontent class="p-1">
+        <div #header class="items-center ml-5 mt-5">
           <!-- Back -->
           <div class="flex cursor-pointer" (click)="goBack()">
             <mat-icon
@@ -20,34 +17,6 @@
               appearance="outline "
             ></mat-icon>
             <div class="font-medium text-lg">Back to subject management</div>
-          </div>
-
-          <!-- action -->
-          <div>
-            <button
-              class="shadow btn bg-orange-500 text-white font-sans font-medium"
-            >
-              <mat-icon
-                aria-hidden="false"
-                aria-label="Example home icon"
-                fontIcon="edit"
-                class="text-white text-lg"
-                appearance="outline "
-              ></mat-icon>
-              Edit Subject
-            </button>
-            <button
-              class="shadow ml-5 btn bg-red-500 text-white font-sans font-medium"
-            >
-              <mat-icon
-                aria-hidden="false"
-                aria-label="Example home icon"
-                fontIcon="delete"
-                class="text-white text-lg"
-                appearance="outline "
-              ></mat-icon>
-              Delete subject
-            </button>
           </div>
         </div>
 
@@ -96,7 +65,7 @@
         <!-- data -->
         <div
           #detailcontent
-          class="mt-5 ml-5 bg-white rounded-xl border border-gray-400 flex items-center"
+          class="my-5 pb-5 ml-5 bg-white rounded-xl border border-gray-400 flex items-center"
         >
           <div role="tablist" class="tabs tabs-bordered w-full m-5">
             <input
@@ -108,29 +77,91 @@
               checked
             />
             <div role="tabpanel" class="tab-content p-10">
-              <div class="mt-2">
-                Id:
-                <div class="inline text-gray-500">{{ currentSubject.id }}</div>
+              <div class="text-right">
+                <button
+                  (click)="editDetailSubject()"
+                  class="shadow btn bg-orange-500 text-white font-sans font-medium"
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="edit"
+                    class="text-white text-lg"
+                    appearance="outline "
+                  ></mat-icon>
+                  Edit Subject
+                </button>
+                <button
+                  (click)="deleteSubjectRaw(currentSubject.id)"
+                  class="shadow ml-5 btn bg-red-500 text-white font-sans font-medium"
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="delete"
+                    class="text-white text-lg"
+                    appearance="outline "
+                  ></mat-icon>
+                  Delete subject
+                </button>
               </div>
-              <div class="mt-2">
-                Name:
-                <div class="inline text-gray-500">
-                  {{ currentSubject.subjectCode }}
-                </div>
-              </div>
-              <div class="mt-2">
-                Location:
-                <div class="inline text-gray-500">
-                  {{ currentSubject.name }}
-                </div>
-              </div>
-              <div class="mt-8 text-xl font-sans font-semibold">
-                School Description
-              </div>
-              <div class="whitespace-pre-wrap pt-10">
-                <div class="inline text-gray-500">
-                  {{ currentSubject.credits }}
-                </div>
+
+              <div class="w-full">
+                <table class="w-full">
+                  <tr>
+                    <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                      Subject Id:
+                    </td>
+                    <td>{{ currentSubject.id }}</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                      Subject code:
+                    </td>
+                    <td>{{ currentSubject.subjectCode }}</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                      Subject name:
+                    </td>
+                    <td>{{ currentSubject.name }}</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                      Type:
+                    </td>
+                    <td>{{ currentSubject.type }}</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                      Credits:
+                    </td>
+                    <td>{{ currentSubject.credits }}</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                      Pre-Requisite:
+                    </td>
+                    <td>
+                      <div *ngIf="currentSubject.prerequisite; else noPre">
+                        {{ currentSubject.prerequisite }}
+                      </div>
+                      <ng-template #noPre class="top-1/2">none</ng-template>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                      Description:
+                    </td>
+                    <td>{{ currentSubject.description }}</td>
+                  </tr>
+                  <tr>
+                    <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                      Status:
+                    </td>
+                    <td>{{ currentSubject.status }}</td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
@@ -138,4 +169,40 @@
       </div>
     </div>
   </div>
+
+  <app-loadingmodal *ngIf="loading"></app-loadingmodal>
+  <app-messagebox
+    (closeModal)="close2()"
+    [open]="openMessage2"
+    [title]="messageTitle"
+    [description]="messageDescription"
+    [type]="fail"  
+  ></app-messagebox>
+  <div
+    id="wrong-modal"
+    *ngIf="openMessage"
+    tabindex="-1"
+    aria-hidden="true"
+    class="transform transition-transform flex bg-neutral-100/50 
+            overflow-y-auto overflow-x-hidden fixed z-50 justify-center 
+            items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="modal-box">
+      <h3 class="font-bold text-xl text-red-500">
+        Confirmation
+      </h3>
+      <p class="py-4">Do you want to delete</p>
+      <div class="modal-action">
+        <form action="dialog">
+          <button class="mr-5 btn btn-success text-white" (click)="deleteSubject()">
+            Yes
+          </button>
+          <button class="btn btn-error text-white" (click)="close()">
+            No
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </app-drawer>

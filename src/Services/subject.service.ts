@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConfigService } from './app-config.service';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from '../Models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class SubjectService {
 
   deleteSubject(id: any) {
     return this.http.delete<any>(this.configService.apiBaseUrl + '/academic/subject/' + id);
+  }
+
+  updateSubject(id: any, newSubject: Subject) {
+    return this.http.put<any>(this.configService.apiBaseUrl + '/academic/subject/' + id, newSubject);
   }
 }

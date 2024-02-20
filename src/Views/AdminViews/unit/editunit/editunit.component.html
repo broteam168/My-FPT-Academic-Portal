@@ -120,7 +120,6 @@
                         required
                         id="Description"
                         formControlName="Description"
-                        id="Description"
                         type="text"
                         class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="Add description here"
@@ -155,7 +154,13 @@
               </div>
             </form>
             <app-loadingmodal *ngIf="loading"></app-loadingmodal>
-            <app-messagebox (closeModal)="close()" [open]="openMessage" [title]="messageTitle" [description]="messageDescription" [type]="fail" ></app-messagebox>
+            <app-messagebox 
+              (closeModal)="close()" 
+              [open]="openMessage" 
+              [title]="messageTitle" 
+              [description]="messageDescription" 
+              [type]="fail" 
+            ></app-messagebox>
         
           </div>
          </div>

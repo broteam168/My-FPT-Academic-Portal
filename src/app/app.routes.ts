@@ -25,6 +25,7 @@ import { AddsubjectComponent } from '../Views/AdminViews/academic/subject/addsub
 import { DeletesubjectComponent } from '../Views/AdminViews/academic/subject/deletesubject/deletesubject.component';
 import { CuriculumComponent } from '../Views/AdminViews/academic/curiculum/curiculum.component';
 import { DetailSubjectComponent } from '../Views/AdminViews/academic/subject/detail-subject/detail-subject.component';
+import { EditdetailsubjectComponent } from '../Views/AdminViews/academic/subject/editdetailsubject/editdetailsubject.component';
 
 
 export const routes: Routes = [
@@ -60,6 +61,10 @@ export const routes: Routes = [
       {
         path: 'academic/subject/curiculum',
         component: CuriculumComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/edit',
+        component: EditdetailsubjectComponent,
       },
       {
         path: 'timetable',
