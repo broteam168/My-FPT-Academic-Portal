@@ -26,6 +26,11 @@ import { DeletesubjectComponent } from '../Views/AdminViews/academic/subject/del
 import { CuriculumComponent } from '../Views/AdminViews/academic/curiculum/curiculum.component';
 import { DetailSubjectComponent } from '../Views/AdminViews/academic/subject/detail-subject/detail-subject.component';
 import { EditdetailsubjectComponent } from '../Views/AdminViews/academic/subject/editdetailsubject/editdetailsubject.component';
+import { SyllabusComponent } from '../Views/AdminViews/academic/syllabus/syllabus.component';
+import { DetailsyllabusComponent } from '../Views/AdminViews/academic/syllabus/detailsyllabus/detailsyllabus.component';
+import { EditdetailsyllabusComponent } from '../Views/AdminViews/academic/syllabus/editdetailsyllabus/editdetailsyllabus.component';
+import { AddsyllabusComponent } from '../Views/AdminViews/academic/syllabus/addsyllabus/addsyllabus.component';
+
 
 
 export const routes: Routes = [
@@ -65,6 +70,22 @@ export const routes: Routes = [
       {
         path: 'academic/subject/detail/:id/edit',
         component: EditdetailsubjectComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/syllabus',
+        component: SyllabusComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/syllabus/add',
+        component: AddsyllabusComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/syllabus/detail/:id2',
+        component: DetailsyllabusComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/syllabus/detail/:id2/edit',
+        component: EditdetailsyllabusComponent,
       },
       {
         path: 'timetable',

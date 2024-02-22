@@ -1,37 +1,34 @@
 import { Component } from '@angular/core';
 import { DrawerComponent } from "../../../../Common/drawer/drawer.component";
 import { HeaderComponent } from "../../../../Common/header/header.component";
-import { Route, Router } from '@angular/router';
-import { getMenu } from '../../../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
-import { Subject } from '../../../../../Models';
-import { SubjectService } from '../../../../../Services/subject.service';
-import { CommonModule, NgClass, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
+import { getMenu } from '../../../MenuDrawer';
 import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
 import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
-import { Syllabus } from '../../../../../Models/syllabus';
 import { SyllabusService } from '../../../../../Services/syllabus.service';
+import { Syllabus } from '../../../../../Models/syllabus';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-detail-subject',
+    selector: 'app-detailsyllabus',
     standalone: true,
-    templateUrl: './detail-subject.component.html',
-    styleUrl: './detail-subject.component.scss',
+    templateUrl: './detailsyllabus.component.html',
+    styleUrl: './detailsyllabus.component.scss',
     imports: [
         DrawerComponent,
         HeaderComponent,
         MatIcon,
-        NgClass,
         NgIf,
-        CommonModule,
+        NgClass,
         LoadingmodalComponent,
         MessageboxComponent
     ]
 })
-export class DetailSubjectComponent {
+export class DetailsyllabusComponent {
     menu: any;
-    subjectService: SubjectService;
-    currentSubject: Subject;
+    syllabusService: SyllabusService;
+    currentSyllabus: Syllabus;
     messageTitle: string;
     messageDescription: string;
     openMessage: boolean;
@@ -39,46 +36,25 @@ export class DetailSubjectComponent {
     fail: boolean;
     loading: boolean;
     navigate: boolean;
-    subjectPrerequisite: Subject;
-    syllabuses: Syllabus[];
-    hasActiveSyllabus: boolean = false;
-    constructor(
-        subjectService: SubjectService,
+    constructor (
         private router: Router,
-        private syllabusService: SyllabusService
+        syllabusService: SyllabusService
     ) {
         this.menu = getMenu('Academic'),
-        this.subjectService = subjectService;
-        this.subjectService.getAllSubject();
-        this.subjectService.getSubjectById(router.url.split('/').pop()).subscribe((response) => {
-            this.currentSubject = response.data;
-            this.subjectService.getSubjectById(this.currentSubject.prerequisite).subscribe(x => {
-                this.subjectPrerequisite = x.data;
-            });
-
-            this.InitSyllabus();
-        });
-
-        
-    }
-
-    InitSyllabus() {
-        this.syllabusService.getAllSyllabusBySubjId(this.currentSubject.id).subscribe(x => {
-            this.syllabuses = x.data;
-            this.hasActiveSyllabus = this.syllabuses.some(item => item.active === true);
+        this.syllabusService = syllabusService;
+        this.syllabusService.getSyllabusById(router.url.split('/').pop()).subscribe((response) => {
+            this.currentSyllabus = response.data;
         });
     }
-
     goBack() {
-        this.router.navigateByUrl('/admin/academic/subject');
-    }
-
-    editDetailSubject() {
-        this.router.navigateByUrl(this.router.url + '/edit');
+        var temp = this.router.url.split('/');
+        temp.pop();
+        temp.pop();
+        this.router.navigateByUrl(temp.join('/'));
     }
 
     currentId: any;
-    deleteSubjectRaw(id: any) {
+    deleteSyllabusRaw(id: any) {
         this.currentId = id;
         this.openMessage = true;
     }
@@ -89,7 +65,7 @@ export class DetailSubjectComponent {
 
     deleteSubject() {
         this.loading = true;
-        this.subjectService.deleteSubject(this.currentId).subscribe((data) => {
+        this.syllabusService.deleteSyllabus(this.currentId).subscribe((data) => {
             if (data['responseCode'] == 200) {
                 this.messageTitle = 'Notification';
                 this.fail = false;
@@ -114,8 +90,7 @@ export class DetailSubjectComponent {
         }
     }
 
-    goToSyllabusManagement() {
-        this.router.navigateByUrl(this.router.url + '/syllabus')
+    editDetailSyllabus() {
+        this.router.navigateByUrl(this.router.url + '/edit');
     }
-
 }

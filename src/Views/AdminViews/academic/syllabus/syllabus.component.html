@@ -1,1 +1,116 @@
-<p>syllabus works!</p>
+<app-drawer [items]="menu">
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent>
+        <!-- back -->
+        <div class="flex items-center hover:cursor-pointer" (click)="goBack()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="keyboard_backspace"
+            class="text-lg font-medium m-5 hover:bg-white hover:rounded-full hover:pl-1"
+            appearance="outline"
+          ></mat-icon>
+          <div class="font-medium text-lg">Back to subject detail</div>
+        </div>
+
+        <!-- title -->
+        <div class="ml-6 text-center">
+          <p class="text-4xl font-medium">Syllabus management</p>
+        </div>
+
+        <!-- các nút -->
+        <div
+          #button_header_right
+          class="flex items-center justify-between my-5 float-right"
+        >
+          <button
+            (click)="addNewSyllabus()"
+            class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="library_add"
+              class="text-white text-lg"
+              appearance="outline "
+            ></mat-icon>
+            Add Syllabus
+          </button>
+        </div>
+
+        <!-- data list -->
+        <div>
+          <table class="mt-6 mx-5 min-w-full">
+            <tr class="text-white bg-orange-500">
+              <td class="px-5 py-6">Syllabus Id</td>
+              <td class="px-5 py-6">Approved date</td>
+              <td class="px-5 py-6">Status</td>
+              <td class="px-5 py-6"></td>
+            </tr>
+
+            <tr
+              *ngFor="let item of syllabuses"
+              class="bg-white mb-5 border-b border-gray-300"
+            >
+              <td class="px-5 py-6">{{ item.id }}</td>
+              <td class="px-5 py-6">{{ item.approvedDate }}</td>
+              <td class="px-5 py-6">
+                <div
+                  [ngClass]="{
+                    'text-green-600': item.active,
+                    'text-red-600': !item.active
+                  }"
+                >
+                  {{ item.active ? "Active" : "Deactive" }}
+                </div>
+              </td>
+              <td class="px-5 py-6 flex justify-center">
+                <div
+                  (click)="viewDetailSyllabus(item.id)"
+                  class="flex bg-purple-300 w-fit text-purple-500 cursor-pointer rounded-md mr-5"
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="remove_red_eye"
+                    class="text-purple-500 text-base ml-1.5"
+                    appearance="outline "
+                  ></mat-icon>
+                  <p class="pr-3">View Detail</p>
+                </div>
+                <div
+                  (click)="setActiveSyllabus(item.id)"
+                  class="flex bg-orange-200 w-fit text-orange-500 cursor-pointer rounded-md"
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="remove_red_eye"
+                    class="text-orange-500 text-base ml-1.5"
+                    appearance="outline "
+                  ></mat-icon>
+                  <p class="pr-3">Set Active</p>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-loadingmodal *ngIf="loading"> </app-loadingmodal>
+
+  <app-messagebox
+    (closeModal)="close()"
+    [open]="openMessage"
+    [title]="messageTitle"
+    [description]="messageDescription"
+    [type]="fail"
+  ></app-messagebox>
+</app-drawer>

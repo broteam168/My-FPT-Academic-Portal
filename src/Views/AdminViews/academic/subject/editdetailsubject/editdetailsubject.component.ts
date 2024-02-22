@@ -7,7 +7,7 @@ import { Subject } from '../../../../../Models';
 import { DrawerComponent } from "../../../../Common/drawer/drawer.component";
 import { HeaderComponent } from "../../../../Common/header/header.component";
 import { MatIcon } from '@angular/material/icon';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
 import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
 
@@ -22,6 +22,7 @@ import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.co
         MatIcon,
         NgClass,
         NgIf,
+        NgFor,
         ReactiveFormsModule,
         LoadingmodalComponent,
         MessageboxComponent
@@ -29,6 +30,7 @@ import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.co
 })
 export class EditdetailsubjectComponent implements OnInit {
   menu: any;
+  subjects: Subject[];
   subjectFrom: FormGroup;
   messageTitle: string;
   messageDescription: string;
@@ -54,7 +56,9 @@ export class EditdetailsubjectComponent implements OnInit {
       status: [true],
     });
     this.subjectService = subjectService;
-    
+    this.subjectService.getAllSubject().subscribe((x) => {
+      this.subjects = x.data;
+    });
   }
   ngOnInit(): void {
     var temp = this.router.url.split('/');
@@ -69,6 +73,8 @@ export class EditdetailsubjectComponent implements OnInit {
       this.subjectFrom.controls['description'].setValue(this.currentSubject.description);
       this.subjectFrom.controls['status'].setValue(this.currentSubject.status);
     });
+
+    this.subjects = this.subjects.filter((x) => x.id != this.currentSubject.id);
   }
 
   close() {

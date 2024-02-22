@@ -8,7 +8,8 @@ import { SubjectService } from '../../../../../Services/subject.service';
 import { getMenu } from '../../../MenuDrawer';
 import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
 import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
-import { NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { Subject } from '../../../../../Models';
 
 @Component({
     selector: 'app-addsubject',
@@ -22,11 +23,13 @@ import { NgIf } from '@angular/common';
         LoadingmodalComponent, 
         MessageboxComponent,
         ReactiveFormsModule,
-        NgIf
+        NgIf,
+        CommonModule
     ]
 })
 export class AddsubjectComponent{
     menu: any;
+    subjects: Subject[];
     subjectForm: FormGroup;
     router: Router;
     messageTitle: string;
@@ -51,6 +54,10 @@ export class AddsubjectComponent{
             description: ['', Validators.required],
             credits: ['', Validators.required],
             prerequisite: [''],
+        });
+
+        this.subjectService.getAllSubject().subscribe((x) => {
+            this.subjects = x.data;
         });
     }
 

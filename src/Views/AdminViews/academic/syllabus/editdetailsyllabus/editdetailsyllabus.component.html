@@ -16,49 +16,7 @@
               class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
               appearance="outline "
             ></mat-icon>
-            <div class="font-medium text-lg">Back to subject detail</div>
-          </div>
-        </div>
-
-        <!-- header content-->
-        <div
-          #headcontent
-          class="mt-5 ml-5 bg-white rounded-xl h-32 border border-gray-400 flex items-center"
-        >
-          <img
-            src="assets/images/google.png"
-            class="w-fit h-3/4 object-scale-down py-auto self-center"
-          />
-          <div class="flex flex-col ml-5">
-            <div class="text-xl font-medium font-sans">
-              {{ currentSubject.name }}
-            </div>
-            <div class="text-xl font-normal font-sans">
-              No.{{ currentSubject.id }}
-            </div>
-            <div class="flex">
-              <div class="text-xl font-normal font-sans">Status:</div>
-              <div
-                class="flex items-center px-1.5 py-1"
-                [ngClass]="{
-                  'text-green-600 bg-emerald-50 ': currentSubject.status,
-                  'text-red-600 bg-rose-50': !currentSubject.status
-                }"
-              >
-                <mat-icon
-                  aria-hidden="false"
-                  aria-label="Example home icon"
-                  fontIcon="fiber_manual_record"
-                  class="text-black text-base ml-1.5"
-                  [ngClass]="{
-                    'text-green-600 ': currentSubject.status,
-                    'text-red-600 ': !currentSubject.status
-                  }"
-                  appearance="outline "
-                ></mat-icon>
-                {{ currentSubject.status ? "Active" : "Deactived" }}
-              </div>
-            </div>
+            <div class="font-medium text-lg">Back to syllabus management</div>
           </div>
         </div>
 
@@ -78,64 +36,32 @@
             />
             <div role="tabpanel" class="tab-content p-10">
               <div class="w-full">
-                <form [formGroup]="subjectFrom">
+                <form [formGroup]="syllabusForm">
                   <table class="w-full">
                     <tr>
                       <td class="w-1/5 text-right pr-2 font-semibold py-2">
-                        Subject Id:
+                        Syllabus Id:
                       </td>
                       <td>
                         <input
                           readonly
                           type="text"
-                          [value]="currentSubject.id"
+                          [value]="currentSyllabus.id"
                           class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
                         />
                       </td>
                     </tr>
                     <tr>
                       <td class="w-1/5 text-right pr-2 font-semibold py-2">
-                        Subject code:
+                        Student task:
                       </td>
                       <td>
                         <input
                           required
-                          id="subjectCode"
-                          formControlName="subjectCode"
+                          id="studentTasks"
+                          formControlName="studentTasks"
                           type="text"
-                          [value]="currentSubject.subjectCode"
-                          class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
-                          placeholder="JPD123"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="w-1/5 text-right pr-2 font-semibold py-2">
-                        Subject name:
-                      </td>
-                      <td>
-                        <input
-                          required
-                          id="name"
-                          formControlName="name"
-                          type="text"
-                          [value]="currentSubject.name"
-                          class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
-                          placeholder="Nhật 1"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="w-1/5 text-right pr-2 font-semibold py-2">
-                        Type:
-                      </td>
-                      <td>
-                        <input
-                          required
-                          id="type"
-                          formControlName="type"
-                          type="text"
-                          [value]="currentSubject.type"
+                          [value]="currentSyllabus.studentTasks"
                           class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
                           placeholder="hello"
                         />
@@ -143,67 +69,82 @@
                     </tr>
                     <tr>
                       <td class="w-1/5 text-right pr-2 font-semibold py-2">
-                        Credits:
+                        Tool:
                       </td>
                       <td>
                         <input
                           required
-                          id="credits"
-                          formControlName="credits"
+                          id="tools"
+                          formControlName="tools"
+                          type="text"
+                          [value]="currentSyllabus.tools"
+                          class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
+                          placeholder="20"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                        Scoring scale:
+                      </td>
+                      <td>
+                        <input
+                          required
+                          id="scoringScale"
+                          formControlName="scoringScale"
                           type="number"
-                          [value]="currentSubject.credits"
+                          [value]="currentSyllabus.scoringScale"
                           class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
-                          placeholder="3"
+                          placeholder="20"
                         />
                       </td>
                     </tr>
                     <tr>
                       <td class="w-1/5 text-right pr-2 font-semibold py-2">
-                        Pre-Requisite:
-                      </td>
-                      <td>
-                        <select
-                          formControlName="prerequisite"
-                          class="w-full px-1 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
-                        >
-                          <option
-                            class=""
-                            [value]="item.id"
-                            *ngFor="let item of subjects"
-                          >
-                            {{ item.subjectCode }}
-                          </option>
-                          <option value =null>none</option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="w-1/5 text-right pr-2 font-semibold py-2">
-                        Description:
-                      </td>
-                      <td>
-                        <textarea
-                          required
-                          id="description"
-                          formControlName="description"
-                          type="text"
-                          [value]="currentSubject.description"
-                          class="h-24 w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg text-start"
-                          placeholder="hello"
-                        ></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="w-1/5 text-right pr-2 font-semibold py-2">
-                        Status:
+                        Min mark:
                       </td>
                       <td>
                         <input
-                          id="status"
-                          formControlName="status"
-                          type="checkbox"
-                          [value]="currentSubject.status"
-                          class="checkbox checkbox-primary ml-5"
+                          required
+                          id="markMin"
+                          formControlName="markMin"
+                          type="number"
+                          [value]="currentSyllabus.markMin"
+                          class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
+                          placeholder="5"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                        Total slot:
+                      </td>
+                      <td>
+                        <input
+                          required
+                          id="slot"
+                          formControlName="slot"
+                          type="number"
+                          [value]="currentSyllabus.slot"
+                          class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
+                          placeholder="20"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                        Approved date:
+                      </td>
+                      <td>
+                        <input
+                          required
+                          id="approvedDate"
+                          formControlName="approvedDate"
+                          type="date"
+                          pattern="\d{4}-\d{2}-\d{2}"
+                          [value]="currentSyllabus.approvedDate"
+                          class="w-full px-2 py-1 ml-5 border-2 border-gray-200 focus:border-indigo-500 rounded-lg"
+                          placeholder="2000-2-1"
                         />
                       </td>
                     </tr>
@@ -220,20 +161,10 @@
                         class="text-white text-lg"
                         appearance="outline "
                       ></mat-icon>
-                      Update subject
+                      Update syllabus
                     </button>
                   </div>
                 </form>
-
-                <app-loadingmodal *ngIf="loading"> </app-loadingmodal>
-
-                <app-messagebox
-                  (closeModal)="close()"
-                  [open]="openMessage"
-                  [title]="messageTitle"
-                  [description]="messageDescription"
-                  [type]="fail"
-                ></app-messagebox>
               </div>
             </div>
           </div>
@@ -241,4 +172,14 @@
       </div>
     </div>
   </div>
+
+  <app-loadingmodal *ngIf="loading"></app-loadingmodal>
+
+  <app-messagebox
+    (closeModal)="close()"
+    [open]="openMessage"
+    [title]="messageTitle"
+    [description]="messageDescription"
+    [type]="fail"
+  ></app-messagebox>
 </app-drawer>

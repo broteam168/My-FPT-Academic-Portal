@@ -12,8 +12,7 @@ export class SubmajorService {
     private configService: AppConfigService
   ) {}
   getSubMajorInMajor(id: any) {
-    return this.http.get<any>(
-      this.configService.apiBaseUrl + '/submajor/search?majorId=' + id
+    return this.http.get<any>(this.configService.apiBaseUrl + '/submajor/search?majorId=' + id
     );
   }
   createNewSubMajor(newClass: any) {
