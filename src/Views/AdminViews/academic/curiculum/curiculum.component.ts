@@ -16,12 +16,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './curiculum.component.html',
   styleUrl: './curiculum.component.scss',
-  imports: [
-    DrawerComponent, 
-    HeaderComponent, 
-    MatIcon,
-    CommonModule
-],
+  imports: [DrawerComponent, HeaderComponent, MatIcon, CommonModule],
 })
 export class CuriculumComponent {
   menu: any;
@@ -38,12 +33,12 @@ export class CuriculumComponent {
   constructor(
     private router: Router,
     private curiculumService: CuriculumService,
-    subMajorService: SubmajorService,
-    ) {
+    subMajorService: SubmajorService
+  ) {
     this.menu = getMenu('Academic');
     this.subMajorService = subMajorService;
-    this.subMajorService.getAllSubMajor().subscribe(x => {
-        this.subMajors = x.data;
+    this.subMajorService.getAllSubMajor().subscribe((x) => {
+      this.subMajors = x.data;
     });
   }
   goBack() {
@@ -51,13 +46,31 @@ export class CuriculumComponent {
   }
 
   changeSubMajor(event: any) {
-    this.curiculumService.getCuriculumBySubMajorId(event).subscribe(x => {
-        this.curiculums = x.data;
-        this.sortCurriculumsBySemester();
-      });
-    }
+    this.curiculumService.getCuriculumBySubMajorId(event).subscribe((x) => {
+      this.curiculums = x.data;
+      this.sortCurriculumsBySemester();
+    });
+  }
 
-    sortCurriculumsBySemester() {
-      this.curiculums.sort((a, b) => a.semester - b.semester);
-    }
+  sortCurriculumsBySemester() {
+    this.curiculums.sort((a, b) => a.semester - b.semester);
+  }
+
+  goToAddCuriculum() {
+    this.router.navigateByUrl(this.router.url + '/add');
+  }
+
+  currentId: any;
+  deleteCuriculumRaw(id: any) {
+    this.currentId = id;
+    this.openMessage = true;
+  }
+
+  close() {
+    this.openMessage = false;
+  }
+
+  deleteCuriculum() {
+    this.loading
+  }
 }
