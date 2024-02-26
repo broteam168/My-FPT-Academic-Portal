@@ -21,4 +21,8 @@ export class AcademicComponent {
   {
     this.router.navigateByUrl(this.router.url + '/semester')
   }
+  ManageCourse()
+  {
+    this.router.navigateByUrl(this.router.url + '/course')
+  }
 }

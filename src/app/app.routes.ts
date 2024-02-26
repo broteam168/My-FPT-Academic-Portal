@@ -21,15 +21,10 @@ import { TimeComponent } from '../Views/AdminViews/time/time.component';
 import { RoomComponent } from '../Views/AdminViews/unit/room/room.component';
 import { AddroomComponent } from '../Views/AdminViews/unit/room/addroom/addroom.component';
 import { EditroomComponent } from '../Views/AdminViews/unit/room/editroom/editroom.component';
-import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
-import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
-import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
-import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.component';
-import { AddslotComponent } from '../Views/AdminViews/time/groupslot/slot/addslot/addslot.component';
-import { EditslotComponent } from '../Views/AdminViews/time/groupslot/slot/editslot/editslot.component';
 import { SemesterComponent } from '../Views/AdminViews/academic/semester/semester.component';
 import { AddsemesterComponent } from '../Views/AdminViews/academic/semester/addsemester/addsemester.component';
 import { EditSemesterComponent } from '../Views/AdminViews/academic/semester/editsemester/editsemester.component';
+import { CourseComponent } from '../Views/AdminViews/academic/course/course.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -40,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'user',
         component: UserComponent,
+      },
+      {
+        path: 'academic/course',
+        component: CourseComponent,
       },
       {
         path: 'academic/semester/:id/edit',
@@ -57,30 +56,7 @@ export const routes: Routes = [
         path: 'academic',
         component: AcademicComponent,
       },
-      {
-        path: 'timetable/groupslot/:id/slot/:id2/edit',
-        component: EditslotComponent,
-      },
-      {
-        path: 'timetable/groupslot/:id/slot/add',
-        component: AddslotComponent,
-      },
-      {
-        path: 'timetable/groupslot/:id/slot',
-        component: SlotComponent,
-      },
-      {
-        path: 'timetable/groupslot/:id/edit',
-        component: EditgroupComponent,
-      },
-      {
-        path: 'timetable/groupslot/add',
-        component: AddgroupComponent,
-      },
-      {
-        path: 'timetable/groupslot',
-        component: GroupslotComponent,
-      },
+     
       {
         path: 'timetable',
         component: TimeComponent,
