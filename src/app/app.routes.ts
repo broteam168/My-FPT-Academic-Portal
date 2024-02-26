@@ -31,6 +31,7 @@ import { DetailsyllabusComponent } from '../Views/AdminViews/academic/syllabus/d
 import { EditdetailsyllabusComponent } from '../Views/AdminViews/academic/syllabus/editdetailsyllabus/editdetailsyllabus.component';
 import { AddsyllabusComponent } from '../Views/AdminViews/academic/syllabus/addsyllabus/addsyllabus.component';
 import { AddcuriculumComponent } from '../Views/AdminViews/academic/curiculum/addcuriculum/addcuriculum.component';
+import { EditcuriculumComponent } from '../Views/AdminViews/academic/curiculum/editcuriculum/editcuriculum.component';
 
 
 
@@ -91,6 +92,10 @@ export const routes: Routes = [
       {
         path: 'academic/subject/curiculum/add',
         component: AddcuriculumComponent,
+      },
+      {
+        path: 'academic/subject/curiculum/edit/:id',
+        component: EditcuriculumComponent,
       },
       {
         path: 'timetable',

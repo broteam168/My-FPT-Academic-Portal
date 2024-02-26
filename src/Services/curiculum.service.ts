@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppConfigService } from './app-config.service';
+import { Curiculum } from '../Models/curiculum';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,9 @@ export class CuriculumService {
 
   getSubjectByCuriculum(id: any) {
     return this.http.get<any>(this.configService.apiBaseUrl + '/academic/curiculum/searchSubject?subjectId=' + id);
+  }
+
+  updateCuriculum(id: any, newCuriculum: Curiculum) {
+    return this.http.put<any>(this.configService.apiBaseUrl + '/academic/curiculum/' + id, newCuriculum);
   }
 }

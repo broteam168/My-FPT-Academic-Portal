@@ -1,32 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { getMenu } from '../../../MenuDrawer';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { SubjectService } from '../../../../../Services/subject.service';
 import { Subject } from '../../../../../Models';
-import { DrawerComponent } from "../../../../Common/drawer/drawer.component";
-import { HeaderComponent } from "../../../../Common/header/header.component";
+import { DrawerComponent } from '../../../../Common/drawer/drawer.component';
+import { HeaderComponent } from '../../../../Common/header/header.component';
 import { MatIcon } from '@angular/material/icon';
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
-import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
+import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
+import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 
 @Component({
-    selector: 'app-editdetailsubject',
-    standalone: true,
-    templateUrl: './editdetailsubject.component.html',
-    styleUrl: './editdetailsubject.component.scss',
-    imports: [
-        DrawerComponent,
-        HeaderComponent,
-        MatIcon,
-        NgClass,
-        NgIf,
-        NgFor,
-        ReactiveFormsModule,
-        LoadingmodalComponent,
-        MessageboxComponent
-    ]
+  selector: 'app-editdetailsubject',
+  standalone: true,
+  templateUrl: './editdetailsubject.component.html',
+  styleUrl: './editdetailsubject.component.scss',
+  imports: [
+    DrawerComponent,
+    HeaderComponent,
+    MatIcon,
+    NgClass,
+    NgIf,
+    NgFor,
+    ReactiveFormsModule,
+    LoadingmodalComponent,
+    MessageboxComponent,
+  ],
 })
 export class EditdetailsubjectComponent implements OnInit {
   menu: any;
@@ -63,14 +68,22 @@ export class EditdetailsubjectComponent implements OnInit {
   ngOnInit(): void {
     var temp = this.router.url.split('/');
     temp.pop();
-    this.subjectService.getSubjectById(temp.pop()).subscribe(x => {
+    this.subjectService.getSubjectById(temp.pop()).subscribe((x) => {
       this.currentSubject = x.data;
-      this.subjectFrom.controls['subjectCode'].setValue(this.currentSubject.subjectCode);
+      this.subjectFrom.controls['subjectCode'].setValue(
+        this.currentSubject.subjectCode
+      );
       this.subjectFrom.controls['name'].setValue(this.currentSubject.name);
       this.subjectFrom.controls['type'].setValue(this.currentSubject.type);
-      this.subjectFrom.controls['credits'].setValue(this.currentSubject.credits);
-      this.subjectFrom.controls['prerequisite'].setValue(this.currentSubject.prerequisite);
-      this.subjectFrom.controls['description'].setValue(this.currentSubject.description);
+      this.subjectFrom.controls['credits'].setValue(
+        this.currentSubject.credits
+      );
+      this.subjectFrom.controls['prerequisite'].setValue(
+        this.currentSubject.prerequisite
+      );
+      this.subjectFrom.controls['description'].setValue(
+        this.currentSubject.description
+      );
       this.subjectFrom.controls['status'].setValue(this.currentSubject.status);
     });
 
@@ -93,24 +106,24 @@ export class EditdetailsubjectComponent implements OnInit {
   updateDetailSubject() {
     var newSubject = this.subjectFrom.getRawValue();
     console.log(newSubject);
-      var temp = this.router.url.split('/');
-      temp.pop();
-      this.subjectService
-        .updateSubject(temp.pop(), newSubject)
-        .subscribe((data) => {
-          if (data['responseCode'] == 200) {
-            this.messageTitle = 'Notification';
-            this.fail = false;
-            this.messageDescription = data['message'];
-            this.openMessage = true;
-            this.navigate = true;
-          } else {
-            this.messageTitle = 'Error';
-            this.fail = true;
-            this.messageDescription = data['message'];
-            this.openMessage = true;
-          }
-          return data;
-        });
+    var temp = this.router.url.split('/');
+    temp.pop();
+    this.subjectService
+      .updateSubject(temp.pop(), newSubject)
+      .subscribe((data) => {
+        if (data['responseCode'] == 200) {
+          this.messageTitle = 'Notification';
+          this.fail = false;
+          this.messageDescription = data['message'];
+          this.openMessage = true;
+          this.navigate = true;
+        } else {
+          this.messageTitle = 'Error';
+          this.fail = true;
+          this.messageDescription = data['message'];
+          this.openMessage = true;
+        }
+        return data;
+      });
   }
 }

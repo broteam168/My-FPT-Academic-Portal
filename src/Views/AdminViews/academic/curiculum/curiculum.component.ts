@@ -10,13 +10,15 @@ import { SubmajorService } from '../../../../Services';
 import { Subject } from '../../../../Models';
 import { SubjectService } from '../../../../Services/subject.service';
 import { CommonModule } from '@angular/common';
+import { LoadingmodalComponent } from "../../../Common/loadingmodal/loadingmodal.component";
+import { MessageboxComponent } from "../../../Common/messagebox/messagebox.component";
 
 @Component({
-  selector: 'app-curiculum',
-  standalone: true,
-  templateUrl: './curiculum.component.html',
-  styleUrl: './curiculum.component.scss',
-  imports: [DrawerComponent, HeaderComponent, MatIcon, CommonModule],
+    selector: 'app-curiculum',
+    standalone: true,
+    templateUrl: './curiculum.component.html',
+    styleUrl: './curiculum.component.scss',
+    imports: [DrawerComponent, HeaderComponent, MatIcon, CommonModule, LoadingmodalComponent, MessageboxComponent]
 })
 export class CuriculumComponent {
   menu: any;
@@ -27,6 +29,7 @@ export class CuriculumComponent {
   fail: boolean;
   loading: boolean;
   navigate: boolean;
+  openMessage2: boolean;
 
   subMajors: SubMajor[];
   subMajorService: SubmajorService;
@@ -71,6 +74,33 @@ export class CuriculumComponent {
   }
 
   deleteCuriculum() {
-    this.loading
+    this.loading = true;
+    this.curiculumService.deleteCuriculum(this.currentId).subscribe(data => {
+      if (data['responseCode'] == 200) {
+        this.messageTitle = 'Notification';
+        this.fail = false;
+        this.messageDescription = data['message'];
+        this.openMessage2 = true;
+        this.navigate = true;
+      } else {
+        this.messageTitle = 'Error';
+        this.fail = true;
+        this.messageDescription = data['message'];
+        this.openMessage2 = true;
+      }
+      return data;
+    });
+    this.close();
+  }
+
+  close2() {
+    this.openMessage2 = false;
+    if (this.navigate == true) {
+      location.reload();
+    }
+  }
+
+  editCuriculum(id: any) {
+    this.router.navigateByUrl(this.router.url + '/edit/' + id);
   }
 }
