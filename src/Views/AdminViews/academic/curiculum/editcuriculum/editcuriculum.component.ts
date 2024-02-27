@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { getMenu } from '../../../MenuDrawer';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SubMajor } from '../../../../../Models/submajor';
 import { MajorService, SubmajorService } from '../../../../../Services';
 import { Major, Subject } from '../../../../../Models';
 import { SubjectService } from '../../../../../Services/subject.service';
@@ -14,6 +13,7 @@ import { CuriculumService } from '../../../../../Services/curiculum.service';
 import { Curiculum } from '../../../../../Models/curiculum';
 import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
 import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
+import { SubMajor } from '../../../../../Models/Major/submajor';
 
 @Component({
     selector: 'app-editcuriculum',
