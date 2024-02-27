@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { getMenu } from '../../../MenuDrawer';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SubMajor } from '../../../../../Models/submajor';
-import { SubmajorService } from '../../../../../Services';
-import { Subject } from '../../../../../Models';
+import { MajorService, SubmajorService } from '../../../../../Services';
+import { Major, Subject } from '../../../../../Models';
 import { SubjectService } from '../../../../../Services/subject.service';
 import { CuriculumService } from '../../../../../Services/curiculum.service';
 import { Curiculum } from '../../../../../Models/curiculum';
@@ -46,6 +46,8 @@ export class EditcuriculumComponent implements OnInit{
   subjects: Subject[];
   subjectService: SubjectService;
 
+  
+
   currentCuriculum: Curiculum;
   constructor(
     private router: Router,
@@ -56,6 +58,9 @@ export class EditcuriculumComponent implements OnInit{
   ) {
     this.menu = getMenu('Academic');
     this.submajorService = subMajorService;
+
+    
+
     this.submajorService.getAllSubMajor().subscribe((x) => {
       this.subMajors = x.data;
     });

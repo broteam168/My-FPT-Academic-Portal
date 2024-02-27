@@ -6,8 +6,8 @@ import { getMenu } from '../../MenuDrawer';
 import { Curiculum } from '../../../../Models/curiculum';
 import { CuriculumService } from '../../../../Services/curiculum.service';
 import { SubMajor } from '../../../../Models/submajor';
-import { SubmajorService } from '../../../../Services';
-import { Subject } from '../../../../Models';
+import { MajorService, SubmajorService } from '../../../../Services';
+import { Major, Subject } from '../../../../Models';
 import { SubjectService } from '../../../../Services/subject.service';
 import { CommonModule } from '@angular/common';
 import { LoadingmodalComponent } from "../../../Common/loadingmodal/loadingmodal.component";
@@ -33,20 +33,39 @@ export class CuriculumComponent {
 
   subMajors: SubMajor[];
   subMajorService: SubmajorService;
+
+  majors: Major[];
+  majorService: MajorService;
+  
   constructor(
     private router: Router,
     private curiculumService: CuriculumService,
-    subMajorService: SubmajorService
+    subMajorService: SubmajorService,
+    majorService: MajorService
   ) {
     this.menu = getMenu('Academic');
     this.subMajorService = subMajorService;
-    this.subMajorService.getAllSubMajor().subscribe((x) => {
-      this.subMajors = x.data;
+
+    this.majorService = majorService;
+    this.majorService.getAllMajors().subscribe(x => {
+      this.majors = x.data;
     });
+
+    // this.subMajorService.getAllSubMajor().subscribe((x) => {
+    //   this.subMajors = x.data;
+    // });
   }
   goBack() {
     this.router.navigateByUrl('/admin/academic/subject');
   }
+
+  changeMajor(event: any) {
+    this.changeSubMajor(10000);
+
+    this.subMajorService.getSubMajorInMajor(event).subscribe(x => {
+      this.subMajors = x.data;
+    });
+  };
 
   changeSubMajor(event: any) {
     this.curiculumService.getCuriculumBySubMajorId(event).subscribe((x) => {

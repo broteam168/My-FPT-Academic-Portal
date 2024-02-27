@@ -20,7 +20,7 @@
 
         <!-- title -->
         <div class="ml-6 text-center">
-          <p class="text-4xl font-medium">Curiculum</p>
+          <p class="text-4xl font-medium">Curriculum</p>
         </div>
 
         <!-- các nút -->
@@ -30,11 +30,15 @@
         >
           <div class="flex flex-row ml-5 h-12 w-1/2">
             <div class="relative mr-5 w-1/2">
-              <select class="h-full rounded-lg w-full">
-                <option>Chọn chuyên ngành</option>
-                <option>Chọn chuyên ngành</option>
-                <option>Chọn chuyên ngành</option>
-                <option>Chọn chuyên ngành</option>
+              <select 
+                #major
+                (change)="changeMajor(major.value)"
+              class="h-full rounded-lg w-full"
+              >
+                <option value="10000">Chọn chuyên ngành</option>
+                <ng-container *ngFor="let item of majors">
+                  <option [value]="item.id">{{item.name}}</option>
+                </ng-container>
               </select>
             </div>
             <div class="relative w-1/2">
@@ -43,7 +47,7 @@
                 (change)="changeSubMajor(submajor.value)"
                 class="h-full rounded-lg w-full"
               >
-                <option>Chọn ngành hẹp</option>
+                <option value="10000">Chọn ngành hẹp</option>
                 <ng-container *ngFor="let item of subMajors">
                   <option [value]="item.id">{{ item.name }}</option>
                 </ng-container>
