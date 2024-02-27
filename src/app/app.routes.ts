@@ -21,6 +21,7 @@ import { EditsubmajorComponent } from '../Views/AdminViews/major/submajor/editsu
 import { SubjectComponent } from '../Views/AdminViews/academic/subject/subject.component';
 import { TimeComponent } from '../Views/AdminViews/time/time.component';
 import { RoomComponent } from '../Views/AdminViews/unit/room/room.component';
+
 import { AddsubjectComponent } from '../Views/AdminViews/academic/subject/addsubject/addsubject.component';
 import { DeletesubjectComponent } from '../Views/AdminViews/academic/subject/deletesubject/deletesubject.component';
 import { CuriculumComponent } from '../Views/AdminViews/academic/curiculum/curiculum.component';
@@ -33,6 +34,16 @@ import { AddsyllabusComponent } from '../Views/AdminViews/academic/syllabus/adds
 import { AddcuriculumComponent } from '../Views/AdminViews/academic/curiculum/addcuriculum/addcuriculum.component';
 import { EditcuriculumComponent } from '../Views/AdminViews/academic/curiculum/editcuriculum/editcuriculum.component';
 
+
+
+import { AddroomComponent } from '../Views/AdminViews/unit/room/addroom/addroom.component';
+import { EditroomComponent } from '../Views/AdminViews/unit/room/editroom/editroom.component';
+import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
+import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
+import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
+import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.component';
+import { AddslotComponent } from '../Views/AdminViews/time/groupslot/slot/addslot/addslot.component';
+import { EditslotComponent } from '../Views/AdminViews/time/groupslot/slot/editslot/editslot.component';
 
 
 export const routes: Routes = [
@@ -50,6 +61,7 @@ export const routes: Routes = [
         component: AcademicComponent,
       },
       {
+
         path: 'academic/subject',
         component: SubjectComponent,
       },
@@ -96,6 +108,30 @@ export const routes: Routes = [
       {
         path: 'academic/subject/curiculum/edit/:id',
         component: EditcuriculumComponent,
+
+        path: 'timetable/groupslot/:id/slot/:id2/edit',
+        component: EditslotComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/slot/add',
+        component: AddslotComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/slot',
+        component: SlotComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/edit',
+        component: EditgroupComponent,
+      },
+      {
+        path: 'timetable/groupslot/add',
+        component: AddgroupComponent,
+      },
+      {
+        path: 'timetable/groupslot',
+        component: GroupslotComponent,
+
       },
       {
         path: 'timetable',
@@ -118,6 +154,16 @@ export const routes: Routes = [
       {
         path: 'unit/school/:id/class/add',
         component: AddclassComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'unit/school/:id/room/:id2/edit',
+        component: EditroomComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'unit/school/:id/room/add',
+        component: AddroomComponent,
         pathMatch: 'full',
       },
       {

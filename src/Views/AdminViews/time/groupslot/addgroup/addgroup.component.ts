@@ -1,64 +1,56 @@
 import { Component } from '@angular/core';
+
+import { Route, Router } from '@angular/router';
+
+import { MatIcon } from '@angular/material/icon';
 import {
-  FormBuilder,
   FormGroup,
+  FormControl,
   ReactiveFormsModule,
+  FormBuilder,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ClassService } from '../../../../../Services/Unit/class.service';
-import { getMenu } from '../../../MenuDrawer';
+import { NgIf } from '@angular/common';
 import { DrawerComponent, HeaderComponent } from '../../../../Common';
-import { MatIcon } from '@angular/material/icon';
-import { NgClass, NgFor, NgIf } from '@angular/common';
-import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
-import { MajorService } from '../../../../../Services';
-import { Major } from '../../../../../Models';
+import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
+import { getMenu } from '../../../MenuDrawer';
+import { GroupslotService } from '../../../../../Services/groupslot.service';
 
 @Component({
-  selector: 'app-addclass',
+  selector: 'app-addunit',
   standalone: true,
   imports: [
     NgIf,
     DrawerComponent,
     HeaderComponent,
     MatIcon,
-    NgFor,
     ReactiveFormsModule,
     MessageboxComponent,
     LoadingmodalComponent,
   ],
-  templateUrl: './addclass.component.html',
-  styleUrl: './addclass.component.scss',
+  templateUrl: './addgroup.component.html',
+  styleUrl: './addgroup.component.scss',
 })
-export class AddclassComponent {
-  classForm: FormGroup;
+export class AddgroupComponent {
+  schoolForm: FormGroup;
   menu: any;
+  router: Router;
   messageTitle: string;
   messageDescription: string;
   openMessage: boolean;
   fail: boolean;
   loading: boolean;
   naviage: boolean;
-  majors: Major[];
-  major: Major;
-  constructor(
-    private classService: ClassService,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private majorService: MajorService
-  ) {
-    this.menu = getMenu('Units');
+
+  constructor(router: Router, private formBuilder: FormBuilder, private groupSlotService:GroupslotService) {
+    this.menu = getMenu('TimeTable');
     this.router = router;
-    this.classForm = this.formBuilder.group({
+    this.schoolForm = this.formBuilder.group({
       name: ['', Validators.required],
-      majorId: ['', Validators.required],
+      type: ['', Validators.required],
       description: ['', Validators.required],
       isActive: [true],
-    });
-    this.majorService.getAllMajors().subscribe((x) => {
-      this.majors = x.data;
     });
   }
   close() {
@@ -66,16 +58,10 @@ export class AddclassComponent {
     if (this.naviage == true) this.goBack();
   }
   createSchool() {
-    console.log(this.classForm.getRawValue());
-    if (this.classForm.valid) {
+    if (this.schoolForm.valid) {
       this.loading = true;
-      var newClass = this.classForm.getRawValue();
-      var temp = this.router.url.split('/');
-      temp.pop();
-      temp.pop();
-      newClass['school'] = Number(temp.pop());
-      console.log(newClass);
-      this.classService.createNewClass(newClass).subscribe((data) => {
+      var newSchool = this.schoolForm.getRawValue();
+       this.groupSlotService.createNewGroup(newSchool).subscribe((data) => {
         if (data['responseCode'] == 200) {
           this.messageTitle = 'Notification';
           this.fail = false;
@@ -99,9 +85,6 @@ export class AddclassComponent {
     this.loading = false;
   }
   goBack() {
-    var temp = this.router.url.split('/');
-    temp.pop();
-  
-    this.router.navigateByUrl(temp.join('/'));
+    this.router.navigateByUrl('/admin/timetable/groupslot');
   }
 }

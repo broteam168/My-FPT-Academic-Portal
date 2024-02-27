@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ClassService } from '../../../../../Services/class.service';
+import { ClassService } from '../../../../../Services/Unit/class.service';
 import { getMenu } from '../../../MenuDrawer';
 import { DrawerComponent, HeaderComponent } from '../../../../Common';
 import { MatIcon } from '@angular/material/icon';
@@ -15,7 +15,7 @@ import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.co
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
 import { MajorService, SubmajorService } from '../../../../../Services';
 import { Major } from '../../../../../Models';
-import { SubMajor } from '../../../../../Models/submajor';
+import { SubMajor } from '../../../../../Models/Major/submajor';
 
 @Component({
   selector: 'app-add-submajor',
