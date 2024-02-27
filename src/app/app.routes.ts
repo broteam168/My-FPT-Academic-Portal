@@ -38,12 +38,16 @@ import { EditcuriculumComponent } from '../Views/AdminViews/academic/curiculum/e
 
 import { AddroomComponent } from '../Views/AdminViews/unit/room/addroom/addroom.component';
 import { EditroomComponent } from '../Views/AdminViews/unit/room/editroom/editroom.component';
-import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
-import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
-import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
-import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.component';
-import { AddslotComponent } from '../Views/AdminViews/time/groupslot/slot/addslot/addslot.component';
+import { SemesterComponent } from '../Views/AdminViews/academic/semester/semester.component';
+import { AddsemesterComponent } from '../Views/AdminViews/academic/semester/addsemester/addsemester.component';
+import { EditSemesterComponent } from '../Views/AdminViews/academic/semester/editsemester/editsemester.component';
+import { CourseComponent } from '../Views/AdminViews/academic/course/course.component';
 import { EditslotComponent } from '../Views/AdminViews/time/groupslot/slot/editslot/editslot.component';
+import { AddslotComponent } from '../Views/AdminViews/time/groupslot/slot/addslot/addslot.component';
+import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.component';
+import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
+import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
+import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
 
 
 export const routes: Routes = [
@@ -57,9 +61,26 @@ export const routes: Routes = [
         component: UserComponent,
       },
       {
+        path: 'academic/course',
+        component: CourseComponent,
+      },
+      {
+        path: 'academic/semester/:id/edit',
+        component: EditSemesterComponent,
+      },
+      {
+        path: 'academic/semester/add',
+        component: AddsemesterComponent,
+      },
+      {
+        path: 'academic/semester',
+        component: SemesterComponent,
+      },
+      {
         path: 'academic',
         component: AcademicComponent,
       },
+     
       {
 
         path: 'academic/subject',

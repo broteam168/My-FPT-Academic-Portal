@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { getMenu } from '../../../MenuDrawer';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
 import { MajorService, SubmajorService } from '../../../../../Services';
 import { Major, Subject } from '../../../../../Models';
 import { SubjectService } from '../../../../../Services/subject.service';

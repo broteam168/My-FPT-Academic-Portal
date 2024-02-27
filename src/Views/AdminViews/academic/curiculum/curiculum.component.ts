@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { getMenu } from '../../MenuDrawer';
 import { Curiculum } from '../../../../Models/curiculum';
 import { CuriculumService } from '../../../../Services/curiculum.service';
-
 import { MajorService, SubmajorService } from '../../../../Services';
 import { Major, Subject } from '../../../../Models';
 import { SubjectService } from '../../../../Services/subject.service';

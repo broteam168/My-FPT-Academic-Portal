@@ -28,6 +28,11 @@ export class SchoolService {
         this.schools = response.data;
       });
   }
+  getAllBaseSchools() {
+    return this.http
+      .get<any>(this.configService.apiBaseUrl + '/unit/school')
+      
+  }
   createNewSchool(newSchool: School) {
     const newObj = Object.fromEntries(
       Object.entries(newSchool).map(([k, v]) => [

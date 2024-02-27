@@ -7,7 +7,7 @@ import { getMenu } from '../../../MenuDrawer';
 import { Router } from '@angular/router';
 import { CuriculumService } from '../../../../../Services/curiculum.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SubMajor } from '../../../../../Models/submajor';
+import { SubMajor } from '../../../../../Models/Major/submajor';
 import { SubmajorService } from '../../../../../Services';
 import { Subject } from '../../../../../Models';
 import { SubjectService } from '../../../../../Services/subject.service';

@@ -13,10 +13,19 @@ import { Route, Router } from '@angular/router';
 })
 export class AcademicComponent {
   menu: any;
-  constructor(private router: Router) {
+  constructor(private router : Router) {
     this.menu = getMenu('Academic');
     console.log(this.menu);
   }
+  ManageSemester()
+  {
+    this.router.navigateByUrl(this.router.url + '/semester')
+  }
+  ManageCourse()
+  {
+    this.router.navigateByUrl(this.router.url + '/course')
+  }
+
   goToSubject() {
     this.router.navigate([this.router.url + '/subject']);
   }
