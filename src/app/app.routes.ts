@@ -108,7 +108,8 @@ export const routes: Routes = [
       {
         path: 'academic/subject/curiculum/edit/:id',
         component: EditcuriculumComponent,
-
+      },
+      {
         path: 'timetable/groupslot/:id/slot/:id2/edit',
         component: EditslotComponent,
       },
