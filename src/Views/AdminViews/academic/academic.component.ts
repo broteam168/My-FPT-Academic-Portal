@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DrawerComponent, HeaderComponent } from '../../Common';
 import { getMenu } from '../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-academic',
@@ -12,8 +13,11 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class AcademicComponent {
   menu: any;
-  constructor() {
+  constructor(private router: Router) {
     this.menu = getMenu('Academic');
     console.log(this.menu);
+  }
+  goToSubject() {
+    this.router.navigate([this.router.url + '/subject']);
   }
 }
