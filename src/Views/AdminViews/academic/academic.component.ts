@@ -25,4 +25,8 @@ export class AcademicComponent {
   {
     this.router.navigateByUrl(this.router.url + '/course')
   }
+
+  goToSubject() {
+    this.router.navigate([this.router.url + '/subject']);
+  }
 }

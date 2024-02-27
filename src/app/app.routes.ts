@@ -17,14 +17,38 @@ import { EditmajorComponent } from '../Views/AdminViews/major/editmajor/editmajo
 import { SubmajorComponent } from '../Views/AdminViews/major/submajor/submajor.component';
 import { AddsubmajorComponent } from '../Views/AdminViews/major/submajor/addsubmajor/addsubmajor.component';
 import { EditsubmajorComponent } from '../Views/AdminViews/major/submajor/editsubmajor/editsubmajor.component';
+
+import { SubjectComponent } from '../Views/AdminViews/academic/subject/subject.component';
 import { TimeComponent } from '../Views/AdminViews/time/time.component';
 import { RoomComponent } from '../Views/AdminViews/unit/room/room.component';
+
+import { AddsubjectComponent } from '../Views/AdminViews/academic/subject/addsubject/addsubject.component';
+import { DeletesubjectComponent } from '../Views/AdminViews/academic/subject/deletesubject/deletesubject.component';
+import { CuriculumComponent } from '../Views/AdminViews/academic/curiculum/curiculum.component';
+import { DetailSubjectComponent } from '../Views/AdminViews/academic/subject/detail-subject/detail-subject.component';
+import { EditdetailsubjectComponent } from '../Views/AdminViews/academic/subject/editdetailsubject/editdetailsubject.component';
+import { SyllabusComponent } from '../Views/AdminViews/academic/syllabus/syllabus.component';
+import { DetailsyllabusComponent } from '../Views/AdminViews/academic/syllabus/detailsyllabus/detailsyllabus.component';
+import { EditdetailsyllabusComponent } from '../Views/AdminViews/academic/syllabus/editdetailsyllabus/editdetailsyllabus.component';
+import { AddsyllabusComponent } from '../Views/AdminViews/academic/syllabus/addsyllabus/addsyllabus.component';
+import { AddcuriculumComponent } from '../Views/AdminViews/academic/curiculum/addcuriculum/addcuriculum.component';
+import { EditcuriculumComponent } from '../Views/AdminViews/academic/curiculum/editcuriculum/editcuriculum.component';
+
+
+
 import { AddroomComponent } from '../Views/AdminViews/unit/room/addroom/addroom.component';
 import { EditroomComponent } from '../Views/AdminViews/unit/room/editroom/editroom.component';
 import { SemesterComponent } from '../Views/AdminViews/academic/semester/semester.component';
 import { AddsemesterComponent } from '../Views/AdminViews/academic/semester/addsemester/addsemester.component';
 import { EditSemesterComponent } from '../Views/AdminViews/academic/semester/editsemester/editsemester.component';
 import { CourseComponent } from '../Views/AdminViews/academic/course/course.component';
+import { EditslotComponent } from '../Views/AdminViews/time/groupslot/slot/editslot/editslot.component';
+import { AddslotComponent } from '../Views/AdminViews/time/groupslot/slot/addslot/addslot.component';
+import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.component';
+import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
+import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
+import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
+
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -58,6 +82,80 @@ export const routes: Routes = [
       },
      
       {
+
+        path: 'academic/subject',
+        component: SubjectComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id',
+        component: DetailSubjectComponent,
+      },
+      {
+        path: 'academic/subject/add',
+        component: AddsubjectComponent,
+      },
+      {
+        path: 'academic/subject/delete',
+        component: DeletesubjectComponent,
+      },
+      {
+        path: 'academic/subject/curiculum',
+        component: CuriculumComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/edit',
+        component: EditdetailsubjectComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/syllabus',
+        component: SyllabusComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/syllabus/add',
+        component: AddsyllabusComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/syllabus/detail/:id2',
+        component: DetailsyllabusComponent,
+      },
+      {
+        path: 'academic/subject/detail/:id/syllabus/detail/:id2/edit',
+        component: EditdetailsyllabusComponent,
+      },
+      {
+        path: 'academic/subject/curiculum/add',
+        component: AddcuriculumComponent,
+      },
+      {
+        path: 'academic/subject/curiculum/edit/:id',
+        component: EditcuriculumComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/slot/:id2/edit',
+        component: EditslotComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/slot/add',
+        component: AddslotComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/slot',
+        component: SlotComponent,
+      },
+      {
+        path: 'timetable/groupslot/:id/edit',
+        component: EditgroupComponent,
+      },
+      {
+        path: 'timetable/groupslot/add',
+        component: AddgroupComponent,
+      },
+      {
+        path: 'timetable/groupslot',
+        component: GroupslotComponent,
+
+      },
+      {
         path: 'timetable',
         component: TimeComponent,
       },
@@ -65,7 +163,6 @@ export const routes: Routes = [
         path: 'unit',
         component: UnitComponent,
       },
-
       {
         path: 'unit/school/add',
         component: AddunitComponent,

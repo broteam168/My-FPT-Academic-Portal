@@ -1,0 +1,123 @@
+<app-drawer [items]="menu">
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent class="pb-10 pr-5">
+        <!-- back -->
+        <div class="flex items-center hover:cursor-pointer" (click)="goBack()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="keyboard_backspace"
+            class="text-lg font-medium m-5 hover:bg-white hover:rounded-full hover:pl-1"
+            appearance="outline"
+          ></mat-icon>
+          <div class="font-medium text-lg">Back to Academic management</div>
+        </div>
+
+        <!-- title -->
+        <div class="ml-6 text-center">
+          <p class="text-4xl font-medium">Subject Management</p>
+        </div>
+
+        <!-- các nút -->
+        <div #button_header_right class="flex items-center justify-between mt-5">
+          <div class="ml-5">
+            <button
+              (click)="goToCuriculum()"
+              class="shadow btn bg-orange-500 text-white font-sans font-medium hover:bg-orange-300"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="ballot"
+                class="text-white text-lg"
+                appearance="outline "
+              ></mat-icon>
+              View Curiculum
+            </button>
+          </div>
+          <div>
+            <button
+              class="shadow btn bg-green-500 text-white font-sans font-medium hover:bg-green-600" (click)="addSubject()"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="library_add"
+                class="text-white text-lg"
+                appearance="outline "
+              ></mat-icon>
+              Add Subject
+            </button>
+            <button
+              class="shadow ml-5 btn bg-red-500 text-white font-sans font-medium" (click)="deleteSubject()"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="edit"
+                class="text-white text-lg"
+                appearance="outline "
+              ></mat-icon>
+              Delete subject
+            </button>
+          </div>
+        </div>
+
+        <!-- data list -->
+        <div class="overflow-x-hidden">
+          <table class="mt-6 mx-5 min-w-full">
+            <tr class="text-white bg-orange-500">
+              <td class="px-5 py-6"></td>
+              <td class="px-5 py-6">Subject Id</td>
+              <td class="px-5 py-6">Subject Code</td>
+              <td class="px-5 py-6">Subject Name</td>
+              <td class="px-5 py-6">Credit</td>
+              <td class="px-5 py-6">Status</td>
+              <td class="px-5 py-6"></td>
+            </tr>
+
+            
+            <tr *ngFor="let item of getAllSubject()" class="bg-white mb-5 border-b border-gray-300">
+              <td class="px-5 py-6"></td>
+              <td class="px-5 py-6">{{item.id}}</td>
+              <td class="px-5 py-6">{{item.subjectCode}}</td>
+              <td class="px-5 py-6">{{item.name}}</td>
+              <td class="px-5 py-6">{{item.credits}}</td>
+              <td class="px-5 py-6">
+                <div
+                  [ngClass]="{
+                    'text-green-600': item.status,
+                    'text-red-600': !item.status
+                  }"
+                >
+                  {{item.status ? "Active" : "Deactive"}}
+                </div>
+              </td>
+              <td class="px-5 py-6">
+                <div 
+                  (click)="viewDetailSubject(item.id)" 
+                  class="flex bg-purple-300 w-fit text-purple-500 cursor-pointer rounded-md"
+                >
+                  <mat-icon
+                      aria-hidden="false"
+                      aria-label="Example home icon"
+                      fontIcon="remove_red_eye"
+                      class="text-purple-500 text-base ml-1.5"
+                      appearance="outline "
+                    ></mat-icon>
+                  <p class="pr-3">View Detail</p>
+                </div>
+              </td>
+            </tr>
+          </table>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</app-drawer>
