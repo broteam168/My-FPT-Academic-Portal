@@ -13,6 +13,10 @@ export class ClassService {
   ) {
    
   }
+  getAlllClasses() {
+    return this.http
+       .get<any>(this.configService.apiBaseUrl + '/unit/class');
+   }
   getClassesById(id:string) {
    return this.http
       .get<any>(this.configService.apiBaseUrl + '/unit/class/search?schoolid='+id);

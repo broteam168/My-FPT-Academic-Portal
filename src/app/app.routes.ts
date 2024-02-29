@@ -48,6 +48,8 @@ import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.comp
 import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
 import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
 import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
+import { AddcourseComponent } from '../Views/AdminViews/academic/course/addcourse/addcourse.component';
+import { EditcourseComponent } from '../Views/AdminViews/academic/course/editcourse/editcourse.component';
 
 
 export const routes: Routes = [
@@ -59,6 +61,14 @@ export const routes: Routes = [
       {
         path: 'user',
         component: UserComponent,
+      },
+      {
+        path: 'academic/course/:id/edit',
+        component: EditcourseComponent,
+      },
+      {
+        path: 'academic/course/add',
+        component: AddcourseComponent,
       },
       {
         path: 'academic/course',
