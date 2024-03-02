@@ -1,0 +1,32 @@
+<app-drawer [items]="menu">
+    <div class="h-screen bg-gray-100">
+      <app-header></app-header>
+      <div class="bg-gray-100">
+        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+          >Open drawer</label
+        >
+        <div #maincontent class="pb-10 pl-5 mt-5">
+          
+  
+          <!-- title -->
+          <div class="text-center">
+            <p class="text-4xl font-medium">Curriculum</p>
+          </div>
+  
+          <!-- data list -->
+          <div>
+            <table class="mt-6 w-full">
+              <tr class="text-white bg-orange-500">
+                <td class="w-1/12"></td>
+                <td class="w-1/6 py-4 pl-2">Subject Code</td>
+                <td class="w-1/4">Subject Name</td>
+                <td class="w-1/4">Termino</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </app-drawer>
+  

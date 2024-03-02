@@ -3,6 +3,8 @@ import { DrawerComponent, HeaderComponent } from '../../Common';
 import { getMenu } from '../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
 import { Route, Router } from '@angular/router';
+import { SubjectService } from '../../../Services/subject.service';
+import { Subject } from '../../../Models';
 
 @Component({
   selector: 'app-academic',
@@ -13,9 +15,22 @@ import { Route, Router } from '@angular/router';
 })
 export class AcademicComponent {
   menu: any;
-  constructor(private router : Router) {
+  subjectService: SubjectService;
+  subjects: Subject[];
+  countSubject: number = 0;
+
+  constructor(
+    private router : Router,
+    subjectService: SubjectService,
+
+    ) {
     this.menu = getMenu('Academic');
-    console.log(this.menu);
+
+    this.subjectService = subjectService;
+    this.subjectService.getAllSubject().subscribe(x => {
+      this.subjects = x.data;
+      this.countSubject = this.subjects.length;
+    });
   }
   ManageSemester()
   {

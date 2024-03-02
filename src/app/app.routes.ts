@@ -48,6 +48,10 @@ import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.comp
 import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
 import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
 import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
+import { studentGuard } from '../Helpers/student.guard';
+import { TimetableComponent } from '../Views/StudentViews/timetable/timetable.component';
+import { Curiculum1Component } from '../Views/StudentViews/curiculum1/curiculum1.component';
+import { Course1Component } from '../Views/StudentViews/course1/course1.component';
 
 
 export const routes: Routes = [
@@ -80,9 +84,7 @@ export const routes: Routes = [
         path: 'academic',
         component: AcademicComponent,
       },
-     
       {
-
         path: 'academic/subject',
         component: SubjectComponent,
       },
@@ -244,5 +246,23 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
     ],
+  },
+  {
+    path: 'student',
+    canActivateChild: [studentGuard],
+    children: [
+      {
+        path: 'timetable',
+        component: TimetableComponent,
+      },
+      {
+        path: 'curiculum1',
+        component: Curiculum1Component,
+      },
+      {
+        path: 'course1',
+        component: Course1Component,
+      },
+    ]
   },
 ];
