@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateChildFn, Router } from '@angular/router';
-import { AuthService } from '../Services/auth.service';
+import { AuthService } from '../Services/Common/auth.service';
 import { catchError, map } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 

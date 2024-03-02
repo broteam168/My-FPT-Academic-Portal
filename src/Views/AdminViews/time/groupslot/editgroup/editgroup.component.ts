@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { SchoolService } from '../../../../../Services';
 import { GroupSlot, School } from '../../../../../Models';
 import { getMenu } from '../../../MenuDrawer';
-import { GroupslotService } from '../../../../../Services/groupslot.service';
+import { GroupslotService } from '../../../../../Services/Time/groupslot.service';
 
 
 @Component({

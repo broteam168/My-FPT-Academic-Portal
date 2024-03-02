@@ -5,12 +5,12 @@ import { Route, Router } from '@angular/router';
 import { getMenu } from '../../../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
 import { Subject } from '../../../../../Models';
-import { SubjectService } from '../../../../../Services/subject.service';
+import { SubjectService } from '../../../../../Services/Academic/subject.service';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
 import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
 import { Syllabus } from '../../../../../Models/syllabus';
-import { SyllabusService } from '../../../../../Services/syllabus.service';
+import { SyllabusService } from '../../../../../Services/Academic/syllabus.service';
 
 @Component({
     selector: 'app-detail-subject',

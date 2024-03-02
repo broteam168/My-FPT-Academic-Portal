@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppConfigService } from './app-config.service';
-import { Syllabus } from '../Models/syllabus';
+import { AppConfigService } from '../Common/app-config.service';
+import { Syllabus } from '../../Models/syllabus';
 
 @Injectable({
   providedIn: 'root'

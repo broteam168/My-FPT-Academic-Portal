@@ -34,8 +34,6 @@ import { AddsyllabusComponent } from '../Views/AdminViews/academic/syllabus/adds
 import { AddcuriculumComponent } from '../Views/AdminViews/academic/curiculum/addcuriculum/addcuriculum.component';
 import { EditcuriculumComponent } from '../Views/AdminViews/academic/curiculum/editcuriculum/editcuriculum.component';
 
-
-
 import { AddroomComponent } from '../Views/AdminViews/unit/room/addroom/addroom.component';
 import { EditroomComponent } from '../Views/AdminViews/unit/room/editroom/editroom.component';
 import { SemesterComponent } from '../Views/AdminViews/academic/semester/semester.component';
@@ -48,11 +46,18 @@ import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.comp
 import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
 import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
 import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
+
 import { studentGuard } from '../Helpers/student.guard';
 import { TimetableComponent } from '../Views/StudentViews/timetable/timetable.component';
 import { Curiculum1Component } from '../Views/StudentViews/curiculum1/curiculum1.component';
 import { Course1Component } from '../Views/StudentViews/course1/course1.component';
 
+
+import { AddcourseComponent } from '../Views/AdminViews/academic/course/addcourse/addcourse.component';
+import { EditcourseComponent } from '../Views/AdminViews/academic/course/editcourse/editcourse.component';
+import { SessionComponent } from '../Views/AdminViews/time/session/session.component';
+import { AddsessionComponent } from '../Views/AdminViews/time/session/addsession/addsession.component';
+import { EditsessionComponent } from '../Views/AdminViews/time/session/editsession/editsession.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -63,6 +68,14 @@ export const routes: Routes = [
       {
         path: 'user',
         component: UserComponent,
+      },
+      {
+        path: 'academic/course/:id/edit',
+        component: EditcourseComponent,
+      },
+      {
+        path: 'academic/course/add',
+        component: AddcourseComponent,
       },
       {
         path: 'academic/course',
@@ -133,6 +146,15 @@ export const routes: Routes = [
         component: EditcuriculumComponent,
       },
       {
+        path: 'timetable/session/:id/edit',
+        component: EditsessionComponent,
+      },
+      { path: 'timetable/session/add', component: AddsessionComponent },
+      {
+        path: 'timetable/session',
+        component: SessionComponent,
+      },
+      {
         path: 'timetable/groupslot/:id/slot/:id2/edit',
         component: EditslotComponent,
       },
@@ -155,7 +177,6 @@ export const routes: Routes = [
       {
         path: 'timetable/groupslot',
         component: GroupslotComponent,
-
       },
       {
         path: 'timetable',
@@ -245,6 +266,11 @@ export const routes: Routes = [
         component: MajorComponent,
         pathMatch: 'full',
       },
+      {
+        path:'**',
+        redirectTo:'academic'
+
+      }
     ],
   },
   {

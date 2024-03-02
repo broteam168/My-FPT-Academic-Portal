@@ -7,7 +7,7 @@
         >
         <div #maincontent class="px-3 mt-2 pb-10">
             <div #header class="flex flex-row justify-between items-center">
-                <div
+                <div (click)="goBack()"
                   #back_button
                   class="flex items-center hover:cursor-pointer"
                   
@@ -195,7 +195,96 @@
                           </th>
                         </tr>
                       </thead>
-                     
+                      <tbody *ngFor="let item of allCourse">
+                        <tr>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <div class="flex items-center">
+                              <div class="flex-shrink-0 w-10 h-10">
+                                <img
+                                  class="w-full h-full rounded-full"
+                                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+                                  alt=""
+                                />
+                              </div>
+                              <div class="ml-3">
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                  {{ item.name }}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <p class="text-gray-900 whitespace-no-wrap">
+                              {{ item.classs.name }}
+                            </p>
+                          </td>
+  
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <p
+                              class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                            >
+                              {{ getRoomName(item.room) }}
+                            </p>
+                          </td>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <p
+                              class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                            >
+                              {{ getTime(item.slots,item.days) }}
+                            </p>
+                          </td>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <p
+                              class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                            >
+                              {{ item.semester.name }}
+                            </p>
+                          </td>
+                          <td
+                          class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                        >
+                          <p
+                            class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                          >
+                            {{ item.status }}
+                          </p>
+                        </td>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex"
+                          >
+                            <div (click)="editClass(item.id)">
+                              <mat-icon
+                                title="Edit class"
+                                aria-label="Example home icon"
+                                fontIcon="edit"
+                                class="text-green-700 text-lg hover:cursor-pointer"
+                                akt
+                                appearance="outline "
+                              ></mat-icon>
+                            </div>
+                            <div (click)="deletee(item.id)">
+                              <mat-icon
+                                title="Delete class"
+                                aria-label="Example home icon"
+                                fontIcon="delete"
+                                class="text-red-700 text-lg hover:cursor-pointer ml-3"
+                                akt
+                                appearance="outline "
+                              ></mat-icon>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
                     </table>
                     <div
                       class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between"
@@ -223,7 +312,40 @@
               </div>
             </div>
               </div>
-              
+              <app-messagebox
+              (closeModal)="close2()"
+              [open]="openMessage2"
+              [title]="messageTitle"
+              [description]="messageDescription"
+              [type]="fail"
+            ></app-messagebox>
+              <div 
+              id="wrong-modal"
+              *ngIf="openMessage"
+              tabindex="-1"
+              aria-hidden="true"
+              class="transform transition-transform flex bg-neutral-100/50 overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+            >
+              <div class="modal-box">
+                <h3
+                  class="font-bold text-xl text-red-500"
+                >
+                 Confirmation
+                </h3>
+                <p class="py-4"> Please consider before doing this action. This can cause losing data forever!!!</p>
+                <div class="modal-action">
+                  <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button  class="btn btn-error text-white" (click)="deletea()">
+                      Delete
+                    </button>
+                    <button class="ml-5 btn btn-primary" (click)="close()">
+                      Close
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
        </div>
       </div>
     </div>

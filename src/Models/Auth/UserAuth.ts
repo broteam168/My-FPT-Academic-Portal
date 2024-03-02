@@ -9,7 +9,9 @@ import { role } from "./role";
     Address:string;
     LastLogin:string;
     token:string;
+    FullName :string;
     role:role[];
+    rolec:role;
     constructor(responseAuth : any)
     {
       var temp = responseAuth.data.userInfoDto;
@@ -21,5 +23,7 @@ import { role } from "./role";
       this.Address = temp.address;
       this.LastLogin = temp.lastLogin;
       this.role = temp.roles;
+      this.FullName = temp.fullName;
+      this.rolec = this.role[0];
     }
  }

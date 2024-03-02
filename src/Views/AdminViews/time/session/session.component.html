@@ -1,0 +1,355 @@
+<app-drawer [items]="menu">
+    <div class="h-screen bg-gray-100">
+      <app-header></app-header>
+      <div class="bg-gray-100">
+        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+          >Open drawer</label
+        >
+        <div #maincontent class="px-3 mt-2 pb-10">
+            <div #header class="flex flex-row justify-between items-center">
+              <div (click)="goBack()"
+              #back_button
+                  class="flex items-center hover:cursor-pointer"
+                  
+                >
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="Example home icon"
+                    fontIcon="keyboard_backspace"
+                    class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
+                    appearance="outline "
+                  ></mat-icon>
+      
+                  <div class="font-medium text-lg">Back to TimeTable management</div>
+                </div>
+                <div #right_button class="mt-3"></div>
+              </div>
+              <div #select class="mt-5 w-full bg-white h-fit py-5 pl-5 border-slate-200 border-2 rounded-xl ">
+                <div>
+                    <h2 class="text-xl font-medium leading-tight mb-5">Select school and class to start:</h2>
+                  </div>
+                <div #changeunit class="flex items-center">
+                    <div class="flex">
+                        <label for="" class="text-base font-medium px-1 mt-1"
+                        >Select School:</label
+                      >
+                        <select #selectscho (change)="selectSchool(selectscho.selectedIndex)" class="bg-slate-100 rounded-md px-5 py-2 w-fit h-fit ml-1">
+                            <option (value) = "item.id" *ngFor="let item of allSchools">{{item.name}}</option>
+                            <option value="-1">All schools</option>
+                        </select>
+                    </div>
+                    <div class="flex">
+                        <label for="" class="text-base font-medium px-1 mt-1 ml-5"
+                        >Class:</label
+                      >
+                      <select #selectClass class="bg-slate-100 rounded-md px-5 py-2 w-fit h-fit ml-1">
+                        <option *ngFor="let item of allClasses">{{item.name}}</option>
+                        <option value="-1">All classes</option>
+                        </select>
+                    </div>
+                    <button class="shadow btn bg-blue-500 text-white font-sans font-medium hover:bg-blue-600 ml-12" 
+                    (click)="ShowData(selectscho.selectedIndex,selectClass.selectedIndex)">
+                        <mat-icon
+                        aria-hidden="false"
+                        aria-label="Example home icon"
+                        fontIcon="remove_red_eye"
+                        class="text-white text-lg "
+                        appearance="outline "
+                      ></mat-icon
+                      >
+                      Load data
+                    </button>
+                </div>
+                <div>
+                    
+                </div>
+              </div>
+              <div class="bg-white mt-5 w-full h-full px-5 py-10">
+                 <div class="container mx-auto px-4 sm:px-8">
+              <div class="py-8">
+                <div>
+                  <h2 class="text-2xl font-semibold leading-tight">Sessions</h2>
+                </div>
+                <div class="flex justify-between">
+                  <div class="my-2 flex sm:flex-row flex-col">
+                    <div class="flex flex-row mb-1 sm:mb-0">
+                      <div class="relative">
+                        <select
+                          #count
+                          (change)="onChange(count.value)"
+                       
+                          class="h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        >
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                        </select>
+                        <div
+                          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                        >
+                          <svg
+                            class="fill-current h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="relative">
+                        <select
+                          class="h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500"
+                        >
+                          <option>All</option>
+                          <option>Active</option>
+                          <option>Inactive</option>
+                        </select>
+                        <div
+                          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                        >
+                          <svg
+                            class="fill-current h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="block relative">
+                      <span
+                        class="h-full absolute inset-y-0 left-0 flex items-center pl-2"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          class="h-4 w-4 fill-current text-gray-500"
+                        >
+                          <path
+                            d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z"
+                          ></path>
+                        </svg>
+                      </span>
+                      <input
+                        #searchbox
+                        (input)="search(searchbox.value)"
+                     
+                        placeholder="Search"
+                        class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <button (click)="addClass()"
+                    class="btn border-green-500 font-medium text-green-600 hover:bg-green-500 hover:text-white"
+                  >
+                    Add sessions
+                  </button>
+                  </div>
+                </div>
+                <!--Action block-->
+                <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                  <div
+                    class="inline-block min-w-full shadow rounded-lg overflow-hidden"
+                  >
+                    <table class="min-w-full leading-normal">
+                      <thead>
+                        <tr>
+                          <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                          >
+                            Name
+                          </th>
+                          <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                          >
+                            Course
+                          </th>
+                          <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                          >
+                            Date
+                          </th>
+                          <th
+                          class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Time
+                        </th>
+                          <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                          >
+                            Semester
+                          </th>
+  
+                          <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                          >
+                            Status
+                          </th>
+                          <th
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                          >
+                            Action
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody *ngFor="let item of DataClasses">
+                        <tr>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <div class="flex items-center">
+                              <div class="flex-shrink-0 w-10 h-10">
+                                <img
+                                  class="w-full h-full rounded-full"
+                                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+                                  alt=""
+                                />
+                              </div>
+                              <div class="ml-3">
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                  {{ item.name }}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <p class="text-gray-900 whitespace-no-wrap">
+                              {{ item.course.name }}
+                            </p>
+                          </td>
+  
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <p
+                              class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                            >
+                              {{ item.dateDay }}
+                            </p>
+                          </td>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <p
+                              class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                            >
+                              {{item.startTime+'~'+item.endTime}}
+                            </p>
+                          </td>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                          >
+                            <p
+                              class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                            >
+                              {{ item.course.semester.name }}
+                            </p>
+                          </td>
+                          <td
+                          class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                        >
+                          <p
+                            class="text-gray-900 whitespace-no-wrap overflow-hidden"
+                          >
+                            {{ item.status }}
+                          </p>
+                        </td>
+                          <td
+                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex"
+                          >
+                            <div (click)="editClass(item.id)">
+                              <mat-icon
+                                title="Edit class"
+                                aria-label="Example home icon"
+                                fontIcon="edit"
+                                class="text-green-700 text-lg hover:cursor-pointer"
+                                akt
+                                appearance="outline "
+                              ></mat-icon>
+                            </div>
+                            <div (click)="deletee(item.id)">
+                              <mat-icon
+                                title="Delete class"
+                                aria-label="Example home icon"
+                                fontIcon="delete"
+                                class="text-red-700 text-lg hover:cursor-pointer ml-3"
+                                akt
+                                appearance="outline "
+                              ></mat-icon>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div
+                      class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between"
+                    >
+                      <span class="text-xs xs:text-sm text-gray-900">
+                       
+                      </span>
+                      <div class="inline-flex mt-2 xs:mt-0">
+                        <button
+                          (click)="BackListClass()"
+                          class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
+                        >
+                          Prev
+                        </button>
+                        <button
+                          (click)="nextListClass()"
+                          class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              </div>
+              <app-messagebox
+              (closeModal)="close2()"
+              [open]="openMessage2"
+              [title]="messageTitle"
+              [description]="messageDescription"
+              [type]="fail"
+            ></app-messagebox>
+              <div 
+              id="wrong-modal"
+              *ngIf="openMessage"
+              tabindex="-1"
+              aria-hidden="true"
+              class="transform transition-transform flex bg-neutral-100/50 overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+            >
+              <div class="modal-box">
+                <h3
+                  class="font-bold text-xl text-red-500"
+                >
+                 Confirmation
+                </h3>
+                <p class="py-4"> Please consider before doing this action. This can cause losing data forever!!!</p>
+                <div class="modal-action">
+                  <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button  class="btn btn-error text-white" (click)="deletea()">
+                      Delete
+                    </button>
+                    <button class="ml-5 btn btn-primary" (click)="close()">
+                      Close
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+       </div>
+      </div>
+    </div>
+  </app-drawer>
+  
