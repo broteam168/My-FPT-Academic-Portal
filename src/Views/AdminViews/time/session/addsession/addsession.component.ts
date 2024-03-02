@@ -19,6 +19,8 @@ import { GroupslotService } from '../../../../../Services/Time/groupslot.service
 import { ClassService } from '../../../../../Services';
 import { Class } from '../../../../../Models';
 import { CourseService } from '../../../../../Services/Academic/course.service';
+import { Course } from '../../../../../Models/Academic/course';
+import { SessionService } from '../../../../../Services/Time/session.service';
 
 @Component({
   selector: 'app-addunit',
@@ -33,10 +35,10 @@ import { CourseService } from '../../../../../Services/Academic/course.service';
     LoadingmodalComponent,
     NgFor
   ],
-  templateUrl: './addcourse.component.html',
-  styleUrl: './addcourse.component.scss',
+  templateUrl: './addsession.component.html',
+  styleUrl: './addsession.component.scss',
 })
-export class AddcourseComponent implements OnInit{
+export class AddsessionComponent implements OnInit{
   schoolForm: FormGroup;
   menu: any;
   router: Router;
@@ -46,29 +48,29 @@ export class AddcourseComponent implements OnInit{
   fail: boolean;
   loading: boolean;
   naviage: boolean;
-
-  allClasses : Class[]
+    currentCourse:Course;
+  allCourses : Course[]
   constructor(
     router: Router,
     private formBuilder: FormBuilder,
-    private courseService: CourseService,
-    private classService : ClassService
+    private courseService : CourseService,
+    private sessionService :SessionService
   ) {
-    this.menu = getMenu('Academic');
+    this.menu = getMenu('Timetable');
     this.router = router;
 
     
     this.schoolForm = this.formBuilder.group({
-      classId: ['', Validators.required],
-      semester: ['', Validators.required]
+      courseId: ['', Validators.required]
+
     });
   }
   ngOnInit(): void {
     ///Add class option
-    this.classService.getAlllClasses().subscribe(response=>
+    this.courseService.getAllCourses().subscribe(response=>
       {
-        this.allClasses =  response.data;
-        this.allClasses = this.allClasses.filter(x=>x.isActive == true);
+        this.allCourses =  response.data;
+        this.allCourses = this.allCourses.filter(x=>x.status == 'ASSIGN');
       })
   }
   close() {
@@ -79,8 +81,8 @@ export class AddcourseComponent implements OnInit{
     if (this.schoolForm.valid) {
       this.loading = true;
       var newSchool = this.schoolForm.getRawValue();
-     
-      this.courseService.createCourseByClass(newSchool).subscribe((data) => {
+      console
+      this.sessionService.createSession(newSchool).subscribe((data) => {
         if (data['responseCode'] == 200) {
           this.messageTitle = 'Notification';
           this.fail = false;
@@ -102,6 +104,11 @@ export class AddcourseComponent implements OnInit{
       this.openMessage = true;
     }
     this.loading = false;
+    
+  }
+  selectSchool(id:number)
+  {
+    this.currentCourse = this.allCourses[id];
   }
   goBack() {
     this.router.navigateByUrl('/admin/academic/course');

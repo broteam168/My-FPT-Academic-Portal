@@ -15,7 +15,7 @@ import { DrawerComponent, HeaderComponent } from '../../../../Common';
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
 import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 import { getMenu } from '../../../MenuDrawer';
-import { GroupslotService } from '../../../../../Services/groupslot.service';
+import { GroupslotService } from '../../../../../Services/Time/groupslot.service';
 
 @Component({
   selector: 'app-addunit',

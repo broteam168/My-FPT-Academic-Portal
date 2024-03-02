@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { getMenu } from '../../../MenuDrawer';
 import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
 import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
-import { SyllabusService } from '../../../../../Services/syllabus.service';
+import { SyllabusService } from '../../../../../Services/Academic/syllabus.service';
 import { Syllabus } from '../../../../../Models/syllabus';
 import { NgClass, NgIf } from '@angular/common';
 

@@ -5,7 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { getMenu } from '../../MenuDrawer';
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { SyllabusService } from '../../../../Services/syllabus.service';
+import { SyllabusService } from '../../../../Services/Academic/syllabus.service';
 import { Syllabus } from '../../../../Models/syllabus';
 import { MessageboxComponent } from "../../../Common/messagebox/messagebox.component";
 import { LoadingmodalComponent } from "../../../Common/loadingmodal/loadingmodal.component";

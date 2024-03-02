@@ -32,10 +32,10 @@ import { Course } from '../../../../../Models/Academic/course';
     MessageboxComponent,
     LoadingmodalComponent,
   ],
-  templateUrl: './editcourse.component.html',
-  styleUrl: './editcourse.component.scss',
+  templateUrl: './editsession.component.html',
+  styleUrl: './editsession.component.scss',
 })
-export class EditcourseComponent implements OnInit {
+export class EditsessionComponent implements OnInit {
   classForm: FormGroup;
   menu: any;
   messageTitle: string;

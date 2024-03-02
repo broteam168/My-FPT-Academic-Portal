@@ -5,7 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { getMenu } from '../../../MenuDrawer';
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { SubjectService } from '../../../../../Services/subject.service';
+import { SubjectService } from '../../../../../Services/Academic/subject.service';
 import { Subject } from '../../../../../Models';
 import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";
 import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";

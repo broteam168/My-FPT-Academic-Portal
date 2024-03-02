@@ -34,8 +34,6 @@ import { AddsyllabusComponent } from '../Views/AdminViews/academic/syllabus/adds
 import { AddcuriculumComponent } from '../Views/AdminViews/academic/curiculum/addcuriculum/addcuriculum.component';
 import { EditcuriculumComponent } from '../Views/AdminViews/academic/curiculum/editcuriculum/editcuriculum.component';
 
-
-
 import { AddroomComponent } from '../Views/AdminViews/unit/room/addroom/addroom.component';
 import { EditroomComponent } from '../Views/AdminViews/unit/room/editroom/editroom.component';
 import { SemesterComponent } from '../Views/AdminViews/academic/semester/semester.component';
@@ -50,7 +48,9 @@ import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/a
 import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
 import { AddcourseComponent } from '../Views/AdminViews/academic/course/addcourse/addcourse.component';
 import { EditcourseComponent } from '../Views/AdminViews/academic/course/editcourse/editcourse.component';
-
+import { SessionComponent } from '../Views/AdminViews/time/session/session.component';
+import { AddsessionComponent } from '../Views/AdminViews/time/session/addsession/addsession.component';
+import { EditsessionComponent } from '../Views/AdminViews/time/session/editsession/editsession.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -90,9 +90,7 @@ export const routes: Routes = [
         path: 'academic',
         component: AcademicComponent,
       },
-     
       {
-
         path: 'academic/subject',
         component: SubjectComponent,
       },
@@ -141,6 +139,15 @@ export const routes: Routes = [
         component: EditcuriculumComponent,
       },
       {
+        path: 'timetable/session/:id/edit',
+        component: EditsessionComponent,
+      },
+      { path: 'timetable/session/add', component: AddsessionComponent },
+      {
+        path: 'timetable/session',
+        component: SessionComponent,
+      },
+      {
         path: 'timetable/groupslot/:id/slot/:id2/edit',
         component: EditslotComponent,
       },
@@ -163,7 +170,6 @@ export const routes: Routes = [
       {
         path: 'timetable/groupslot',
         component: GroupslotComponent,
-
       },
       {
         path: 'timetable',

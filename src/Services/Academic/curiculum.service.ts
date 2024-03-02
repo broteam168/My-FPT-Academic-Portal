@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppConfigService } from './app-config.service';
-import { Curiculum } from '../Models/curiculum';
+import { AppConfigService } from '../Common/app-config.service';
+import { Curiculum } from '../../Models/curiculum';
 
 @Injectable({
   providedIn: 'root'

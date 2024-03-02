@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { DrawerComponent, HeaderComponent } from '../../../Common';
 import { SchoolService } from '../../../../Services';
 import { getMenu } from '../../MenuDrawer';
-import { GroupslotService } from '../../../../Services/groupslot.service';
+import { GroupslotService } from '../../../../Services/Time/groupslot.service';
 import { GroupSlot } from '../../../../Models';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppConfigService } from './app-config.service';
+import { AppConfigService } from '../Common/app-config.service';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -10,6 +10,11 @@ export class CourseService {
     private http: HttpClient,
     private configService: AppConfigService
   ) {}
+  getAllCourses() {
+    var link = this.configService.apiBaseUrl +
+    '/academic/course';
+    return this.http.get<any>(link);
+  }
   getCourses(param: any) {
     var link = this.configService.apiBaseUrl +
     '/academic/course/search'+ (param==null?'':(''+param));

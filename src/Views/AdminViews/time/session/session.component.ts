@@ -10,25 +10,27 @@ import { SubMajor } from '../../../../Models/Major/submajor';
 import { Course } from '../../../../Models/Academic/course';
 import { CourseService } from '../../../../Services/Academic/course.service';
 import { MessageboxComponent } from '../../../Common/messagebox/messagebox.component';
+import { SessionService } from '../../../../Services/Time/session.service';
+import { Session } from '../../../../Models/Time/session';
 
 @Component({
   selector: 'app-course',
   standalone: true,
   imports: [DrawerComponent, HeaderComponent, MatIcon, NgFor, NgClass,MessageboxComponent,NgIf],
-  templateUrl: './course.component.html',
-  styleUrl: './course.component.scss',
+  templateUrl: './session.component.html',
+  styleUrl: './session.component.scss',
 })
-export class CourseComponent implements OnInit {
+export class SessionComponent implements OnInit {
   menu: any;
   allSchools: School[];
   allClasses: Class[];
   currentSchool: string;
   currentClass: string;
 
-  DataClasses: SubMajor[];
+  DataClasses: Session[];
 
   currentItem: Major;
-  classes: SubMajor[];
+  classes: Session[];
   start: number;
   count: number;
   counti: number;
@@ -41,13 +43,15 @@ export class CourseComponent implements OnInit {
   naviage: boolean;
 
   allCourse: Course[];
+  allSessions: Session[];
   constructor(
     private router: Router,
     private schoolService: SchoolService,
     private classService: ClassService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private sessionService:SessionService
   ) {
-    this.menu = getMenu('Academic');
+    this.menu = getMenu('Timetable');
   }
   ngOnInit(): void {
     this.schoolService.getAllBaseSchools().subscribe((response) => {
@@ -80,15 +84,20 @@ export class CourseComponent implements OnInit {
           this.allClasses[idClass].id;
       else param += 'schoolid=' + this.allSchools[idSchool].id;
     }
-    this.courseService.getCourses(param).subscribe(x=>
+    this.sessionService.getSession(param).subscribe(x=>
       {
-        this.allCourse = x.data;
+        this.classes = x.data;
+        this.start = 1;
+      this.count = 5;
+      this.DataClasses = this.classes.filter(
+        (x, i) => this.start - 1 <= i && i < this.start + this.count - 1
+      );
       });
   }
   addClass() {
     this.router.navigateByUrl(this.router.url + '/add');
   }
-  editClass(id: number) {
+  editClass(id: any) {
     this.router.navigateByUrl(this.router.url + '/' + id + '/edit');
   }
   BackListClass() {
@@ -123,7 +132,6 @@ export class CourseComponent implements OnInit {
 
   currentId: any;
   deletee(id: any) {
-    console.log("â")
     this.currentId = id;
     this.openMessage = true;
   }
@@ -148,6 +156,15 @@ export class CourseComponent implements OnInit {
       return data;
     });
     this.close();
+  }
+  onChange(event: any) {
+    this.count = Number(event);
+    this.DataClasses = [];
+    console.log(Number(this.start + this.count - 1));
+    this.start = 1;
+    this.DataClasses = this.classes.filter(
+      (x, i) => this.start - 1 <= i && i < Number(this.start + this.count - 1)
+    );
   }
   getRoomName(room:Room)
   {

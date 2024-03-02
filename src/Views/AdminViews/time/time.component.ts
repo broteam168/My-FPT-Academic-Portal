@@ -20,4 +20,8 @@ export class TimeComponent {
   {
     this.router.navigateByUrl(this.router.url+'/groupslot')
   }
+  manageSession()
+  {
+    this.router.navigateByUrl(this.router.url+'/session')
+  }
 }

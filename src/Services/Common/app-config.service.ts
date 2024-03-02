@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import {apiBaseUrl} from '../assets/configs/app-seting.json';
+import {apiBaseUrl} from '../../assets/configs/app-seting.json';
 @Injectable({
   providedIn: 'root'
 })

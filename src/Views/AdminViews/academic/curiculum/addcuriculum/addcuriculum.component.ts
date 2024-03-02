@@ -5,12 +5,12 @@ import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { getMenu } from '../../../MenuDrawer';
 import { Router } from '@angular/router';
-import { CuriculumService } from '../../../../../Services/curiculum.service';
+import { CuriculumService } from '../../../../../Services/Academic/curiculum.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SubMajor } from '../../../../../Models/Major/submajor';
 import { SubmajorService } from '../../../../../Services';
 import { Subject } from '../../../../../Models';
-import { SubjectService } from '../../../../../Services/subject.service';
+import { SubjectService } from '../../../../../Services/Academic/subject.service';
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
 import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 

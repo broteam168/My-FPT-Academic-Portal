@@ -1,0 +1,172 @@
+<app-drawer [items]="menu">
+    <div class="h-screen bg-gray-100">
+      <app-header></app-header>
+      <div class="bg-gray-100">
+        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+          >Open drawer</label
+        >
+        <div #maincontent class="pt-10 px-5 pb-10">
+          <div #header class="flex flex-row justify-between items-center">
+            <div
+              #back_button
+              class="flex items-center hover:cursor-pointer"
+              (click)="goBack()"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="keyboard_backspace"
+                class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
+                appearance="outline "
+              ></mat-icon>
+  
+              <div class="font-medium text-lg">Back to Course management</div>
+            </div>
+            <div #right_button class="mt-3"></div>
+          </div>
+          <div
+            #formcontrol
+            class="mt-5 bg-white pt-10 flex justify-center rounded-xl flex-col xl:max-w-screen-lg xl:mx-auto"
+          >
+            <div class="text-center mb-10">
+              <h1 class="font-bold text-3xl text-gray-900">Edit session No.{{currentCourse.id}}</h1>
+              <p>Edit information and save</p>
+            </div>
+            <form
+              [formGroup]="classForm"
+              class="flex flex-col items-center w-full"
+            >
+              <div class="w-2/3">
+                <div class="flex -mx-3">
+                  <div class="w-1/2 px-3 mb-5">
+                    <label for="" class="text-xs font-semibold px-1"
+                      >Session name</label
+                    >
+                    <div class="flex">
+                      <div
+                        class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                      >
+                        <i
+                          class="mdi mdi-account-outline text-gray-400 text-lg"
+                        ></i>
+                      </div>
+                      <input
+                        [readOnly]="true"
+                        id="Name"
+                        formControlName="name"
+                        type="text"
+                        class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        placeholder="SE1819"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-1/2 px-3 mb-5">
+                    <label for="" class="text-xs font-semibold px-1">Room</label>
+                    <div class="flex">
+                      <div
+                        class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                      >
+                        <i
+                          class="mdi mdi-account-outline text-gray-400 text-lg"
+                        ></i>
+                      </div>
+                      <input
+                        required
+                         formControlName="subMajor"
+                       
+                        class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        [readOnly]="true"            
+                        
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="flex -mx-3">
+                  <div class="w-1/2 px-3 mb-5">
+                    <label for="" class="text-xs font-semibold px-1"
+                      >Start time</label
+                    >
+                    <div class="flex">
+                      <div
+                        class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                      >
+                        <i
+                          class="mdi mdi-account-outline text-gray-400 text-lg"
+                        ></i>
+                      </div>
+                      <input
+                        [readOnly]="true"
+                        id="Name"
+                        formControlName="semester"
+                        type="text"
+                        class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        placeholder="SE1819"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-1/2 px-3 mb-5">
+                    <label for="" class="text-xs font-semibold px-1">End time</label>
+                    <div class="flex">
+                     
+                      <select
+                      formControlName="roomId"
+                      class="pl-3 h-full rounded-md  border  block appearance-none w-full bg-white border-gray-300 text-gray-700 py-2.5  pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    >
+                      <option class="pl-3 py-3" [value]="item.id" *ngFor="let item of allRoom">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex -mx-3 w-full mb-5">
+                  <div class="w-full pl-3">
+                    <label for="" class="text-xs font-semibold px-1"
+                      >Date</label
+                    >
+                    <div class="flex">
+                      <div
+                        class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
+                      >
+                        <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
+                      </div>
+                      <input
+                        required
+                        id="Description"
+                        formControlName="startDate"
+                        id="Description"
+                        type="text"
+                        class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                        placeholder="1,2...,8"
+                      >
+                    </div>
+                  </div>
+                </div>
+               
+              
+                <div class="flex -mx-3">
+                  <div class="w-full px-3 mb-5">
+                    <button
+                      (click)="createSchool()"
+                      class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                    >
+                      UPDATE NOW
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <app-loadingmodal *ngIf="loading"></app-loadingmodal>
+            <app-messagebox
+              (closeModal)="close()"
+              [open]="openMessage"
+              [title]="messageTitle"
+              [description]="messageDescription"
+              [type]="fail"
+            ></app-messagebox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-drawer>
+  

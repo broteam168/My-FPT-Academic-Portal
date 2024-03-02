@@ -3,7 +3,7 @@ import { getMenu } from "../../MenuDrawer";
 import { DrawerComponent, HeaderComponent } from "../../../Common";
 import { MatIcon } from "@angular/material/icon";
 import { Subject } from "../../../../Models";
-import { SubjectService } from "../../../../Services/subject.service";
+import { SubjectService } from "../../../../Services/Academic/subject.service";
 import { Router } from "@angular/router";
 import { NgClass, NgFor } from "@angular/common";
 

@@ -12,7 +12,7 @@ import { DrawerComponent, HeaderComponent } from '../../../../../Common';
 import { MessageboxComponent } from '../../../../../Common/messagebox/messagebox.component';
 import { LoadingmodalComponent } from '../../../../../Common/loadingmodal/loadingmodal.component';
 import { Slot } from '../../../../../../Models/Time/slot';
-import { SlotService } from '../../../../../../Services/slot.service';
+import { SlotService } from '../../../../../../Services/Time/slot.service';
 import { getMenu } from '../../../../MenuDrawer';
 
 

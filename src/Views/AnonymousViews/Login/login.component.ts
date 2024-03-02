@@ -13,7 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../../Services/auth.service';
+import { AuthService } from '../../../Services/Common/auth.service';
 import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { UserAuth } from '../../../Models';
