@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SubjectService } from '../../../../../Services/subject.service';
+import { SubjectService } from '../../../../../Services/Academic/subject.service';
 import { Subject } from '../../../../../Models';
 import { DrawerComponent } from '../../../../Common/drawer/drawer.component';
 import { HeaderComponent } from '../../../../Common/header/header.component';

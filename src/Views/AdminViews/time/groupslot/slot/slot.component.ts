@@ -6,7 +6,7 @@ import { DrawerComponent, HeaderComponent } from '../../../../Common';
 import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 import { Slot } from '../../../../../Models/Time/slot';
 import { GroupSlot } from '../../../../../Models';
-import { SlotService } from '../../../../../Services/slot.service';
+import { SlotService } from '../../../../../Services/Time/slot.service';
 import { getMenu } from '../../../MenuDrawer';
 
 

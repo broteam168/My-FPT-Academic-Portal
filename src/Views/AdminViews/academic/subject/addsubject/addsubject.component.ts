@@ -4,7 +4,7 @@ import { HeaderComponent } from "../../../../Common/header/header.component";
 import { MatIcon } from "@angular/material/icon";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SubjectService } from '../../../../../Services/subject.service';
+import { SubjectService } from '../../../../../Services/Academic/subject.service';
 import { getMenu } from '../../../MenuDrawer';
 import { LoadingmodalComponent } from "../../../../Common/loadingmodal/loadingmodal.component";
 import { MessageboxComponent } from "../../../../Common/messagebox/messagebox.component";

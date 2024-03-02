@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Route, Router } from '@angular/router';
 
@@ -10,12 +10,15 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { DrawerComponent, HeaderComponent } from '../../../../Common';
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
 import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 import { getMenu } from '../../../MenuDrawer';
 import { GroupslotService } from '../../../../../Services/Time/groupslot.service';
+import { ClassService } from '../../../../../Services';
+import { Class } from '../../../../../Models';
+import { CourseService } from '../../../../../Services/Academic/course.service';
 
 @Component({
   selector: 'app-addunit',
@@ -28,11 +31,12 @@ import { GroupslotService } from '../../../../../Services/Time/groupslot.service
     ReactiveFormsModule,
     MessageboxComponent,
     LoadingmodalComponent,
+    NgFor
   ],
-  templateUrl: './addgroup.component.html',
-  styleUrl: './addgroup.component.scss',
+  templateUrl: './addcourse.component.html',
+  styleUrl: './addcourse.component.scss',
 })
-export class AddgroupComponent {
+export class AddcourseComponent implements OnInit{
   schoolForm: FormGroup;
   menu: any;
   router: Router;
@@ -43,15 +47,29 @@ export class AddgroupComponent {
   loading: boolean;
   naviage: boolean;
 
-  constructor(router: Router, private formBuilder: FormBuilder, private groupSlotService:GroupslotService) {
-    this.menu = getMenu('TimeTable');
+  allClasses : Class[]
+  constructor(
+    router: Router,
+    private formBuilder: FormBuilder,
+    private courseService: CourseService,
+    private classService : ClassService
+  ) {
+    this.menu = getMenu('Academic');
     this.router = router;
+
+    
     this.schoolForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      type: ['', Validators.required],
-      description: ['', Validators.required],
-      isActive: [true],
+      classId: ['', Validators.required],
+      semester: ['', Validators.required]
     });
+  }
+  ngOnInit(): void {
+    ///Add class option
+    this.classService.getAlllClasses().subscribe(response=>
+      {
+        this.allClasses =  response.data;
+        this.allClasses = this.allClasses.filter(x=>x.isActive == true);
+      })
   }
   close() {
     this.openMessage = false;
@@ -61,7 +79,8 @@ export class AddgroupComponent {
     if (this.schoolForm.valid) {
       this.loading = true;
       var newSchool = this.schoolForm.getRawValue();
-       this.groupSlotService.createNewGroup(newSchool).subscribe((data) => {
+     
+      this.courseService.createCourseByClass(newSchool).subscribe((data) => {
         if (data['responseCode'] == 200) {
           this.messageTitle = 'Notification';
           this.fail = false;
@@ -85,6 +104,6 @@ export class AddgroupComponent {
     this.loading = false;
   }
   goBack() {
-    this.router.navigateByUrl('/admin/timetable/groupslot');
+    this.router.navigateByUrl('/admin/academic/course');
   }
 }

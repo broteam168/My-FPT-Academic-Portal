@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Route, Router } from '@angular/router';
 
@@ -10,12 +10,17 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { DrawerComponent, HeaderComponent } from '../../../../Common';
 import { LoadingmodalComponent } from '../../../../Common/loadingmodal/loadingmodal.component';
 import { MessageboxComponent } from '../../../../Common/messagebox/messagebox.component';
 import { getMenu } from '../../../MenuDrawer';
 import { GroupslotService } from '../../../../../Services/Time/groupslot.service';
+import { ClassService } from '../../../../../Services';
+import { Class } from '../../../../../Models';
+import { CourseService } from '../../../../../Services/Academic/course.service';
+import { Course } from '../../../../../Models/Academic/course';
+import { SessionService } from '../../../../../Services/Time/session.service';
 
 @Component({
   selector: 'app-addunit',
@@ -28,11 +33,12 @@ import { GroupslotService } from '../../../../../Services/Time/groupslot.service
     ReactiveFormsModule,
     MessageboxComponent,
     LoadingmodalComponent,
+    NgFor
   ],
-  templateUrl: './addgroup.component.html',
-  styleUrl: './addgroup.component.scss',
+  templateUrl: './addsession.component.html',
+  styleUrl: './addsession.component.scss',
 })
-export class AddgroupComponent {
+export class AddsessionComponent implements OnInit{
   schoolForm: FormGroup;
   menu: any;
   router: Router;
@@ -42,16 +48,30 @@ export class AddgroupComponent {
   fail: boolean;
   loading: boolean;
   naviage: boolean;
-
-  constructor(router: Router, private formBuilder: FormBuilder, private groupSlotService:GroupslotService) {
-    this.menu = getMenu('TimeTable');
+    currentCourse:Course;
+  allCourses : Course[]
+  constructor(
+    router: Router,
+    private formBuilder: FormBuilder,
+    private courseService : CourseService,
+    private sessionService :SessionService
+  ) {
+    this.menu = getMenu('Timetable');
     this.router = router;
+
+    
     this.schoolForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      type: ['', Validators.required],
-      description: ['', Validators.required],
-      isActive: [true],
+      courseId: ['', Validators.required]
+
     });
+  }
+  ngOnInit(): void {
+    ///Add class option
+    this.courseService.getAllCourses().subscribe(response=>
+      {
+        this.allCourses =  response.data;
+        this.allCourses = this.allCourses.filter(x=>x.status == 'ASSIGN');
+      })
   }
   close() {
     this.openMessage = false;
@@ -61,7 +81,8 @@ export class AddgroupComponent {
     if (this.schoolForm.valid) {
       this.loading = true;
       var newSchool = this.schoolForm.getRawValue();
-       this.groupSlotService.createNewGroup(newSchool).subscribe((data) => {
+      console
+      this.sessionService.createSession(newSchool).subscribe((data) => {
         if (data['responseCode'] == 200) {
           this.messageTitle = 'Notification';
           this.fail = false;
@@ -83,8 +104,13 @@ export class AddgroupComponent {
       this.openMessage = true;
     }
     this.loading = false;
+    
+  }
+  selectSchool(id:number)
+  {
+    this.currentCourse = this.allCourses[id];
   }
   goBack() {
-    this.router.navigateByUrl('/admin/timetable/groupslot');
+    this.router.navigateByUrl('/admin/academic/course');
   }
 }

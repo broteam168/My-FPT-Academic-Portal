@@ -1,8 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { AppConfigService } from '../Services/app-config.service';
-import { AuthService } from '../Services/auth.service';
+import { AppConfigService } from '../Services/Common/app-config.service';
+import { AuthService } from '../Services/Common/auth.service';
 import { UserAuth } from '../Models';
 @Component({
   selector: 'app-root',
