@@ -259,6 +259,11 @@ export const routes: Routes = [
         component: MajorComponent,
         pathMatch: 'full',
       },
+      {
+        path:'**',
+        redirectTo:'academic'
+
+      }
     ],
   },
 ];

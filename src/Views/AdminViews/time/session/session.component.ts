@@ -117,7 +117,7 @@ export class SessionComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('/admin/academic');
+    this.router.navigateByUrl('/admin/timetable');
   }
   search(text: string) {
     this.DataClasses = this.DataClasses = this.classes

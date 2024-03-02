@@ -1,13 +1,7 @@
 export function getMenu(highlight:string)
     {
         return  ([
-            {
-              icon: 'computer',
-              name: 'Dashboard',
-              url: '/',
-              current: false,
-              below: false,
-            },
+            
             {
               icon: 'account_balance',
               name: 'Academic',

@@ -165,7 +165,7 @@ export class CourseComponent implements OnInit {
     this.openMessage2 = false;
     var temp = this.router.url.split('/');
     temp.pop();
-
+    
      
   }
 }
