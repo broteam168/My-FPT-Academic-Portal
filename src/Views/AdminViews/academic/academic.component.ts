@@ -3,8 +3,8 @@ import { DrawerComponent, HeaderComponent } from '../../Common';
 import { getMenu } from '../MenuDrawer';
 import { MatIcon } from '@angular/material/icon';
 import { Route, Router } from '@angular/router';
-import { SubjectService } from '../../../Services/subject.service';
 import { Subject } from '../../../Models';
+import { SubjectService } from '../../../Services/Academic/subject.service';
 
 @Component({
   selector: 'app-academic',

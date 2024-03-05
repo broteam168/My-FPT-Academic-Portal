@@ -1,14 +1,24 @@
 <app-drawer [items]="menu">
-    <div class="h-screen bg-gray-100">
-        <app-header></app-header>
-        <div class="bg-gray-100">
-            <label for="my-drawer-2" class="btn btn-primary drawer-button hidden">
-                Open drawer
-            </label>
-            <div #maincontent class="px-5 mt-10 pb-10">
-                <!-- header -->
-                
-            </div>
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden">
+        Open drawer
+      </label>
+      <div #maincontent class="px-5 mt-10 pb-10">
+        <!-- title -->
+        <div class="text-center">
+          <p class="text-4xl font-medium">Course</p>
         </div>
+        <!-- header -->
+        <div #header>
+          <div #total class="font-sans font-bold text-lg">
+            Showing total
+            <div class="text-red-500 inline">{{getCountCourse()}}</div>
+            Course(s)
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </app-drawer>

@@ -58,6 +58,7 @@ import { EditcourseComponent } from '../Views/AdminViews/academic/course/editcou
 import { SessionComponent } from '../Views/AdminViews/time/session/session.component';
 import { AddsessionComponent } from '../Views/AdminViews/time/session/addsession/addsession.component';
 import { EditsessionComponent } from '../Views/AdminViews/time/session/editsession/editsession.component';
+import { Information1Component } from '../Views/StudentViews/information1/information1.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -288,6 +289,10 @@ export const routes: Routes = [
       {
         path: 'course1',
         component: Course1Component,
+      },
+      {
+        path: 'information1',
+        component: Information1Component,
       },
     ]
   },

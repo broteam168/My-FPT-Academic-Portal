@@ -45,4 +45,6 @@ export class CourseService {
         '/academic/course/'+id 
     );
   }
+
+  
 }
