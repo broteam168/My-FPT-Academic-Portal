@@ -294,6 +294,15 @@ export const routes: Routes = [
         path: 'information1',
         component: Information1Component,
       },
+      {
+        path:'**',
+        redirectTo:'timetable'
+      }
     ]
+    
   },
+  {
+    path:'**',
+    redirectTo:'login'
+  }
 ];

@@ -4,6 +4,7 @@ import { role } from "./role";
  {
     UserId:Number;
     UserName:string;
+    UserPassword: string;
     Phone:string;
     Mail:string;
     Address:string;
@@ -18,6 +19,7 @@ import { role } from "./role";
       this.token = responseAuth.data.accessToken;
       this.UserId = temp.userId;
       this.UserName = temp.userName;
+      this.UserPassword = temp.userPassword;
       this.Phone = temp.phone;
       this.Mail = temp.mail;
       this.Address = temp.address;

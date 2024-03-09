@@ -17,10 +17,18 @@
           <div>
             <table class="mt-6 w-full">
               <tr class="text-white bg-orange-500">
-                <td class="w-1/12"></td>
+                <td class="w-1/6"></td>
+                <td class="w-1/6">Stt</td>
                 <td class="w-1/6 py-4 pl-2">Subject Code</td>
                 <td class="w-1/4">Subject Name</td>
                 <td class="w-1/4">Termino</td>
+              </tr>
+              <tr *ngFor="let item of curiculums; let i = index" class="bg-white border-b">
+                <td class="w-1/6"></td>
+                <td class="w-1/6">{{i + 1}}</td>
+                <td class="w-1/6 py-4 pl-2">{{ item.subject.subjectCode }}</td>
+                <td class="w-1/6">{{ item.subject.name }}</td>
+                <td class="w-1/4">{{ item.semester }}</td>
               </tr>
             </table>
           </div>
