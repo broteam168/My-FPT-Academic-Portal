@@ -25,4 +25,8 @@ export class StudentService {
   getStudentByUserId(id: any){
     return this.http.get<any>(this.configService.apiBaseUrl + '/academic/student/search?userId=' + id);
   }
+
+  getCourseByStudentId(id: any) {
+    return this.http.get<any>(this.configService.apiBaseUrl + '/academic/student/search1?studentId=' + id);
+  }
 }

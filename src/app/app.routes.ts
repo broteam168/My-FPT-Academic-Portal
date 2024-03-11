@@ -59,6 +59,7 @@ import { SessionComponent } from '../Views/AdminViews/time/session/session.compo
 import { AddsessionComponent } from '../Views/AdminViews/time/session/addsession/addsession.component';
 import { EditsessionComponent } from '../Views/AdminViews/time/session/editsession/editsession.component';
 import { Information1Component } from '../Views/StudentViews/information1/information1.component';
+import { RegistercourseComponent } from '../Views/StudentViews/course1/registercourse/registercourse.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -289,6 +290,10 @@ export const routes: Routes = [
       {
         path: 'course1',
         component: Course1Component,
+      },
+      {
+        path: 'course1/register',
+        component: RegistercourseComponent,
       },
       {
         path: 'information1',

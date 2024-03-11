@@ -6,23 +6,24 @@
         Open drawer
       </label>
       <div #maincontent class="px-5 mt-10 pb-10">
+        <!-- back -->
+        <div class="flex items-center hover:cursor-pointer" (click)="goBack()">
+            <mat-icon
+                fontIcon="keyboard_backspace"
+                class="text-lg font-medium mr-3 hover:rounded-full hover:pl-1 hover:bg-white"
+            ></mat-icon>
+            <div class="font-medium text-lg">Back to Course</div>
+        </div>
         <!-- title -->
-        <div class="text-center">
-          <p class="text-4xl font-medium">Course</p>
+        <div class="text-center my-7">
+          <p class="text-4xl font-medium">Register</p>
         </div>
         <!-- header -->
-        <div #header class="flex items-center justify-between">
+        <div #header>
           <div #total class="font-sans font-bold text-lg">
             Showing total
             <div class="text-red-500 inline">{{ getCountCourse() }}</div>
             Course(s)
-          </div>
-
-          <div 
-            (click)="goToRegisterCourse()"
-            class="btn btn-success text-white font-sans text-lg"
-          >
-            Register course
           </div>
         </div>
 
@@ -41,32 +42,35 @@
                   </div>
                 </div>
 
-                <div #content >
+                <div #content>
                   <div class="flex items-center mb-3">
-                    <mat-icon 
-                    fontIcon="book"
-                    class="mr-2"
-                    ></mat-icon>
+                    <mat-icon fontIcon="book" class="mr-2"></mat-icon>
                     <div class="inline font-medium mr-1">Subject:</div>
-                    <div class="inline">{{item.subject.subjectCode}}</div>
+                    <div class="inline">{{ item.subject.subjectCode }}</div>
                   </div>
 
                   <div class="flex items-center mb-3">
-                    <mat-icon 
-                    fontIcon="access_time"
-                    class="mr-2"
-                    ></mat-icon>
+                    <mat-icon fontIcon="access_time" class="mr-2"></mat-icon>
                     <div class="inline font-medium mr-1">Slot:</div>
-                    <div class="inline">{{item.slots}}</div>
+                    <div class="inline">{{ item.slots }}</div>
                   </div>
                 </div>
 
                 <div #action class="text-end">
-                      <button class="btn p-2 btn-info font-sans text-white font-medium" (click)="openDetail(item)">
-                        Detail
-                      </button>
-                </div>
+                  <button
+                    class="btn p-2 btn-success font-sans text-white font-medium mr-3"
+                    (click)="enrollCourse(item.id)"
+                  >
+                    Enroll
+                  </button>
 
+                  <button
+                    class="btn p-2 btn-info font-sans text-white font-medium"
+                    (click)="openDetail(item)"
+                  >
+                    Detail
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -75,41 +79,39 @@
     </div>
   </div>
   <div
-    id = "wrong-modal"
+    id="wrong-modal"
     *ngIf="openMessage"
     tabindex="-1"
     aria-hidden="true"
-    class="transform transition-transform flex bg-neutral-100/50
-    overflow-y-auto overflow-x-hidden fixed z-50 justify-center
-    items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+    class="transform transition-transform flex bg-neutral-100/50 overflow-y-auto overflow-x-hidden fixed z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
   >
     <div class="modal-box text-center">
       <h1>Course detail</h1>
       <div class="w-full flex justify-center mt-5">
         <table class="">
           <tr>
-            <th class="text-left pb-3 pr-3">Name: </th>
-            <td class="text-left pb-3">{{currentCourse.name}}</td>
+            <th class="text-left pb-3 pr-3">Name:</th>
+            <td class="text-left pb-3">{{ currentCourse.name }}</td>
           </tr>
           <tr>
-            <th class="text-left pb-3 pr-3">Subject: </th>
-            <td class="text-left pb-3">{{currentCourse.subject.name}}</td>
+            <th class="text-left pb-3 pr-3">Subject:</th>
+            <td class="text-left pb-3">{{ currentCourse.subject.name }}</td>
           </tr>
           <tr>
-            <th class="text-left pb-3 pr-3">Room: </th>
-            <td class="text-left pb-3">{{currentCourse.room.name}}</td>
+            <th class="text-left pb-3 pr-3">Room:</th>
+            <td class="text-left pb-3">{{ currentCourse.room.name }}</td>
           </tr>
           <tr>
-            <th class="text-left pb-3 pr-3">Class: </th>
-            <td class="text-left pb-3">{{currentCourse.classs.name}}</td>
+            <th class="text-left pb-3 pr-3">Class:</th>
+            <td class="text-left pb-3">{{ currentCourse.classs.name }}</td>
           </tr>
           <tr>
-            <th class="text-left pb-3 pr-3">Slot: </th>
-            <td class="text-left pb-3">{{currentCourse.slots}}</td>
+            <th class="text-left pb-3 pr-3">Slot:</th>
+            <td class="text-left pb-3">{{ currentCourse.slots }}</td>
           </tr>
           <tr>
-            <th class="text-left pb-3 pr-3">Day: </th>
-            <td class="text-left pb-3">{{currentCourse.days}}</td>
+            <th class="text-left pb-3 pr-3">Day:</th>
+            <td class="text-left pb-3">{{ currentCourse.days }}</td>
           </tr>
         </table>
       </div>

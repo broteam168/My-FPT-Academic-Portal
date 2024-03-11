@@ -12,6 +12,8 @@ import { MatIcon } from '@angular/material/icon';
 import { LoadingmodalComponent } from "../../Common/loadingmodal/loadingmodal.component";
 import { MessageboxComponent } from "../../Common/messagebox/messagebox.component";
 import { Student } from '../../../Models/Academic/student';
+import { StudentService } from '../../../Services/Academic/student.service';
+import { AuthService } from '../../../Services';
 
 @Component({
     selector: 'app-course1',
@@ -41,20 +43,25 @@ export class Course1Component implements OnInit{
   
   currentUser: UserAuth | null;
   currentStudent: Student;
+
   constructor(
     private router: Router,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private studentService: StudentService,
+    private authService: AuthService,
   ) {
     this.menu = getMenu('Course');
   }
   ngOnInit(): void {
-    this.courseService.getAllCourses().subscribe(x => {
-      this.courses = x.data;
+    this.currentUser = this.authService.currentUserValue;
 
-      this.courses.filter(course => course.status === 'ASSIGNED');
+    this.studentService.getStudentByUserId(this.currentUser?.UserId).subscribe(x => {
+      this.currentStudent = x.data;
+
+      this.studentService.getCourseByStudentId(this.currentStudent.id).subscribe(y => {
+        this.courses = y.data;
+      });
     });
-
-    
   }
 
   getCountCourse() {
@@ -71,5 +78,8 @@ export class Course1Component implements OnInit{
     this.openMessage = false;
   }
 
+  goToRegisterCourse() {
+    this.router.navigateByUrl(this.router.url + '/register');
+  }
 
 }
