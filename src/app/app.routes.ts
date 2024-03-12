@@ -48,7 +48,6 @@ import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/a
 import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
 
 import { studentGuard } from '../Helpers/student.guard';
-import { TimetableComponent } from '../Views/StudentViews/timetable/timetable.component';
 import { Curiculum1Component } from '../Views/StudentViews/curiculum1/curiculum1.component';
 import { Course1Component } from '../Views/StudentViews/course1/course1.component';
 
@@ -60,6 +59,7 @@ import { AddsessionComponent } from '../Views/AdminViews/time/session/addsession
 import { EditsessionComponent } from '../Views/AdminViews/time/session/editsession/editsession.component';
 import { Information1Component } from '../Views/StudentViews/information1/information1.component';
 import { RegistercourseComponent } from '../Views/StudentViews/course1/registercourse/registercourse.component';
+import { Timetable1Component } from '../Views/StudentViews/timetable1/timetable1.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -280,8 +280,8 @@ export const routes: Routes = [
     canActivateChild: [studentGuard],
     children: [
       {
-        path: 'timetable',
-        component: TimetableComponent,
+        path: 'timetable1',
+        component: Timetable1Component,
       },
       {
         path: 'curiculum1',
@@ -301,7 +301,7 @@ export const routes: Routes = [
       },
       {
         path:'**',
-        redirectTo:'timetable'
+        redirectTo:'timetable1'
       }
     ]
     

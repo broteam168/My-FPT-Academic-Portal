@@ -3,7 +3,7 @@ export function getMenu(highlight: string) {
     {
       icon: 'today',
       name: 'Timetable',
-      url: '/student/timetable',
+      url: '/student/timetable1',
       current: false,
       below: false,
     },

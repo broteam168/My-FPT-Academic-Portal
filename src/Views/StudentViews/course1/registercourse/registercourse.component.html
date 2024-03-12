@@ -78,6 +78,16 @@
       </div>
     </div>
   </div>
+
+  <app-loadingmodal *ngIf="loading"></app-loadingmodal>
+  <app-messagebox
+    (closeModal)="closeRegister()"
+    [open]="openMessage3"
+    [title]="messageTitle"
+    [description]="messageDescription"
+    [type]="fail"
+  ></app-messagebox>
+
   <div
     id="wrong-modal"
     *ngIf="openMessage"

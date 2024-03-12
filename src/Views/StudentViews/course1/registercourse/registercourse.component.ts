@@ -12,18 +12,23 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../Services';
 import { StudentService } from '../../../../Services/Academic/student.service';
+import { EnrollmentService } from '../../../../Services/Academic/enrollment.service';
+import { LoadingmodalComponent } from "../../../Common/loadingmodal/loadingmodal.component";
+import { MessageboxComponent } from "../../../Common/messagebox/messagebox.component";
 
 @Component({
-  selector: 'app-registercourse',
-  standalone: true,
-  templateUrl: './registercourse.component.html',
-  styleUrl: './registercourse.component.scss',
-  imports: [
-    DrawerComponent, 
-    HeaderComponent,
-    MatIcon,
-    CommonModule
-],
+    selector: 'app-registercourse',
+    standalone: true,
+    templateUrl: './registercourse.component.html',
+    styleUrl: './registercourse.component.scss',
+    imports: [
+        DrawerComponent,
+        HeaderComponent,
+        MatIcon,
+        CommonModule,
+        LoadingmodalComponent,
+        MessageboxComponent
+    ]
 })
 export class RegistercourseComponent {
   menu: any;
@@ -37,6 +42,8 @@ export class RegistercourseComponent {
   openMessage2: boolean;
   loading: boolean;
 
+  openMessage3: boolean;
+
   currentUser: UserAuth | null;
   currentStudent: Student;
 
@@ -47,7 +54,7 @@ export class RegistercourseComponent {
     private formBuilder: FormBuilder,
     private studentService: StudentService,
     private authService: AuthService,
-    
+    private enrollmentService: EnrollmentService
     ) {
     this.menu = getMenu('Course');
     this.enrollmentForm = this.formBuilder.group({
@@ -97,6 +104,34 @@ export class RegistercourseComponent {
     if (this.enrollmentForm.valid) {
       this.loading = true;
       var newEnrollment = this.enrollmentForm.getRawValue();
+      this.enrollmentService.createEnrollment(newEnrollment).subscribe(data => {
+        if (data['responseCode'] == 200) {
+          this.messageTitle = 'Notification';
+          this.fail = false;
+          this.messageDescription = data['message'];
+          this.openMessage3 = true;
+          this.navigate = true;
+        } else {
+          this.messageTitle = 'Error';
+          this.fail = true;
+          this.messageDescription = data['message'];
+          this.openMessage3 = true;
+        }
+        return data;
+      });
+    } else {
+      this.messageTitle = 'Error Occur';
+      this.fail = true;
+      this.messageDescription = 'You are wrong somewhere';
+      this.openMessage = true;
+    }
+    this.loading = false;
+  }
+
+  closeRegister() {
+    this.openMessage3 = false;
+    if (this.navigate == true) {
+      this.goBack();
     }
   }
 }
