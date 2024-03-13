@@ -19,19 +19,15 @@
               </select>
             </div>
             <div class="ml-5 w-36 h-12">
-              <select #year class="h-full rounded-lg w-full">
-                <option>Week</option>
+              <select 
+              (change)="showData(selectWeek.value)"
+              #selectWeek 
+              class="h-full rounded-lg w-full">
+                <option value="-1">Week</option>
                 <option *ngFor="let Week of weeks" [value]="Week.value">{{Week.text}}</option>
               </select>
             </div>
 
-            <button class="font-sans btn bg-blue-500 shadow ml-5 text-white">
-              <mat-icon
-              fontIcon="remove_red_eye"
-              class="text-white text-lg"
-              ></mat-icon>
-              Load
-            </button>
           </div>
   
           <!-- data list -->
@@ -41,31 +37,31 @@
                 <td class="px-1 py-6 border border-black"></td>
                 <td class="px-1 py-6 border border-black">
                   <div>MON</div>
-                  <div>08/01</div>
+                  <div>{{ this.currentDay1 }}</div>
                 </td>
                 <td class="px-1 py-6 border border-black">
                   <div>TUE</div>
-                  <div>08/01</div>
+                  <div>{{ this.currentDay2 }}</div>
                 </td>
                 <td class="px-1 py-6 border border-black">
                   <div>WED</div>
-                  <div>08/01</div>
+                  <div>{{ this.currentDay3 }}</div>
                 </td>
                 <td class="px-1 py-6 border border-black">
                   <div>THU</div>
-                  <div>08/01</div>
+                  <div>{{ this.currentDay4 }}</div>
                 </td>
                 <td class="px-1 py-6 border border-black">
                   <div>FRI</div>
-                  <div>08/01</div>
+                  <div>{{ this.currentDay5 }}</div>
                 </td>
                 <td class="px-1 py-6 border border-black">
                   <div>SAT</div>
-                  <div>08/01</div>
+                  <div>{{ this.currentDay6 }}</div>
                 </td>
                 <td class="px-1 py-6 border border-black">
                   <div>SUN</div>
-                  <div>08/01</div>
+                  <div>{{ this.currentDay7 }}</div>
                 </td>
               </tr>
               <tr class="bg-white">

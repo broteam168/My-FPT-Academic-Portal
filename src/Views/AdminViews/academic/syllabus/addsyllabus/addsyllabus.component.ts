@@ -85,11 +85,11 @@ export class AddsyllabusComponent {
   createSubject() {
     if (this.syllabusForm.valid) {
       this.loading = true;
-      let currentApprovedDate = this.syllabusForm.controls['approvedDate'].value;
-      let currentDate = new Date(currentApprovedDate);
-      currentDate.setDate(currentDate.getDate() + 1);
-      let newApprovedDate = currentDate.toISOString().split('T')[0];
-      this.syllabusForm.controls['approvedDate'].setValue(newApprovedDate);
+      // let currentApprovedDate = this.syllabusForm.controls['approvedDate'].value;
+      // let currentDate = new Date(currentApprovedDate);
+      // currentDate.setDate(currentDate.getDate() + 1);
+      // let newApprovedDate = currentDate.toISOString().split('T')[0];
+      // this.syllabusForm.controls['approvedDate'].setValue(newApprovedDate);
 
       this.syllabusForm.controls['subjectId'].setValue(this.currentSubject.id);
 
