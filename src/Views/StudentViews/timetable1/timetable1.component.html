@@ -1,70 +1,94 @@
 <app-drawer [items]="menu">
-    <div class="h-screen bg-gray-100">
-      <app-header></app-header>
-      <div class="bg-gray-100">
-        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
-          >Open drawer</label
-        >
-        <div #maincontent class="pb-10 pl-5 mt-5">
-          <!-- title -->
-          <div class="text-center">
-            <p class="text-4xl font-medium">Timetable</p>
-          </div>
-  
-          <!-- các nút -->
-          <div #button_header_right class="flex items-center justify-start mt-5">
-            <div class="w-20 h-12 ">
-              <select #year class="h-full rounded-lg w-full">
-                <option value="2024">2024</option>
-              </select>
-            </div>
-            <div class="ml-5 w-36 h-12">
-              <select 
-              (change)="showData(selectWeek.value)"
-              #selectWeek 
-              class="h-full rounded-lg w-full">
-                <option value="-1">Week</option>
-                <option *ngFor="let Week of weeks" [value]="Week.value">{{Week.text}}</option>
-              </select>
-            </div>
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+        >Open drawer</label
+      >
+      <div #maincontent class="pb-10 pl-5 mt-5">
+        <!-- title -->
+        <div class="text-center">
+          <p class="text-4xl font-medium">Timetable</p>
+        </div>
 
+        <!-- các nút -->
+        <div #button_header_right class="flex items-center justify-start mt-5">
+          <div class="w-20 h-12">
+            <select #year class="h-full rounded-lg w-full">
+              <option value="2024">2024</option>
+            </select>
           </div>
-  
-          <!-- data list -->
-          <div class="flex justify-center">
-            <table class="mt-6 mr-5 w-full border border-black text-sm">
-              <tr class="text-white bg-lime-400">
-                <td class="px-1 py-6 border border-black"></td>
-                <td class="px-1 py-6 border border-black">
-                  <div>MON</div>
-                  <div>{{ this.currentDay1 }}</div>
-                </td>
-                <td class="px-1 py-6 border border-black">
-                  <div>TUE</div>
-                  <div>{{ this.currentDay2 }}</div>
-                </td>
-                <td class="px-1 py-6 border border-black">
-                  <div>WED</div>
-                  <div>{{ this.currentDay3 }}</div>
-                </td>
-                <td class="px-1 py-6 border border-black">
-                  <div>THU</div>
-                  <div>{{ this.currentDay4 }}</div>
-                </td>
-                <td class="px-1 py-6 border border-black">
-                  <div>FRI</div>
-                  <div>{{ this.currentDay5 }}</div>
-                </td>
-                <td class="px-1 py-6 border border-black">
-                  <div>SAT</div>
-                  <div>{{ this.currentDay6 }}</div>
-                </td>
-                <td class="px-1 py-6 border border-black">
-                  <div>SUN</div>
-                  <div>{{ this.currentDay7 }}</div>
-                </td>
-              </tr>
-              <tr class="bg-white">
+          <div class="ml-5 w-36 h-12">
+            <select
+              (change)="showData(selectWeek.value)"
+              #selectWeek
+              class="h-full rounded-lg w-full"
+            >
+              <option value="-1">Week</option>
+              <option *ngFor="let Week of weeks" [value]="Week.value">
+                {{ Week.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- data list -->
+        <div class="flex justify-center">
+          <table class="mt-6 mr-5 w-full border border-black text-sm">
+            <tr class="text-white bg-lime-400">
+              <td class="px-1 py-6 border border-black"></td>
+              <td class="px-1 py-6 border border-black">
+                <div>MON</div>
+                <div>{{ this.currentDay1 }}</div>
+              </td>
+              <td class="px-1 py-6 border border-black">
+                <div>TUE</div>
+                <div>{{ this.currentDay2 }}</div>
+              </td>
+              <td class="px-1 py-6 border border-black">
+                <div>WED</div>
+                <div>{{ this.currentDay3 }}</div>
+              </td>
+              <td class="px-1 py-6 border border-black">
+                <div>THU</div>
+                <div>{{ this.currentDay4 }}</div>
+              </td>
+              <td class="px-1 py-6 border border-black">
+                <div>FRI</div>
+                <div>{{ this.currentDay5 }}</div>
+              </td>
+              <td class="px-1 py-6 border border-black">
+                <div>SAT</div>
+                <div>{{ this.currentDay6 }}</div>
+              </td>
+              <td class="px-1 py-6 border border-black">
+                <div>SUN</div>
+                <div>{{ this.currentDay7 }}</div>
+              </td>
+            </tr>
+
+            <tr class="bg-white" *ngFor="let slot of slots">
+              <td class="px-1 py-6 border border-black">{{ slot }}</td>
+              <td
+                class="px-1 py-6 border border-black"
+                *ngFor="let day of days"
+              >
+              <ng-container *ngIf="sessions">
+                <div *ngFor="let session of sessions">
+                  <div *ngIf="isSessionInSlotAndDay(session, day, slot)">
+                    <div class="flex">
+                      <div class="mr-2">{{session.course.subject.name}}</div>
+                      <div class="px-1 bg-orange-300 text-white">View material</div>
+                    </div>
+                    <div>{{session.course.room.name}}</div>
+                    <div>{{session.status}}</div>
+                  </div>
+                </div>
+              </ng-container>
+            </td>
+            </tr>
+
+            <!-- <tr class="bg-white">
                 <td class="px-1 py-6 border border-black">
                   <div>Slot 1</div>
                   <div>7:30 - 9:50</div>
@@ -332,14 +356,12 @@
                 </td>
                 <td class="px-1 py-6 border border-black">
                 </td>
-              </tr> 
-            </table>
-          </div>
-          
-          <!-- <app-timetable></app-timetable> -->
-
+              </tr>  -->
+          </table>
         </div>
+
+        <!-- <app-timetable></app-timetable> -->
       </div>
     </div>
-  </app-drawer>
-  
+  </div>
+</app-drawer>

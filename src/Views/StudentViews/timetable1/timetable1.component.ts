@@ -38,7 +38,8 @@ export class Timetable1Component implements OnInit {
 
   sessions: Session[] = [];
   courses: Course[];
-  slots: string[];
+  slots: string[] = [];
+  days: string[] = [];
   constructor(
     private router: Router,
     private courseService: CourseService,
@@ -52,7 +53,9 @@ export class Timetable1Component implements OnInit {
 
     this.initWeek();
 
+    this.initSlot();
 
+    this.initDay();
 
     this.currentUser = this.authService.currentUserValue;
 
@@ -114,6 +117,17 @@ export class Timetable1Component implements OnInit {
     this.slots.push('Slot 6');
   }
 
+  initDay() {
+    this.days.push(this.currentDay1);
+    this.days.push(this.currentDay2);
+    this.days.push(this.currentDay3);
+    this.days.push(this.currentDay4);
+    this.days.push(this.currentDay5);
+    this.days.push(this.currentDay6);
+    this.days.push(this.currentDay7);
+
+  }
+
   currentDay1: string;
   currentDay2: string;
   currentDay3: string;
@@ -155,6 +169,13 @@ export class Timetable1Component implements OnInit {
     const year = date.getFullYear();
     // return '${day}/${month}';
     return day + '/' + month + '/' + year;
+  }
+
+  isSessionInSlotAndDay(session: Session, slot: string, day: string) {
+    const sessionSlot = session.course.slots;
+    const sessionDay = this.formatDate2(new Date(session.dateDay));
+
+    return sessionDay == day && sessionSlot == slot; 
   }
 
   getWeekNow() {
