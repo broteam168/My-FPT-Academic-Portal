@@ -1,0 +1,115 @@
+<app-drawer [items]="menu">
+  <div class="h-screen bg-gray-100">
+    <app-header></app-header>
+    <div class="bg-gray-100">
+      <label for="my-drawer-2" class="btn btn-primary drawer-button hidden">
+        Open drawer
+      </label>
+      <div #maincontent class="px-5 mt-10 pb-10">
+        <div class="bg-white">
+          <div class="bg-sky-300 h-20"></div>
+          <img
+            class="mx-auto bg-gray-300 rounded-full p-1 w-20 -mt-8"
+            src="assets/images/google.png"
+            alt="image"
+          />
+          <div #content class="flex flex-col items-center pb-10">
+            <div class="w-1/3 flex flex-col">
+              <p class="text-3xl mx-auto mb-10">{{currentUser?.FullName}}</p>
+              <div class="mb-5">
+                <label for=""> Date of birth </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentStudent.dob"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> Address </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentUser?.Address"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> Phone </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentUser?.Phone"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> Email </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentUser?.Mail"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> School </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentSchool.name"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> Class </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentClass.name"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> Major </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentSubMajor.name"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> Semester </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentStudent.semester"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> Student code </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentStudent.studentCode"
+                  readonly
+                />
+              </div>
+              <div class="mb-5">
+                <label for=""> Username </label>
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-2 py-2 pl-10 border-gray-200 read-only outline-none"
+                  [value]="currentUser?.UserName"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-drawer>

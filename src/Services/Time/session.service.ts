@@ -16,6 +16,11 @@ export class SessionService {
     '/time/session/search'+ (param==null?'':(''+param));
     return this.http.get<any>(link);
   }
+
+  getAllByCourseId(id: any) {
+    return this.http.get<any>(this.configService.apiBaseUrl + '/time/session/search1?courseId=' + id);
+  }
+
   createSession(body:any) {
     var link = this.configService.apiBaseUrl +
     '/time/session';

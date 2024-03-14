@@ -109,11 +109,11 @@ export class EditdetailsyllabusComponent implements OnInit {
   }
 
   updateDetailSubject() {
-    let currentApprovedDate = this.syllabusForm.controls['approvedDate'].value;
-    let currentDate = new Date(currentApprovedDate);
-    currentDate.setDate(currentDate.getDate() + 1);
-    let newApprovedDate = currentDate.toISOString().split('T')[0];
-    this.syllabusForm.controls['approvedDate'].setValue(newApprovedDate);
+    // let currentApprovedDate = this.syllabusForm.controls['approvedDate'].value;
+    // let currentDate = new Date(currentApprovedDate);
+    // currentDate.setDate(currentDate.getDate() + 1);
+    // let newApprovedDate = currentDate.toISOString().split('T')[0];
+    // this.syllabusForm.controls['approvedDate'].setValue(newApprovedDate);
 
     var newSyllabus = this.syllabusForm.getRawValue();
     var temp = this.router.url.split('/');

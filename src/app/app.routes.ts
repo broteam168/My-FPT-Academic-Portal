@@ -46,11 +46,20 @@ import { SlotComponent } from '../Views/AdminViews/time/groupslot/slot/slot.comp
 import { EditgroupComponent } from '../Views/AdminViews/time/groupslot/editgroup/editgroup.component';
 import { AddgroupComponent } from '../Views/AdminViews/time/groupslot/addgroup/addgroup.component';
 import { GroupslotComponent } from '../Views/AdminViews/time/groupslot/groupslot.component';
+
+import { studentGuard } from '../Helpers/student.guard';
+import { Curiculum1Component } from '../Views/StudentViews/curiculum1/curiculum1.component';
+import { Course1Component } from '../Views/StudentViews/course1/course1.component';
+
+
 import { AddcourseComponent } from '../Views/AdminViews/academic/course/addcourse/addcourse.component';
 import { EditcourseComponent } from '../Views/AdminViews/academic/course/editcourse/editcourse.component';
 import { SessionComponent } from '../Views/AdminViews/time/session/session.component';
 import { AddsessionComponent } from '../Views/AdminViews/time/session/addsession/addsession.component';
 import { EditsessionComponent } from '../Views/AdminViews/time/session/editsession/editsession.component';
+import { Information1Component } from '../Views/StudentViews/information1/information1.component';
+import { RegistercourseComponent } from '../Views/StudentViews/course1/registercourse/registercourse.component';
+import { Timetable1Component } from '../Views/StudentViews/timetable1/timetable1.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -266,4 +275,39 @@ export const routes: Routes = [
       }
     ],
   },
+  {
+    path: 'student',
+    canActivateChild: [studentGuard],
+    children: [
+      {
+        path: 'timetable1',
+        component: Timetable1Component,
+      },
+      {
+        path: 'curiculum1',
+        component: Curiculum1Component,
+      },
+      {
+        path: 'course1',
+        component: Course1Component,
+      },
+      {
+        path: 'course1/register',
+        component: RegistercourseComponent,
+      },
+      {
+        path: 'information1',
+        component: Information1Component,
+      },
+      {
+        path:'**',
+        redirectTo:'timetable1'
+      }
+    ]
+    
+  },
+  {
+    path:'**',
+    redirectTo:'login'
+  }
 ];

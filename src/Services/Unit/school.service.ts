@@ -16,7 +16,7 @@ export class SchoolService {
     this.getAllSchools();
   }
  
-  getCurrentSchool(id:string|undefined)
+  getCurrentSchool(id: any |undefined)
   {
     return this.http
     .get<any>(this.configService.apiBaseUrl + '/unit/school/'+id)

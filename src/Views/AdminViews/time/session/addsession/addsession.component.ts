@@ -111,6 +111,8 @@ export class AddsessionComponent implements OnInit{
     this.currentCourse = this.allCourses[id];
   }
   goBack() {
-    this.router.navigateByUrl('/admin/academic/course');
+    var temp = this.router.url.split('/');
+    temp.pop();
+    this.router.navigateByUrl(temp.join('/'));
   }
 }

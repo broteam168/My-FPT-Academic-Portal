@@ -10,17 +10,18 @@ import { appConfig } from '../../app/app.config';
   providedIn: 'root',
 })
 export class AuthService {
-  public static currentUser : UserAuth | null;
+  public static currentUser: UserAuth | null;
   constructor(
     private http: HttpClient,
     private configService: AppConfigService
   ) {
-    AuthService.currentUser =JSON.parse(localStorage.getItem('currentUser') || '{}');
-    
+    AuthService.currentUser = JSON.parse(
+      localStorage.getItem('currentUser') || '{}'
+    );
   }
   public get currentUserValue(): UserAuth | null {
     return AuthService.currentUser;
-}
+  }
 
   login(username: string, password: string) {
     this;
@@ -33,28 +34,33 @@ export class AuthService {
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           AuthService.currentUser = new UserAuth(user);
-          localStorage.setItem('currentUser', JSON.stringify(AuthService.currentUser));
+          localStorage.setItem(
+            'currentUser',
+            JSON.stringify(AuthService.currentUser)
+          );
           return user;
         })
       );
   }
 
   logout() {
-    AuthService.currentUser = null; 
+    AuthService.currentUser = null;
     localStorage.removeItem('currentUser');
   }
-refreshToken()
-{
-  AuthService.currentUser =JSON.parse(localStorage.getItem('currentUser') || '{}');
-}
-  verifyRole(role:string) {
-    if(this.currentUserValue == undefined)
-    {
-      console.log(AuthService.currentUser)
-    AuthService.currentUser =JSON.parse(localStorage.getItem('currentUser') || '{}');
+  refreshToken() {
+    AuthService.currentUser = JSON.parse(
+      localStorage.getItem('currentUser') || '{}'
+    );
+  }
+  verifyRole(role: string) {
+    if (this.currentUserValue == undefined) {
+      console.log(AuthService.currentUser);
+      AuthService.currentUser = JSON.parse(
+        localStorage.getItem('currentUser') || '{}'
+      );
     }
-    return this.http
-      .get<any>(this.configService.apiBaseUrl + '/auth/verify-role?role='+role);
-      
+    return this.http.get<any>(
+      this.configService.apiBaseUrl + '/auth/verify-role?role=' + role
+    );
   }
 }
