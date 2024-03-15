@@ -1,0 +1,113 @@
+<app-drawer [items]="menu">
+    <div class="h-screen bg-gray-100">
+      <app-header></app-header>
+      <div class="bg-gray-100">
+        <label for="my-drawer-2" class="btn btn-primary drawer-button hidden"
+          >Open drawer</label
+        >
+        <div #maincontent class="p-1">
+          <div #header class="items-center ml-5 mt-5">
+            <!-- Back -->
+            <div class="flex cursor-pointer" (click)="goBack()">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                fontIcon="keyboard_backspace"
+                class="text-black text-lg font-medium mb-1 mr-3 hover:bg-white hover:rounded-full hover:pl-1"
+                appearance="outline "
+              ></mat-icon>
+              <div class="font-medium text-lg">Back to syllabus management</div>
+            </div>
+          </div>
+  
+          <!-- data -->
+          <div
+            #detailcontent
+            class="my-5 pb-5 ml-5 bg-white rounded-xl border border-gray-400 flex items-center"
+          >
+            <div role="tablist" class="tabs tabs-bordered w-full m-5">
+              <input
+                type="radio"
+                name="my_tabs_1"
+                role="tab"
+                class="tab w-96"
+                aria-label="Details"
+                checked
+              />
+              <div role="tabpanel" class="tab-content p-10">
+                <div class="w-full">
+                  <table class="w-full">
+                    <ng-container *ngFor="let item of syllabuses">
+                      <ng-container *ngIf="item.active === true">
+                        <tr>
+                          <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                            Syllabus Id:
+                          </td>
+                          <td>{{ item.id }}</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                            Student task:
+                          </td>
+                          <td class="whitespace-pre-wrap">
+                            {{ item.studentTasks }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                            Tool:
+                          </td>
+                          <td class="whitespace-pre-wrap">{{ item.tools }}</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                            Scoring scale:
+                          </td>
+                          <td>{{ item.scoringScale }}</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                            Min mark:
+                          </td>
+                          <td>{{ item.markMin }}</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                            Total slot:
+                          </td>
+                          <td>{{ item.slot }}</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                            Approved date:
+                          </td>
+                          <td>{{ item.approvedDate }}</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1/5 text-right pr-2 font-semibold py-2">
+                            Status:
+                          </td>
+                          <td>
+                            <div
+                              [ngClass]="{
+                                'text-green-600': item.active,
+                                'text-red-600': !item.active
+                              }"
+                            >
+                              {{ item.active ? "Active" : "Deactive" }}
+                            </div>
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </table>
+                  <p *ngIf="!hasActiveSyllabus">None</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-drawer>
+  

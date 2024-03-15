@@ -25,8 +25,8 @@
               class="h-full rounded-lg w-full"
             >
               <option value="-1">Week</option>
-              <option *ngFor="let Week of weeks" [value]="Week.value">
-                {{ Week.text }}
+              <option *ngFor="let week of weeks" [value]="week.value">
+                {{ week.text }}
               </option>
             </select>
           </div>
@@ -68,24 +68,29 @@
             </tr>
 
             <tr class="bg-white" *ngFor="let slot of slots">
-              <td class="px-1 py-6 border border-black">{{ slot }}</td>
+              <td class="px-1 py-6 border border-black">Slot {{ slot }}</td>
               <td
                 class="px-1 py-6 border border-black"
                 *ngFor="let day of days"
               >
-              <ng-container *ngIf="sessions">
                 <div *ngFor="let session of sessions">
-                  <div *ngIf="isSessionInSlotAndDay(session, day, slot)">
+                  <div *ngIf="isSessionInSlotAndDay(session, slot, day)">
                     <div class="flex">
-                      <div class="mr-2">{{session.course.subject.name}}</div>
-                      <div class="px-1 bg-orange-300 text-white">View material</div>
+                      <div class="mr-2">
+                        {{ session.course.subject.subjectCode }}
+                      </div>
+                      <div 
+                        (click)="detailSyllabus(session.course.subject.id)"
+                        class="px-1 bg-orange-300 text-white cursor-pointer"
+                      >
+                        View material
+                      </div>
                     </div>
-                    <div>{{session.course.room.name}}</div>
-                    <div>{{session.status}}</div>
+                    <div>at {{ session.course.room.name }}</div>
+                    <div>{{ session.status }}</div>
                   </div>
                 </div>
-              </ng-container>
-            </td>
+              </td>
             </tr>
 
             <!-- <tr class="bg-white">

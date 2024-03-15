@@ -10,4 +10,5 @@ export class Session {
   endTime:Time;
   dateDay:Date;
   isActive: boolean;
+  slot: number;
 }

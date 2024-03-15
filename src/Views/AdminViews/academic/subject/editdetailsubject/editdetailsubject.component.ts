@@ -63,6 +63,11 @@ export class EditdetailsubjectComponent implements OnInit {
     this.subjectService = subjectService;
     this.subjectService.getAllSubject().subscribe((x) => {
       this.subjects = x.data;
+
+      this.subjects = this.subjects.filter((x) => {
+        return x.id != this.currentSubject.id;
+      });
+      
     });
   }
   ngOnInit(): void {
@@ -87,7 +92,7 @@ export class EditdetailsubjectComponent implements OnInit {
       this.subjectFrom.controls['status'].setValue(this.currentSubject.status);
     });
 
-    this.subjects = this.subjects.filter((x) => x.id != this.currentSubject.id);
+    
   }
 
   close() {

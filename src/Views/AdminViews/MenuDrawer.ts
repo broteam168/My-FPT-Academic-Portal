@@ -10,7 +10,7 @@ export function getMenu(highlight:string)
               below: false,
             },
             {
-              icon: 'account_balance',
+              icon: 'today',
               name: 'Timetable',
               url: '/admin/timetable',
               current: false,

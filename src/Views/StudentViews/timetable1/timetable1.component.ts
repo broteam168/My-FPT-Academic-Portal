@@ -38,7 +38,7 @@ export class Timetable1Component implements OnInit {
 
   sessions: Session[] = [];
   courses: Course[];
-  slots: string[] = [];
+  slots: number[] = [];
   days: string[] = [];
   constructor(
     private router: Router,
@@ -109,12 +109,12 @@ export class Timetable1Component implements OnInit {
   }
 
   initSlot() {
-    this.slots.push('Slot 1');
-    this.slots.push('Slot 2');
-    this.slots.push('Slot 3');
-    this.slots.push('Slot 4');
-    this.slots.push('Slot 5');
-    this.slots.push('Slot 6');
+    this.slots.push(1);
+    this.slots.push(2);
+    this.slots.push(3);
+    this.slots.push(4);
+    this.slots.push(5);
+    this.slots.push(6);
   }
 
   initDay() {
@@ -137,6 +137,7 @@ export class Timetable1Component implements OnInit {
   currentDay7: string;
 
   showData(date: string) {
+    
     const currentYear = new Date().getFullYear();
     this.currentDay1 = date + '/' + currentYear;
     this.currentDay2 = this.increaseDate1(this.currentDay1);
@@ -145,8 +146,15 @@ export class Timetable1Component implements OnInit {
     this.currentDay5 = this.increaseDate1(this.currentDay4);
     this.currentDay6 = this.increaseDate1(this.currentDay5);
     this.currentDay7 = this.increaseDate1(this.currentDay6);
+    this.days = [];
 
-    
+    this.days.push(this.currentDay1);
+    this.days.push(this.currentDay2);
+    this.days.push(this.currentDay3);
+    this.days.push(this.currentDay4);
+    this.days.push(this.currentDay5);
+    this.days.push(this.currentDay6);
+    this.days.push(this.currentDay7);
   }
 
   increaseDate1(dateStr: string): string {
@@ -163,7 +171,7 @@ export class Timetable1Component implements OnInit {
     return this.formatDate2(dateObject);
   }
 
-  formatDate2(date: any): any {
+  formatDate2(date: any): string {
     const day = ('0' + date.getDate()).slice(-2);
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear();
@@ -171,16 +179,42 @@ export class Timetable1Component implements OnInit {
     return day + '/' + month + '/' + year;
   }
 
-  isSessionInSlotAndDay(session: Session, slot: string, day: string) {
-    const sessionSlot = session.course.slots;
-    const sessionDay = this.formatDate2(new Date(session.dateDay));
+  formatDate3(date: any): string {
+    const day = ('0' + date.getDate()).slice(-2);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+    // return '${day}/${month}';
+    return month + '/' + day + '/' + year;
+  }
+   parseDateString(dateString: string): Date | null {
+    const parts = dateString.split('/');
+    if (parts.length !== 3) {
+        return null; // Invalid date format
+    }
 
-    return sessionDay == day && sessionSlot == slot; 
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // Months are 0-indexed in Date objects
+    const year = parseInt(parts[2], 10);
+
+    // Create a new Date object
+    const date = new Date(year, month, day);
+
+    // Validate the Date object (optional)
+    if (isNaN(date.getTime())) {
+        return null; // Invalid date
+    }
+
+    return date;
+}
+  isSessionInSlotAndDay(session: Session, slot: number, day: string) {
+    const sessionSlot = session.slot;
+  
+  
+    return session.dateDay.toString() ==  day && sessionSlot == slot; 
   }
 
-  getWeekNow() {
-    let today = new Date();
-    let formattedDate = today.getDate() + '/' + (today.getMonth() + 1) +  '/' + today.getFullYear();
-    console.log(formattedDate);
+  detailSyllabus(id: any) {
+    console.log(this.router.url + '/subject/' + id + '/syllabus')
+    this.router.navigateByUrl(this.router.url + '/subject/' + id + '/syllabus');
   }
 }
