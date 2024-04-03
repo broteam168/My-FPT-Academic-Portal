@@ -55,4 +55,8 @@ export class Curiculum1Component implements OnInit{
   sortCurriculumBySemester() {
     this.curiculums.sort((a, b) => a.semester - b.semester);
   }
+
+  viewDetailSubject(curiculumId: any, subjectId: any) {
+    this.router.navigate([this.router.url + '/' + curiculumId + '/subject/' + subjectId]);
+  }
 }

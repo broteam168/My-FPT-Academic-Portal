@@ -60,6 +60,8 @@ import { EditsessionComponent } from '../Views/AdminViews/time/session/editsessi
 import { Information1Component } from '../Views/StudentViews/information1/information1.component';
 import { RegistercourseComponent } from '../Views/StudentViews/course1/registercourse/registercourse.component';
 import { Timetable1Component } from '../Views/StudentViews/timetable1/timetable1.component';
+import { DetailsubjectComponent } from '../Views/StudentViews/curiculum1/detailsubject/detailsubject.component';
+import { Detailsyllabus1Component } from '../Views/StudentViews/timetable1/detailsyllabus1/detailsyllabus1.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -284,8 +286,16 @@ export const routes: Routes = [
         component: Timetable1Component,
       },
       {
+        path: 'timetable1/subject/:id/syllabus',
+        component: Detailsyllabus1Component,
+      },
+      {
         path: 'curiculum1',
         component: Curiculum1Component,
+      },
+      {
+        path: 'curiculum1/:id/subject/:id',
+        component: DetailsubjectComponent,
       },
       {
         path: 'course1',

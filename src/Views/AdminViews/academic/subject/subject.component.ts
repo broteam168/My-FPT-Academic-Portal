@@ -23,7 +23,9 @@ import { NgClass, NgFor } from "@angular/common";
 })
 export class SubjectComponent implements OnInit{
   menu: any;
-  subjects: Subject[]
+  subjects: Subject[];
+
+  dataSubjects: Subject[];
   constructor(private subjectService: SubjectService, private router: Router) {
     this.menu = getMenu('Academic');
     
@@ -32,10 +34,12 @@ export class SubjectComponent implements OnInit{
   ngOnInit(): void {
       this.subjectService.getAllSubject().subscribe((x) => {
         this.subjects = x.data;
+
+        this.dataSubjects = this.subjects;
       });
   }
   getAllSubject() {
-    return this.subjects;
+    return this.dataSubjects;
   }
   addSubject() {
     this.router.navigate([this.router.url + '/add']);
@@ -51,5 +55,13 @@ export class SubjectComponent implements OnInit{
   }
   viewDetailSubject(id: any) {
     this.router.navigate([this.router.url + '/detail/' + id]);
+  }
+
+  search(text: string) {
+    this.dataSubjects = this.subjects.filter(x => {
+      return x.subjectCode.toLowerCase().includes(text.toLowerCase());
+    });
+
+    // this.dataSubjects = this.subjects.filter(x => x.subjectCode.toLowerCase().includes(text.toLowerCase()));
   }
 }

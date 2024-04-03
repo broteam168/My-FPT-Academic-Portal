@@ -5,6 +5,10 @@ import { MatIcon } from '@angular/material/icon';
 import { Route, Router } from '@angular/router';
 import { Subject } from '../../../Models';
 import { SubjectService } from '../../../Services/Academic/subject.service';
+import { CourseService } from '../../../Services/Academic/course.service';
+import { SemesterService } from '../../../Services/Academic/semester.service';
+import { Course } from '../../../Models/Academic/course';
+import { Semester } from '../../../Models/Academic/semester';
 
 @Component({
   selector: 'app-academic',
@@ -19,10 +23,17 @@ export class AcademicComponent {
   subjects: Subject[];
   countSubject: number = 0;
 
+  courses: Course[];
+  countCourse: number = 0;
+
+  semesters: Semester[];
+  countSemester: number = 0;
+
   constructor(
     private router : Router,
     subjectService: SubjectService,
-
+    private courseService: CourseService,
+    private semesterService: SemesterService
     ) {
     this.menu = getMenu('Academic');
 
@@ -30,6 +41,16 @@ export class AcademicComponent {
     this.subjectService.getAllSubject().subscribe(x => {
       this.subjects = x.data;
       this.countSubject = this.subjects.length;
+    });
+
+    this.courseService.getAllCourses().subscribe(x => {
+      this.courses = x.data;
+      this.countCourse = this.courses.length;
+    });
+
+    this.semesterService.getAllSemester().subscribe(x => {
+      this.semesters = x.data;
+      this.countSemester = this.semesters.length;
     });
   }
   ManageSemester()
