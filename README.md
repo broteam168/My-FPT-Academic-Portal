@@ -33,5 +33,5 @@
 ```
     
 ## Skills
-HTML, CSS, TypeScript, Tailwind, Spring boot, Angular, SQL Server
+HTML, CSS, Java, TypeScript, Tailwind, Spring boot, Angular, SQL Server
 
